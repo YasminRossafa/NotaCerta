@@ -90,10 +90,7 @@ export function acervoCondensado(): string {
 }
 
 function normalizar(s: string): string {
-  return s
-    .toLowerCase()
-    .normalize("NFD")
-    .replace(/[̀-ͯ]/g, "");
+  return s.toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g, "");
 }
 
 /** Filtro de busca usado na página /repertorios (cliente). */

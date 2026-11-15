@@ -70,7 +70,7 @@ export function TextoDestacado({
 }): ReactNode {
   const segmentos = segmentarTexto(texto, apontamentos);
   return (
-    <p className="text-[15.5px] leading-[1.75] text-navy sm:text-base">
+    <p className="text-navy text-[15.5px] leading-[1.75] sm:text-base">
       {segmentos.map((s, i) =>
         s.indice == null ? (
           <span key={i}>{s.texto}</span>

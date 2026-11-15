@@ -53,8 +53,8 @@ export function CapturaEmail({
 
   if (salvo) {
     return (
-      <div className="flex items-start gap-3 rounded-xl border border-verde/40 bg-verde-claro px-4 py-3 text-sm text-green-900">
-        <span className="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-verde text-white">
+      <div className="border-verde/40 bg-verde-claro flex items-start gap-3 rounded-xl border px-4 py-3 text-sm text-green-900">
+        <span className="bg-verde mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full text-white">
           <IconeCheck width={14} height={14} />
         </span>
         <p>
@@ -68,8 +68,8 @@ export function CapturaEmail({
   return (
     <form onSubmit={enviar} noValidate className={compacto ? "space-y-3" : "space-y-4"}>
       <div>
-        <p className="font-semibold text-navy">{titulo}</p>
-        {texto && <p className="mt-1 text-sm text-slate">{texto}</p>}
+        <p className="text-navy font-semibold">{titulo}</p>
+        {texto && <p className="text-slate mt-1 text-sm">{texto}</p>}
       </div>
       <div className="flex flex-col gap-3 sm:flex-row sm:items-start">
         <Campo
@@ -87,16 +87,16 @@ export function CapturaEmail({
           {rotuloBotao}
         </Botao>
       </div>
-      <label className="flex cursor-pointer items-start gap-3 text-xs leading-relaxed text-slate">
+      <label className="text-slate flex cursor-pointer items-start gap-3 text-xs leading-relaxed">
         <input
           type="checkbox"
           checked={consente}
           onChange={(e) => setConsente(e.target.checked)}
-          className="mt-0.5 h-5 w-5 shrink-0 rounded border-borda accent-azul"
+          className="border-borda accent-azul mt-0.5 h-5 w-5 shrink-0 rounded"
         />
         <span>
           Concordo em receber e-mails do NotaCerta e li o{" "}
-          <a href="/privacidade" className="font-medium text-azul underline">
+          <a href="/privacidade" className="text-azul font-medium underline">
             aviso de privacidade
           </a>
           . Não guardamos sua redação. Você pode sair quando quiser.

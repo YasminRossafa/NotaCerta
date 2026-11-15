@@ -36,7 +36,7 @@ export function Modal({
         if (e.target === ref.current) aoFechar();
       }}
       className={cn(
-        "m-auto w-[calc(100%-2rem)] max-w-lg rounded-2xl border border-borda bg-white p-0 text-navy shadow-xl",
+        "border-borda text-navy m-auto w-[calc(100%-2rem)] max-w-lg rounded-2xl border bg-white p-0 shadow-xl",
         "backdrop:bg-navy/50 backdrop:backdrop-blur-sm",
         className,
       )}
@@ -48,7 +48,7 @@ export function Modal({
             type="button"
             onClick={aoFechar}
             aria-label="Fechar"
-            className="-mt-2 -mr-2 flex h-11 w-11 shrink-0 items-center justify-center rounded-full text-slate hover:bg-cinza-fundo"
+            className="text-slate hover:bg-cinza-fundo -mt-2 -mr-2 flex h-11 w-11 shrink-0 items-center justify-center rounded-full"
           >
             <IconeX />
           </button>

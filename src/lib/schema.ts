@@ -11,14 +11,16 @@ import { z } from "zod";
  */
 
 export const CODIGOS = ["c1", "c2", "c3", "c4", "c5"] as const;
-export const TIPOS_PARAGRAFO = ["introducao", "desenvolvimento1", "desenvolvimento2", "conclusao"] as const;
+export const TIPOS_PARAGRAFO = [
+  "introducao",
+  "desenvolvimento1",
+  "desenvolvimento2",
+  "conclusao",
+] as const;
 export const STATUS_PARAGRAFO = ["adequado", "ajustes", "incompleto"] as const;
 
 const CompetenciaModelo = z.object({
-  nota: z
-    .number()
-    .int()
-    .describe("Nota de 0 a 200 em múltiplos de 40 (0, 40, 80, 120, 160, 200)."),
+  nota: z.number().int().describe("Nota de 0 a 200 em múltiplos de 40 (0, 40, 80, 120, 160, 200)."),
   justificativa: z.string().describe("Uma linha explicando a nota, em tom de professor."),
 });
 
@@ -32,7 +34,10 @@ const ApontamentoModelo = z.object({
 const ItemChecklistModelo = z.object({
   item: z.string().describe("Item do modelo do parágrafo, ex.: 'Motivo explícito (porque/pois)'."),
   ok: z.boolean(),
-  observacao: z.string().nullable().describe("Observação curta quando ok=false; null se não houver."),
+  observacao: z
+    .string()
+    .nullable()
+    .describe("Observação curta quando ok=false; null se não houver."),
 });
 
 const ParagrafoModelo = z.object({
@@ -43,7 +48,9 @@ const ParagrafoModelo = z.object({
   reescrita: z
     .string()
     .nullable()
-    .describe("Versão melhorada do parágrafo seguindo o método; null se não houver o que reescrever."),
+    .describe(
+      "Versão melhorada do parágrafo seguindo o método; null se não houver o que reescrever.",
+    ),
   checklistModelo: z.array(ItemChecklistModelo),
 });
 
@@ -68,7 +75,9 @@ export const CorrecaoModeloSchema = z.object({
     .array(
       z.object({
         id: z.string().describe("id de um item do ACERVO fornecido. Nunca inventar."),
-        porqueCombina: z.string().describe("1 frase: por que esse repertório serve para ESTE tema."),
+        porqueCombina: z
+          .string()
+          .describe("1 frase: por que esse repertório serve para ESTE tema."),
       }),
     )
     .describe("2 a 3 itens do acervo."),

@@ -10,10 +10,23 @@ export const EXEMPLO_CORRECAO: Correcao = {
   transcricao: null,
   completa: true,
   competencias: {
-    c1: { nota: 160, justificativa: "Boa norma culta, com uma vírgula entre sujeito e verbo e um erro de crase." },
-    c2: { nota: 200, justificativa: "Tema citado por completo, contextualizado no Brasil, estrutura dissertativa clara." },
-    c3: { nota: 160, justificativa: "Argumentação consistente; o D2 fica sem a frase de motivo explícita." },
-    c4: { nota: 160, justificativa: "Conectivos corretos; a conclusão carece de conectivo de detalhamento." },
+    c1: {
+      nota: 160,
+      justificativa: "Boa norma culta, com uma vírgula entre sujeito e verbo e um erro de crase.",
+    },
+    c2: {
+      nota: 200,
+      justificativa:
+        "Tema citado por completo, contextualizado no Brasil, estrutura dissertativa clara.",
+    },
+    c3: {
+      nota: 160,
+      justificativa: "Argumentação consistente; o D2 fica sem a frase de motivo explícita.",
+    },
+    c4: {
+      nota: 160,
+      justificativa: "Conectivos corretos; a conclusão carece de conectivo de detalhamento.",
+    },
     c5: { nota: 120, justificativa: "Proposta com agente genérico e detalhamento curto demais." },
   },
   notaTotal: 800,
@@ -53,7 +66,11 @@ export const EXEMPLO_CORRECAO: Correcao = {
         { item: "Problemática retomada", ok: true },
         { item: "Motivo explícito (porque/pois/uma vez que)", ok: true },
         { item: "Citação/repertório adequado ao parágrafo", ok: true },
-        { item: "Argumento com fechamento (Desse modo/Logo/Dessa forma)", ok: false, observacao: "Há dois fechamentos ('portanto' e 'Desse modo')." },
+        {
+          item: "Argumento com fechamento (Desse modo/Logo/Dessa forma)",
+          ok: false,
+          observacao: "Há dois fechamentos ('portanto' e 'Desse modo').",
+        },
       ],
     },
     {
@@ -63,7 +80,8 @@ export const EXEMPLO_CORRECAO: Correcao = {
       status: "ajustes",
       apontamentos: [
         {
-          trecho: "observa-se o preconceito social como um fator que dificulta a integração de pessoas surdas no ambiente educacional.",
+          trecho:
+            "observa-se o preconceito social como um fator que dificulta a integração de pessoas surdas no ambiente educacional.",
           problema: "Falta a frase de motivo explícita depois da problemática.",
           motivo:
             "O método exige, logo após a problemática, uma frase de causa introduzida por 'porque', 'pois', 'uma vez que' ou 'tendo em vista que'. Sem ela, o parágrafo afirma o problema mas não explica por que ele acontece, e o corretor não enxerga a relação de causa.",
@@ -75,7 +93,11 @@ export const EXEMPLO_CORRECAO: Correcao = {
       checklistModelo: [
         { item: "Conectivo correto (D2: Em segundo lugar/Ademais)", ok: true },
         { item: "Problemática retomada", ok: true },
-        { item: "Motivo explícito (porque/pois/uma vez que)", ok: false, observacao: "Não há frase de causa após a problemática." },
+        {
+          item: "Motivo explícito (porque/pois/uma vez que)",
+          ok: false,
+          observacao: "Não há frase de causa após a problemática.",
+        },
         { item: "Citação/repertório adequado ao parágrafo", ok: true },
         { item: "Argumento com fechamento (Desse modo/Logo/Dessa forma)", ok: true },
       ],
@@ -112,19 +134,39 @@ export const EXEMPLO_CORRECAO: Correcao = {
         "Portanto, o Ministério da Educação (MEC) deve investir em infraestrutura inclusiva por meio da destinação de verba específica para a compra de equipamentos tecnológicos, com a finalidade de garantir a acessibilidade plena nas escolas. Em detalhe, é urgente que todas as instituições de ensino contratem intérpretes de Libras disponíveis em tempo integral. Dessa forma, casos como o de Helen Keller, do filme 'O Milagre de Anne Sullivan', não se repetirão na realidade brasileira.",
       checklistModelo: [
         { item: "Conectivo conclusivo", ok: true },
-        { item: "Agente específico (órgão real)", ok: false, observacao: "'O governo' é genérico." },
+        {
+          item: "Agente específico (órgão real)",
+          ok: false,
+          observacao: "'O governo' é genérico.",
+        },
         { item: "Ação no infinitivo", ok: true },
         { item: "Modo/Meio", ok: true },
         { item: "Finalidade", ok: true },
-        { item: "Detalhamento (frase inteira)", ok: false, observacao: "'como intérpretes' é curto demais." },
+        {
+          item: "Detalhamento (frase inteira)",
+          ok: false,
+          observacao: "'como intérpretes' é curto demais.",
+        },
         { item: "Retomada do repertório", ok: true },
       ],
     },
   ],
   repertorioSugestoes: [
-    { id: "empatia", porqueCombina: "Fundamenta, no D2, a inclusão de surdos como dever de se colocar no lugar do outro." },
-    { id: "ibge", porqueCombina: "Dá o dado concreto de acessibilidade escolar para a citação científica do D1." },
-    { id: "cidadania", porqueCombina: "Enquadra a educação de surdos como direito e participação plena na sociedade." },
+    {
+      id: "empatia",
+      porqueCombina:
+        "Fundamenta, no D2, a inclusão de surdos como dever de se colocar no lugar do outro.",
+    },
+    {
+      id: "ibge",
+      porqueCombina:
+        "Dá o dado concreto de acessibilidade escolar para a citação científica do D1.",
+    },
+    {
+      id: "cidadania",
+      porqueCombina:
+        "Enquadra a educação de surdos como direito e participação plena na sociedade.",
+    },
   ],
   resumoProfessor:
     "Sua redação tem uma base sólida: a introdução está dentro do modelo, com repertório bem relacionado ao tema e duas problemáticas claras. Para subir a nota, priorize três coisas: coloque a frase de motivo no D2 (um 'pois' que explique a causa do preconceito), troque 'o governo' por um órgão específico como o MEC e transforme o detalhamento da proposta em uma frase inteira. Com esses ajustes, o texto passa facilmente de 900.",

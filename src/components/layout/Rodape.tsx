@@ -8,16 +8,16 @@ const ANO_ATUAL = 2026;
 
 export function Rodape() {
   return (
-    <footer className="mt-auto border-t border-borda/60 bg-cinza-fundo">
+    <footer className="border-borda/60 bg-cinza-fundo mt-auto border-t">
       <div className="container-nc grid gap-8 py-10 md:grid-cols-[1.4fr_1fr_1fr]">
         <div className="max-w-md">
           <Logo />
-          <p className="mt-3 text-sm text-slate">{SITE.slogan}</p>
+          <p className="text-slate mt-3 text-sm">{SITE.slogan}</p>
           <AvisoNotaEstimada className="mt-4" />
         </div>
 
         <div>
-          <p className="text-sm font-semibold text-navy">Navegar</p>
+          <p className="text-navy text-sm font-semibold">Navegar</p>
           <ul className="mt-3 flex flex-col gap-2 text-sm">
             {NAV_LINKS.map((l) => (
               <li key={l.href}>
@@ -30,7 +30,7 @@ export function Rodape() {
         </div>
 
         <div>
-          <p className="text-sm font-semibold text-navy">Confiança</p>
+          <p className="text-navy text-sm font-semibold">Confiança</p>
           <ul className="mt-3 flex flex-col gap-2 text-sm">
             <li>
               <Link href="/privacidade" className="text-slate hover:text-azul-escuro">
@@ -45,10 +45,10 @@ export function Rodape() {
           </ul>
         </div>
       </div>
-      <div className="border-t border-borda/60">
-        <p className="container-nc py-4 text-xs text-slate">
-          © {ANO_ATUAL} NotaCerta. Método de correção baseado na apostila do CEC
-          (Cursinho Educação e Cidadania), UFSCar Sorocaba.
+      <div className="border-borda/60 border-t">
+        <p className="container-nc text-slate py-4 text-xs">
+          © {ANO_ATUAL} NotaCerta. Método de correção baseado na apostila do CEC (Cursinho Educação
+          e Cidadania), UFSCar Sorocaba.
         </p>
       </div>
     </footer>

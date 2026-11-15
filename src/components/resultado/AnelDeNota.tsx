@@ -28,7 +28,9 @@ export function AnelDeNota({
   return (
     <div
       role="img"
-      aria-label={nota == null ? "Nota não estimada: redação incompleta" : `Nota estimada ${nota} de 1000`}
+      aria-label={
+        nota == null ? "Nota não estimada: redação incompleta" : `Nota estimada ${nota} de 1000`
+      }
       className={cn("relative inline-flex shrink-0 items-center justify-center", className)}
       style={{ width: px, height: px }}
     >
@@ -49,12 +51,12 @@ export function AnelDeNota({
         />
       </svg>
       <div className="absolute inset-0 flex flex-col items-center justify-center leading-none">
-        <span className={cn("font-serif font-semibold text-navy tabular-nums", fonte)}>
+        <span className={cn("text-navy font-serif font-semibold tabular-nums", fonte)}>
           {nota == null ? "—" : nota}
         </span>
         <span
           className={cn(
-            "mt-1 font-medium text-slate",
+            "text-slate mt-1 font-medium",
             tamanho === "lg" ? "text-sm" : "text-[10px]",
           )}
         >

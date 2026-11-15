@@ -66,7 +66,9 @@ function Resultado({
 
   const repertorios = correcao.repertorioSugestoes
     .map((s) => ({ item: repertorioPorId(s.id), porqueCombina: s.porqueCombina }))
-    .filter((r): r is { item: NonNullable<typeof r.item>; porqueCombina: string } => Boolean(r.item));
+    .filter((r): r is { item: NonNullable<typeof r.item>; porqueCombina: string } =>
+      Boolean(r.item),
+    );
 
   return (
     <div className="container-nc py-8 md:py-12">
@@ -84,22 +86,22 @@ function Resultado({
         <AnelDeNota nota={correcao.notaTotal} />
         <div className="min-w-0 flex-1">
           <div className="flex flex-wrap items-center justify-center gap-2 lg:justify-start">
-            <span className="rounded-full border border-borda bg-azul-claro px-3 py-1 text-xs font-semibold text-azul-escuro">
+            <span className="border-borda bg-azul-claro text-azul-escuro rounded-full border px-3 py-1 text-xs font-semibold">
               Nota estimada
             </span>
             {correcao.temaDetectado && (
-              <span className="rounded-full bg-cinza-fundo px-3 py-1 text-xs font-semibold text-slate">
+              <span className="bg-cinza-fundo text-slate rounded-full px-3 py-1 text-xs font-semibold">
                 Tema detectado pelo texto
               </span>
             )}
             {resultado.origem === "imagem" && (
-              <span className="rounded-full bg-cinza-fundo px-3 py-1 text-xs font-semibold text-slate">
+              <span className="bg-cinza-fundo text-slate rounded-full px-3 py-1 text-xs font-semibold">
                 Transcrita da foto
               </span>
             )}
           </div>
-          <p className="mt-3 text-xs font-semibold tracking-wide text-slate uppercase">Tema</p>
-          <h1 className="font-serif text-2xl leading-tight font-semibold text-navy sm:text-3xl">
+          <p className="text-slate mt-3 text-xs font-semibold tracking-wide uppercase">Tema</p>
+          <h1 className="text-navy font-serif text-2xl leading-tight font-semibold sm:text-3xl">
             {correcao.tema}
           </h1>
           {!correcao.completa && (
@@ -115,7 +117,7 @@ function Resultado({
         {/* Lateral (sticky no desktop): competências + resumo do professor */}
         <aside className="space-y-6 lg:sticky lg:top-20">
           <section className="card p-5" aria-labelledby="competencias-titulo">
-            <h2 id="competencias-titulo" className="font-serif text-lg font-semibold text-navy">
+            <h2 id="competencias-titulo" className="text-navy font-serif text-lg font-semibold">
               Competências
             </h2>
             <div className="mt-4 space-y-4">
@@ -137,12 +139,12 @@ function Resultado({
         <div className="space-y-6">
           {correcao.transcricao && (
             <details className="card group p-5">
-              <summary className="flex min-h-[44px] cursor-pointer list-none items-center justify-between gap-3 font-semibold text-navy">
+              <summary className="text-navy flex min-h-[44px] cursor-pointer list-none items-center justify-between gap-3 font-semibold">
                 Ver a transcrição da foto
                 <IconeChevron className="transition-transform group-open:rotate-180" />
               </summary>
-              <p className="mt-3 text-sm whitespace-pre-line text-slate">{correcao.transcricao}</p>
-              <p className="mt-2 text-xs text-slate">
+              <p className="text-slate mt-3 text-sm whitespace-pre-line">{correcao.transcricao}</p>
+              <p className="text-slate mt-2 text-xs">
                 Transcrevemos sem corrigir a ortografia; os erros aparecem nos apontamentos.
               </p>
             </details>
@@ -151,10 +153,10 @@ function Resultado({
           {/* 3. Parágrafo a parágrafo */}
           <section aria-labelledby="paragrafos-titulo" className="space-y-4">
             <div className="flex items-end justify-between gap-3">
-              <h2 id="paragrafos-titulo" className="font-serif text-2xl font-semibold text-navy">
+              <h2 id="paragrafos-titulo" className="text-navy font-serif text-2xl font-semibold">
                 Parágrafo a parágrafo
               </h2>
-              <p className="text-xs text-slate">Trecho → problema → motivo</p>
+              <p className="text-slate text-xs">Trecho → problema → motivo</p>
             </div>
             {correcao.paragrafos.map((p, i) => (
               <CartaoParagrafo
@@ -171,18 +173,21 @@ function Resultado({
           {/* 4. Repertório sugerido */}
           <section aria-labelledby="repertorio-titulo" className="space-y-4">
             <div>
-              <h2 id="repertorio-titulo" className="flex items-center gap-2 font-serif text-2xl font-semibold text-navy">
+              <h2
+                id="repertorio-titulo"
+                className="text-navy flex items-center gap-2 font-serif text-2xl font-semibold"
+              >
                 <IconeLivro className="text-azul" />
                 Repertório para este tema
               </h2>
-              <p className="mt-1 text-sm text-slate">
+              <p className="text-slate mt-1 text-sm">
                 Do nosso acervo curado, nunca inventado. Cada um diz por que combina com o tema.
               </p>
             </div>
             {repertorios.length === 0 ? (
-              <div className="card p-5 text-sm text-slate">
+              <div className="card text-slate p-5 text-sm">
                 Não encontramos um repertório do acervo para este tema.{" "}
-                <Link href="/repertorios" className="font-semibold text-azul underline">
+                <Link href="/repertorios" className="text-azul font-semibold underline">
                   Explore o acervo completo.
                 </Link>
               </div>
@@ -221,19 +226,24 @@ function Resultado({
           </section>
 
           {/* 6. CTA contextual */}
-          <section className="flex flex-col items-start gap-4 rounded-2xl border border-borda p-5 sm:flex-row sm:items-center sm:justify-between">
+          <section className="border-borda flex flex-col items-start gap-4 rounded-2xl border p-5 sm:flex-row sm:items-center sm:justify-between">
             <div>
-              <p className="font-semibold text-navy">Quer corrigir outra redação?</p>
-              <p className="text-sm text-slate">
+              <p className="text-navy font-semibold">Quer corrigir outra redação?</p>
+              <p className="text-slate text-sm">
                 O plano grátis libera 1 por dia. Para corrigir sem limite, conheça o Plano Fundador.
               </p>
             </div>
-            <div className="flex flex-col gap-2 sm:flex-row">
-              <Botao href="/corrigir" variante="secundario">
+            <div className="flex shrink-0 flex-col gap-2 sm:flex-row">
+              <Botao href="/corrigir" variante="secundario" className="whitespace-nowrap">
                 Corrigir outra redação
                 <IconeSeta />
               </Botao>
-              <Botao onClick={() => pedirUpgrade("Correções ilimitadas")}>Plano Fundador</Botao>
+              <Botao
+                onClick={() => pedirUpgrade("Correções ilimitadas")}
+                className="whitespace-nowrap"
+              >
+                Plano Fundador
+              </Botao>
             </div>
           </section>
 
@@ -253,11 +263,14 @@ function Resultado({
 
 function ResumoProfessor({ texto, className }: { texto: string; className?: string }) {
   return (
-    <section className={cn("card border-l-4 border-l-azul p-5", className)} aria-labelledby="resumo-titulo">
-      <h2 id="resumo-titulo" className="font-serif text-lg font-semibold text-navy">
+    <section
+      className={cn("card border-l-azul border-l-4 p-5", className)}
+      aria-labelledby="resumo-titulo"
+    >
+      <h2 id="resumo-titulo" className="text-navy font-serif text-lg font-semibold">
         Resumo do professor
       </h2>
-      <p className="mt-2 text-[15.5px] leading-relaxed text-navy">{texto}</p>
+      <p className="text-navy mt-2 text-[15.5px] leading-relaxed">{texto}</p>
     </section>
   );
 }
@@ -266,10 +279,10 @@ function ResultadoVazio() {
   return (
     <div className="container-nc py-16">
       <div className="card mx-auto max-w-lg p-8 text-center">
-        <p className="font-serif text-2xl font-semibold text-navy">Nenhuma correção para mostrar</p>
-        <p className="mt-2 text-slate">
-          O resultado fica disponível só nesta aba, logo após a correção. Envie uma redação para
-          ver o feedback completo.
+        <p className="text-navy font-serif text-2xl font-semibold">Nenhuma correção para mostrar</p>
+        <p className="text-slate mt-2">
+          O resultado fica disponível só nesta aba, logo após a correção. Envie uma redação para ver
+          o feedback completo.
         </p>
         <Botao href="/corrigir" className="mt-6" tamanho="lg">
           Corrigir uma redação
@@ -283,12 +296,12 @@ function ResultadoVazio() {
 function EsqueletoResultado() {
   return (
     <div className="container-nc py-8 md:py-12" aria-busy="true" aria-label="Carregando resultado">
-      <div className="card h-40 nc-pulse bg-cinza-fundo" />
+      <div className="card nc-pulse bg-cinza-fundo h-40" />
       <div className="mt-6 grid gap-6 lg:grid-cols-[340px_minmax(0,1fr)]">
-        <div className="card h-80 nc-pulse bg-cinza-fundo" />
+        <div className="card nc-pulse bg-cinza-fundo h-80" />
         <div className="space-y-4">
-          <div className="card h-56 nc-pulse bg-cinza-fundo" />
-          <div className="card h-56 nc-pulse bg-cinza-fundo" />
+          <div className="card nc-pulse bg-cinza-fundo h-56" />
+          <div className="card nc-pulse bg-cinza-fundo h-56" />
         </div>
       </div>
     </div>

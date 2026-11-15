@@ -12,21 +12,20 @@ export default function PaginaPrivacidade() {
   return (
     <div className="container-nc py-10 md:py-14">
       <article className="prose-nc mx-auto max-w-2xl">
-        <h1 className="font-serif text-3xl font-semibold text-navy sm:text-4xl">
+        <h1 className="text-navy font-serif text-3xl font-semibold sm:text-4xl">
           Aviso de privacidade
         </h1>
-        <p className="mt-3 text-slate">
-          Este aviso explica, em linguagem simples, o que acontece com a sua redação e os seus
-          dados ao usar o NotaCerta, conforme a Lei Geral de Proteção de Dados (LGPD, Lei
-          13.709/2018).
+        <p className="text-slate mt-3">
+          Este aviso explica, em linguagem simples, o que acontece com a sua redação e os seus dados
+          ao usar o NotaCerta, conforme a Lei Geral de Proteção de Dados (LGPD, Lei 13.709/2018).
         </p>
 
         <Secao titulo="Sua redação">
           <p>
-            O texto ou a foto que você envia é transmitido ao nosso servidor e repassado ao
-            provedor de inteligência artificial apenas para gerar a correção. Não gravamos a
-            redação em banco de dados nem em registros do servidor. O resultado fica salvo somente
-            no seu navegador, nesta aba, até você fechá-la.
+            O texto ou a foto que você envia é transmitido ao nosso servidor e repassado ao provedor
+            de inteligência artificial apenas para gerar a correção. Não gravamos a redação em banco
+            de dados nem em registros do servidor. O resultado fica salvo somente no seu navegador,
+            nesta aba, até você fechá-la.
           </p>
         </Secao>
 
@@ -38,31 +37,31 @@ export default function PaginaPrivacidade() {
             contato.
           </p>
           <p>
-            Usamos um identificador anônimo (cookie) para aplicar o limite diário gratuito. Ele
-            não contém nome, e-mail ou qualquer dado que identifique você.
+            Usamos um identificador anônimo (cookie) para aplicar o limite diário gratuito. Ele não
+            contém nome, e-mail ou qualquer dado que identifique você.
           </p>
         </Secao>
 
         <Secao titulo="Menores de idade">
           <p>
-            Sabemos que parte do público é menor de 18 anos. Por isso coletamos o mínimo
-            necessário e não exigimos dados pessoais para usar a ferramenta. Responsáveis podem
-            solicitar informações ou exclusão pelo contato abaixo.
+            Sabemos que parte do público é menor de 18 anos. Por isso coletamos o mínimo necessário
+            e não exigimos dados pessoais para usar a ferramenta. Responsáveis podem solicitar
+            informações ou exclusão pelo contato abaixo.
           </p>
         </Secao>
 
         <Secao titulo="Nota estimada">
           <p>
             A nota apresentada é uma estimativa gerada por inteligência artificial com base em um
-            método de correção. Ela não é a nota oficial do ENEM. O NotaCerta não tem vínculo com
-            o INEP ou com o MEC.
+            método de correção. Ela não é a nota oficial do ENEM. O NotaCerta não tem vínculo com o
+            INEP ou com o MEC.
           </p>
         </Secao>
 
         <Secao titulo="Contato">
           <p>
             Dúvidas, pedidos de acesso ou exclusão de dados:{" "}
-            <a href={`mailto:${SITE.contatoEmail}`} className="font-semibold text-azul underline">
+            <a href={`mailto:${SITE.contatoEmail}`} className="text-azul font-semibold underline">
               {SITE.contatoEmail}
             </a>
             .
@@ -76,8 +75,8 @@ export default function PaginaPrivacidade() {
 
 function Secao({ titulo, children }: { titulo: string; children: React.ReactNode }) {
   return (
-    <section className="mt-8 space-y-3 text-[15.5px] leading-relaxed text-navy">
-      <h2 className="font-serif text-2xl font-semibold text-navy">{titulo}</h2>
+    <section className="text-navy mt-8 space-y-3 text-[15.5px] leading-relaxed">
+      <h2 className="text-navy font-serif text-2xl font-semibold">{titulo}</h2>
       {children}
     </section>
   );

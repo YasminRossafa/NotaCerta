@@ -24,11 +24,7 @@ const STATUS_POR_ERRO: Record<ErroCorretor["codigo"], number> = {
   entrada_invalida: 400,
 };
 
-function responderErro(
-  corpo: ErroApi,
-  status: number,
-  cookie?: string,
-): NextResponse<ErroApi> {
+function responderErro(corpo: ErroApi, status: number, cookie?: string): NextResponse<ErroApi> {
   const res = NextResponse.json(corpo, { status });
   if (cookie) res.headers.set("Set-Cookie", cookie);
   return res;

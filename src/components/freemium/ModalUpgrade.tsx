@@ -35,16 +35,16 @@ export function ModalUpgrade({
 
   return (
     <Modal aberto={aberto} aoFechar={aoFechar} titulo={titulo}>
-      <p className="text-sm leading-relaxed text-slate">
+      <p className="text-slate text-sm leading-relaxed">
         {motivo === "limite"
           ? "O plano gratuito libera 1 correção completa por dia. Volte amanhã para outra, ou entre na lista do Plano Fundador para corrigir sem limite."
-          : `${recurso ?? "Este recurso"} faz parte do Plano Fundador. Estamos abrindo as primeiras vagas: deixe seu e-mail para entrar com condição de fundador.`}
+          : `“${recurso ?? "Este recurso"}” faz parte do Plano Fundador. Estamos abrindo as primeiras vagas: deixe seu e-mail para entrar com condição de fundador.`}
       </p>
 
-      <ul className="mt-4 space-y-2 text-sm text-navy">
+      <ul className="text-navy mt-4 space-y-2 text-sm">
         {BENEFICIOS.map((b) => (
           <li key={b} className="flex items-center gap-2.5">
-            <span className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-verde-claro text-verde">
+            <span className="bg-verde-claro text-verde flex h-5 w-5 shrink-0 items-center justify-center rounded-full">
               <IconeCheck width={13} height={13} />
             </span>
             {b}
@@ -52,7 +52,7 @@ export function ModalUpgrade({
         ))}
       </ul>
 
-      <div className="mt-5 rounded-xl bg-cinza-fundo p-4">
+      <div className="bg-cinza-fundo mt-5 rounded-xl p-4">
         <CapturaEmail
           origem={motivo}
           titulo="Entrar na lista do Plano Fundador"

@@ -70,16 +70,16 @@ export function UploadFoto({
           <img
             src={imagem.previewUrl}
             alt="Prévia da foto da redação enviada"
-            className="max-h-[420px] w-full object-contain bg-cinza-fundo"
+            className="bg-cinza-fundo max-h-[420px] w-full object-contain"
           />
-          <figcaption className="flex items-center justify-between gap-3 px-4 py-3 text-sm text-slate">
+          <figcaption className="text-slate flex items-center justify-between gap-3 px-4 py-3 text-sm">
             <span>
               {imagem.largura}×{imagem.altura}px · pronta para enviar
             </span>
             <button
               type="button"
               onClick={() => aoMudar(null)}
-              className="inline-flex min-h-[44px] items-center gap-1 font-semibold text-vermelho"
+              className="text-vermelho inline-flex min-h-[44px] items-center gap-1 font-semibold"
             >
               <IconeX width={16} height={16} />
               Remover
@@ -88,19 +88,19 @@ export function UploadFoto({
         </figure>
       ) : (
         <div
-          className="flex flex-col items-center justify-center gap-4 rounded-2xl border-2 border-dashed border-borda bg-azul-claro/40 px-4 py-10 text-center"
+          className="border-borda bg-azul-claro/40 flex flex-col items-center justify-center gap-4 rounded-2xl border-2 border-dashed px-4 py-10 text-center"
           onDragOver={(e) => e.preventDefault()}
           onDrop={(e) => {
             e.preventDefault();
             tratar(e.dataTransfer.files?.[0]);
           }}
         >
-          <span className="flex h-14 w-14 items-center justify-center rounded-full bg-white text-azul shadow-sm">
+          <span className="text-azul flex h-14 w-14 items-center justify-center rounded-full bg-white shadow-sm">
             <IconeCamera width={28} height={28} />
           </span>
           <div>
-            <p className="font-semibold text-navy">Foto da redação manuscrita</p>
-            <p id={descId} className="mt-1 text-sm text-slate">
+            <p className="text-navy font-semibold">Foto da redação manuscrita</p>
+            <p id={descId} className="text-slate mt-1 text-sm">
               Boa luz, folha inteira no quadro, sem sombra. Nós transcrevemos antes de corrigir.
             </p>
           </div>
@@ -128,7 +128,7 @@ export function UploadFoto({
       )}
 
       {mensagemErro && (
-        <p role="alert" className="text-sm font-medium text-vermelho">
+        <p role="alert" className="text-vermelho text-sm font-medium">
           {mensagemErro}
         </p>
       )}

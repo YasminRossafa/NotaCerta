@@ -25,10 +25,10 @@ export function Bloqueado({
         {children}
       </div>
       <div className="absolute inset-0 flex flex-col items-center justify-center gap-3 bg-white/55 p-4 text-center">
-        <span className="flex h-10 w-10 items-center justify-center rounded-full bg-white text-azul-escuro shadow">
+        <span className="text-azul-escuro flex h-10 w-10 items-center justify-center rounded-full bg-white shadow">
           <IconeCadeado />
         </span>
-        <p className="max-w-xs text-sm font-medium text-navy">{rotulo}</p>
+        <p className="text-navy max-w-xs text-sm font-medium">{rotulo}</p>
         <Botao tamanho="sm" onClick={aoPedirUpgrade}>
           Desbloquear com o Plano Fundador
         </Botao>

@@ -18,10 +18,7 @@ import { PROMPT_ACERVO_CABECALHO, PROMPT_METODO } from "@/lib/server/metodo-prom
  */
 
 export type CodigoErroCorretor =
-  | "configuracao"
-  | "api_indisponivel"
-  | "saida_invalida"
-  | "entrada_invalida";
+  "configuracao" | "api_indisponivel" | "saida_invalida" | "entrada_invalida";
 
 export class ErroCorretor extends Error {
   constructor(
@@ -154,9 +151,7 @@ export function normalizarCorrecao(bruto: CorrecaoModelo): unknown {
   };
 }
 
-async function chamarModelo(
-  mensagens: Anthropic.MessageParam[],
-): Promise<CorrecaoModelo | null> {
+async function chamarModelo(mensagens: Anthropic.MessageParam[]): Promise<CorrecaoModelo | null> {
   const client = obterCliente();
   const modelo = process.env.ANTHROPIC_MODEL || MODELO_PADRAO;
 

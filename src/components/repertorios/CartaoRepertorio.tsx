@@ -47,13 +47,13 @@ export function CartaoRepertorio({
     <article id={id} className={cn("card flex h-full flex-col p-5", className)}>
       <div className="flex items-start justify-between gap-3">
         <div className="min-w-0">
-          <p className="text-xs font-semibold tracking-wide text-slate uppercase">
+          <p className="text-slate text-xs font-semibold tracking-wide uppercase">
             {ROTULO_CATEGORIA[item.categoria]}
           </p>
-          <h3 className="mt-1 font-serif text-xl leading-snug font-semibold text-navy">
+          <h3 className="text-navy mt-1 font-serif text-xl leading-snug font-semibold">
             {item.titulo}
           </h3>
-          {item.autor && <p className="text-sm text-slate">{item.autor}</p>}
+          {item.autor && <p className="text-slate text-sm">{item.autor}</p>}
         </div>
         <div className="flex shrink-0 flex-wrap justify-end gap-1">
           {item.uso.map((u) => (
@@ -63,19 +63,19 @@ export function CartaoRepertorio({
       </div>
 
       {porqueCombina && (
-        <p className="mt-3 rounded-lg border border-ambar/40 bg-ambar-claro px-3 py-2 text-sm text-amber-900">
+        <p className="border-ambar/40 bg-ambar-claro mt-3 rounded-lg border px-3 py-2 text-sm text-amber-900">
           <strong className="font-semibold">Por que combina com o tema:</strong> {porqueCombina}
         </p>
       )}
 
-      <p className="mt-3 text-sm leading-relaxed text-navy">{item.resumo}</p>
-      <p className="mt-2 text-sm leading-relaxed text-slate">
-        <strong className="font-semibold text-navy">Como usar:</strong> {item.comoUsar}
+      <p className="text-navy mt-3 text-sm leading-relaxed">{item.resumo}</p>
+      <p className="text-slate mt-2 text-sm leading-relaxed">
+        <strong className="text-navy font-semibold">Como usar:</strong> {item.comoUsar}
       </p>
 
       <ul className="mt-3 flex flex-wrap gap-1.5" aria-label="Temas">
         {item.temas.map((t) => (
-          <li key={t} className="rounded-full bg-cinza-fundo px-2.5 py-0.5 text-xs text-slate">
+          <li key={t} className="bg-cinza-fundo text-slate rounded-full px-2.5 py-0.5 text-xs">
             {t}
           </li>
         ))}
@@ -84,7 +84,7 @@ export function CartaoRepertorio({
       {linkAcervo && (
         <Link
           href={`/repertorios#${item.id}`}
-          className="mt-4 inline-flex min-h-[44px] items-center gap-1.5 text-sm font-semibold text-azul hover:text-azul-escuro"
+          className="text-azul hover:text-azul-escuro mt-4 inline-flex min-h-[44px] items-center gap-1.5 text-sm font-semibold"
         >
           Ver no acervo
           <IconeExterno width={16} height={16} />

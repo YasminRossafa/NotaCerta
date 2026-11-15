@@ -24,10 +24,10 @@ export const AreaTexto = forwardRef<HTMLTextAreaElement, Props>(function AreaTex
   return (
     <div className={cn("flex flex-col gap-1.5", className)}>
       <div className="flex items-baseline justify-between gap-3">
-        <label htmlFor={areaId} className="text-sm font-semibold text-navy">
+        <label htmlFor={areaId} className="text-navy text-sm font-semibold">
           {rotulo}
         </label>
-        {contador && <span className="text-xs text-slate tabular-nums">{contador}</span>}
+        {contador && <span className="text-slate text-xs tabular-nums">{contador}</span>}
       </div>
       <textarea
         ref={ref}
@@ -35,19 +35,19 @@ export const AreaTexto = forwardRef<HTMLTextAreaElement, Props>(function AreaTex
         aria-invalid={erro ? true : undefined}
         aria-describedby={describedBy || undefined}
         className={cn(
-          "min-h-[260px] w-full resize-y rounded-xl border bg-white px-3.5 py-3 text-base leading-relaxed text-navy placeholder:text-slate/70",
+          "text-navy placeholder:text-slate/70 min-h-[260px] w-full resize-y rounded-xl border bg-white px-3.5 py-3 text-base leading-relaxed",
           "focus:border-azul focus:outline-none",
           erro ? "border-vermelho" : "border-borda",
         )}
         {...rest}
       />
       {ajuda && !erro && (
-        <p id={ajudaId} className="text-sm text-slate">
+        <p id={ajudaId} className="text-slate text-sm">
           {ajuda}
         </p>
       )}
       {erro && (
-        <p id={erroId} role="alert" className="text-sm font-medium text-vermelho">
+        <p id={erroId} role="alert" className="text-vermelho text-sm font-medium">
           {erro}
         </p>
       )}

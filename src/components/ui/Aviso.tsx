@@ -42,10 +42,10 @@ export function Aviso({
 /** Aviso constante de "nota estimada" (spec §3.4 e §14). */
 export function AvisoNotaEstimada({ className }: { className?: string }) {
   return (
-    <p className={cn("text-xs leading-relaxed text-slate", className)}>
-      A nota do NotaCerta é <strong className="font-semibold text-navy">estimada</strong> por
-      inteligência artificial seguindo o método da professora. Ela serve como referência de estudo
-      e não representa a nota oficial do ENEM. O NotaCerta não tem vínculo com o INEP ou com o MEC.
+    <p className={cn("text-slate text-xs leading-relaxed", className)}>
+      A nota do NotaCerta é <strong className="text-navy font-semibold">estimada</strong> por
+      inteligência artificial seguindo o método da professora. Ela serve como referência de estudo e
+      não representa a nota oficial do ENEM. O NotaCerta não tem vínculo com o INEP ou com o MEC.
     </p>
   );
 }

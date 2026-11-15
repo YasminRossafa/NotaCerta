@@ -1,9 +1,4 @@
-import {
-  COMPETENCIAS,
-  CORES_FAIXA,
-  faixaDaNota,
-  type CodigoCompetencia,
-} from "@/lib/competencias";
+import { COMPETENCIAS, CORES_FAIXA, faixaDaNota, type CodigoCompetencia } from "@/lib/competencias";
 import { cn } from "@/lib/cn";
 
 /**
@@ -41,15 +36,21 @@ export function BarraCompetencia({
             {meta.sigla}
           </span>
           <span
-            className={cn("truncate font-medium text-navy", compacta ? "text-sm" : "text-base")}
+            className={cn("text-navy truncate font-medium", compacta ? "text-sm" : "text-base")}
             title={meta.descricao}
           >
             {meta.nome}
           </span>
         </div>
-        <span className={cn("shrink-0 font-semibold tabular-nums", cores.texto, compacta ? "text-sm" : "text-base")}>
+        <span
+          className={cn(
+            "shrink-0 font-semibold tabular-nums",
+            cores.texto,
+            compacta ? "text-sm" : "text-base",
+          )}
+        >
           {nota}
-          <span className="text-xs font-normal text-slate">/200</span>
+          <span className="text-slate text-xs font-normal">/200</span>
         </span>
       </div>
       <div
@@ -58,7 +59,10 @@ export function BarraCompetencia({
         aria-valuemin={0}
         aria-valuemax={200}
         aria-valuenow={nota}
-        className={cn("w-full overflow-hidden rounded-full bg-cinza-fundo", compacta ? "h-2" : "h-2.5")}
+        className={cn(
+          "bg-cinza-fundo w-full overflow-hidden rounded-full",
+          compacta ? "h-2" : "h-2.5",
+        )}
       >
         <div
           className={cn("h-full rounded-full", cores.barra)}
@@ -66,7 +70,7 @@ export function BarraCompetencia({
         />
       </div>
       {!compacta && justificativa && (
-        <p className="text-sm leading-relaxed text-slate">{justificativa}</p>
+        <p className="text-slate text-sm leading-relaxed">{justificativa}</p>
       )}
     </div>
   );

@@ -6,7 +6,7 @@ export function Logo({ className, tamanho = "md" }: { className?: string; tamanh
   return (
     <Link
       href="/"
-      className={cn("inline-flex items-center gap-2 font-semibold text-navy", className)}
+      className={cn("text-navy inline-flex items-center gap-2 font-semibold", className)}
       aria-label="NotaCerta — página inicial"
     >
       <svg width={dim} height={dim} viewBox="0 0 32 32" fill="none" aria-hidden="true">

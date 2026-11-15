@@ -21,7 +21,7 @@ export function Cabecalho() {
   }
 
   return (
-    <header className="sticky top-0 z-40 border-b border-borda/60 bg-white/90 backdrop-blur">
+    <header className="border-borda/60 sticky top-0 z-40 border-b bg-white/90 backdrop-blur">
       <div className="container-nc flex h-16 items-center justify-between gap-4">
         <Logo />
 
@@ -54,7 +54,7 @@ export function Cabecalho() {
             aria-expanded={aberto}
             aria-controls="menu-mobile"
             aria-label={aberto ? "Fechar menu" : "Abrir menu"}
-            className="flex h-11 w-11 items-center justify-center rounded-xl text-navy hover:bg-cinza-fundo md:hidden"
+            className="text-navy hover:bg-cinza-fundo flex h-11 w-11 items-center justify-center rounded-xl md:hidden"
           >
             {aberto ? <IconeX /> : <IconeMenu />}
           </button>
@@ -64,7 +64,7 @@ export function Cabecalho() {
       <div
         id="menu-mobile"
         hidden={!aberto}
-        className="border-t border-borda/60 bg-white md:hidden"
+        className="border-borda/60 border-t bg-white md:hidden"
       >
         <nav aria-label="Menu" className="container-nc flex flex-col gap-1 py-3">
           {NAV_LINKS.map((l) => {

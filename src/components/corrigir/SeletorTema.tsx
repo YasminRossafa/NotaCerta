@@ -45,12 +45,12 @@ export function SeletorTema({
         ))}
       </datalist>
 
-      <label className="flex min-h-[44px] cursor-pointer items-center gap-3 text-sm text-navy">
+      <label className="text-navy flex min-h-[44px] cursor-pointer items-center gap-3 text-sm">
         <input
           type="checkbox"
           checked={detectar}
           onChange={(e) => aoMudarDetectar(e.target.checked)}
-          className="h-5 w-5 rounded border-borda accent-azul"
+          className="border-borda accent-azul h-5 w-5 rounded"
         />
         Não sei o tema — detectar pelo texto
       </label>

@@ -31,11 +31,11 @@ export function Carregando({ comImagem }: { comImagem?: boolean }) {
     <div className="card mx-auto max-w-xl p-6 sm:p-8" role="status" aria-live="polite">
       <div className="flex items-center gap-4">
         <span className="relative flex h-12 w-12 shrink-0 items-center justify-center">
-          <span className="absolute inset-0 animate-spin rounded-full border-4 border-borda border-t-azul" />
+          <span className="border-borda border-t-azul absolute inset-0 animate-spin rounded-full border-4" />
         </span>
         <div>
-          <p className="font-serif text-xl font-semibold text-navy">Corrigindo sua redação…</p>
-          <p className="text-sm text-slate">
+          <p className="text-navy font-serif text-xl font-semibold">Corrigindo sua redação…</p>
+          <p className="text-slate text-sm">
             {comImagem ? "Transcrevendo a foto e " : ""}analisando pelo método, competência por
             competência. Leva cerca de um minuto.
           </p>
@@ -51,7 +51,7 @@ export function Carregando({ comImagem }: { comImagem?: boolean }) {
               key={e.rotulo}
               className={cn(
                 "flex items-center gap-3 text-sm",
-                feita ? "text-slate" : atual ? "font-medium text-navy" : "text-slate/60",
+                feita ? "text-slate" : atual ? "text-navy font-medium" : "text-slate/60",
               )}
             >
               <span

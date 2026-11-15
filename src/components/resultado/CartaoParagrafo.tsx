@@ -10,8 +10,16 @@ import { ROTULO_PARAGRAFO, type Paragrafo, type StatusParagrafo } from "@/lib/sc
 
 const STATUS: Record<StatusParagrafo, { rotulo: string; classes: string; ponto: string }> = {
   adequado: { rotulo: "Adequado", classes: "bg-verde-claro text-green-800", ponto: "bg-verde" },
-  ajustes: { rotulo: "Precisa de ajustes", classes: "bg-ambar-claro text-amber-800", ponto: "bg-ambar" },
-  incompleto: { rotulo: "Incompleto", classes: "bg-vermelho-claro text-red-800", ponto: "bg-vermelho" },
+  ajustes: {
+    rotulo: "Precisa de ajustes",
+    classes: "bg-ambar-claro text-amber-800",
+    ponto: "bg-ambar",
+  },
+  incompleto: {
+    rotulo: "Incompleto",
+    classes: "bg-vermelho-claro text-red-800",
+    ponto: "bg-vermelho",
+  },
 };
 
 /**
@@ -41,16 +49,21 @@ export function CartaoParagrafo({
   return (
     <article className="card overflow-hidden" aria-labelledby={`${idBase}-titulo`}>
       {/* Cabeçalho */}
-      <header className="flex flex-wrap items-center justify-between gap-3 border-b border-borda/60 px-5 py-4">
+      <header className="border-borda/60 flex flex-wrap items-center justify-between gap-3 border-b px-5 py-4">
         <div className="flex items-center gap-3">
-          <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-navy font-serif text-sm font-semibold text-white">
+          <span className="bg-navy flex h-8 w-8 items-center justify-center rounded-lg font-serif text-sm font-semibold text-white">
             {numero}
           </span>
-          <h3 id={`${idBase}-titulo`} className="font-serif text-xl font-semibold text-navy">
+          <h3 id={`${idBase}-titulo`} className="text-navy font-serif text-xl font-semibold">
             {ROTULO_PARAGRAFO[paragrafo.tipo]}
           </h3>
         </div>
-        <span className={cn("inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-xs font-semibold", st.classes)}>
+        <span
+          className={cn(
+            "inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-xs font-semibold",
+            st.classes,
+          )}
+        >
           <span className={cn("h-1.5 w-1.5 rounded-full", st.ponto)} aria-hidden="true" />
           {st.rotulo}
         </span>
@@ -59,7 +72,7 @@ export function CartaoParagrafo({
       <div className="space-y-5 px-5 py-5">
         {/* Texto original com destaques */}
         <section aria-label="Texto original">
-          <p className="mb-2 text-xs font-semibold tracking-wide text-slate uppercase">
+          <p className="text-slate mb-2 text-xs font-semibold tracking-wide uppercase">
             Seu texto
             {paragrafo.apontamentos.length > 0 && (
               <span className="ml-2 font-normal normal-case">
@@ -76,14 +89,14 @@ export function CartaoParagrafo({
               idBase={idBase}
             />
           ) : (
-            <p className="text-sm text-slate italic">Parágrafo não encontrado na redação.</p>
+            <p className="text-slate text-sm italic">Parágrafo não encontrado na redação.</p>
           )}
         </section>
 
         {/* Apontamentos */}
         {paragrafo.apontamentos.length > 0 ? (
           <section aria-label="Apontamentos">
-            <p className="mb-2 text-xs font-semibold tracking-wide text-slate uppercase">
+            <p className="text-slate mb-2 text-xs font-semibold tracking-wide uppercase">
               {paragrafo.apontamentos.length === 1
                 ? "1 apontamento"
                 : `${paragrafo.apontamentos.length} apontamentos`}
@@ -103,14 +116,14 @@ export function CartaoParagrafo({
                     )}
                   >
                     <div className="flex items-start justify-between gap-3">
-                      <p className="text-sm text-navy">
-                        <span className="mr-1.5 inline-flex h-5 w-5 items-center justify-center rounded-full bg-ambar-claro text-[11px] font-bold text-amber-800">
+                      <p className="text-navy text-sm">
+                        <span className="bg-ambar-claro mr-1.5 inline-flex h-5 w-5 items-center justify-center rounded-full text-[11px] font-bold text-amber-800">
                           {i + 1}
                         </span>
                         <q className="font-medium">{a.trecho}</q>
                       </p>
                       <span
-                        className="shrink-0 rounded-md bg-cinza-fundo px-2 py-0.5 text-xs font-semibold text-slate"
+                        className="bg-cinza-fundo text-slate shrink-0 rounded-md px-2 py-0.5 text-xs font-semibold"
                         title={comp.nome}
                       >
                         {comp.sigla}
@@ -118,11 +131,11 @@ export function CartaoParagrafo({
                     </div>
                     <dl className="mt-2.5 space-y-1.5 text-sm">
                       <div className="flex gap-2">
-                        <dt className="w-[72px] shrink-0 font-semibold text-vermelho">Problema</dt>
+                        <dt className="text-vermelho w-[72px] shrink-0 font-semibold">Problema</dt>
                         <dd className="text-navy">{a.problema}</dd>
                       </div>
                       <div className="flex gap-2">
-                        <dt className="w-[72px] shrink-0 font-semibold text-azul-escuro">Motivo</dt>
+                        <dt className="text-azul-escuro w-[72px] shrink-0 font-semibold">Motivo</dt>
                         <dd className="text-navy">{a.motivo}</dd>
                       </div>
                     </dl>
@@ -133,7 +146,7 @@ export function CartaoParagrafo({
           </section>
         ) : (
           paragrafo.status === "adequado" && (
-            <p className="flex items-center gap-2 rounded-xl bg-verde-claro px-4 py-3 text-sm text-green-900">
+            <p className="bg-verde-claro flex items-center gap-2 rounded-xl px-4 py-3 text-sm text-green-900">
               <IconeCheck width={18} height={18} />
               Dentro do modelo. Nada a apontar aqui.
             </p>
@@ -148,7 +161,7 @@ export function CartaoParagrafo({
               onClick={() => setReescritaAberta((v) => !v)}
               aria-expanded={reescritaAberta}
               aria-controls={`${idBase}-reescrita`}
-              className="flex min-h-[44px] w-full items-center justify-between gap-3 rounded-xl border border-azul/30 bg-azul-claro px-4 text-left text-sm font-semibold text-azul-escuro hover:bg-azul-claro/70"
+              className="border-azul/30 bg-azul-claro text-azul-escuro hover:bg-azul-claro/70 flex min-h-[44px] w-full items-center justify-between gap-3 rounded-xl border px-4 text-left text-sm font-semibold"
             >
               <span className="inline-flex items-center gap-2">
                 <IconeCaneta width={18} height={18} />
@@ -177,8 +190,8 @@ export function CartaoParagrafo({
 
         {/* Checklist do modelo */}
         {paragrafo.checklistModelo.length > 0 && (
-          <section aria-label="Checklist do modelo" className="rounded-xl bg-cinza-fundo p-4">
-            <p className="mb-2 flex items-center justify-between text-xs font-semibold tracking-wide text-slate uppercase">
+          <section aria-label="Checklist do modelo" className="bg-cinza-fundo rounded-xl p-4">
+            <p className="text-slate mb-2 flex items-center justify-between text-xs font-semibold tracking-wide uppercase">
               Checklist do modelo
               <span className="font-normal normal-case">
                 {itensOk}/{paragrafo.checklistModelo.length}
@@ -195,12 +208,16 @@ export function CartaoParagrafo({
                     aria-label={item.ok ? "Atende" : "Não atende"}
                     role="img"
                   >
-                    {item.ok ? <IconeCheck width={13} height={13} /> : <IconeX width={13} height={13} />}
+                    {item.ok ? (
+                      <IconeCheck width={13} height={13} />
+                    ) : (
+                      <IconeX width={13} height={13} />
+                    )}
                   </span>
                   <span className={item.ok ? "text-slate" : "text-navy"}>
                     {item.item}
                     {!item.ok && item.observacao && (
-                      <span className="block text-xs text-slate">{item.observacao}</span>
+                      <span className="text-slate block text-xs">{item.observacao}</span>
                     )}
                   </span>
                 </li>
@@ -215,12 +232,12 @@ export function CartaoParagrafo({
 
 function ReescritaTexto({ texto }: { texto: string }) {
   return (
-    <div className="rounded-xl border-l-4 border-verde bg-verde-claro/50 px-4 py-3">
+    <div className="border-verde bg-verde-claro/50 rounded-xl border-l-4 px-4 py-3">
       <p className="mb-1 text-xs font-semibold tracking-wide text-green-800 uppercase">
         Versão seguindo o método
       </p>
-      <p className="text-[15.5px] leading-[1.75] text-navy sm:text-base">{texto}</p>
-      <p className="mt-2 text-xs text-slate">
+      <p className="text-navy text-[15.5px] leading-[1.75] sm:text-base">{texto}</p>
+      <p className="text-slate mt-2 text-xs">
         Use como guia: mantenha suas ideias e ajuste a estrutura. Não copie dados que você não
         confere.
       </p>

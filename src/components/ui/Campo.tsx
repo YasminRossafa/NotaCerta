@@ -22,7 +22,7 @@ export const Campo = forwardRef<HTMLInputElement, Props>(function Campo(
 
   return (
     <div className={cn("flex flex-col gap-1.5", className)}>
-      <label htmlFor={inputId} className="text-sm font-semibold text-navy">
+      <label htmlFor={inputId} className="text-navy text-sm font-semibold">
         {rotulo}
       </label>
       <input
@@ -31,19 +31,19 @@ export const Campo = forwardRef<HTMLInputElement, Props>(function Campo(
         aria-invalid={erro ? true : undefined}
         aria-describedby={describedBy || undefined}
         className={cn(
-          "min-h-[44px] w-full rounded-xl border bg-white px-3.5 text-base text-navy placeholder:text-slate/70",
+          "text-navy placeholder:text-slate/70 min-h-[44px] w-full rounded-xl border bg-white px-3.5 text-base",
           "focus:border-azul focus:outline-none",
           erro ? "border-vermelho" : "border-borda",
         )}
         {...rest}
       />
       {ajuda && !erro && (
-        <p id={ajudaId} className="text-sm text-slate">
+        <p id={ajudaId} className="text-slate text-sm">
           {ajuda}
         </p>
       )}
       {erro && (
-        <p id={erroId} role="alert" className="text-sm font-medium text-vermelho">
+        <p id={erroId} role="alert" className="text-vermelho text-sm font-medium">
           {erro}
         </p>
       )}
