@@ -30,8 +30,10 @@ type ErroForm = { tema?: string; texto?: string; imagem?: string };
 const MENSAGENS_ERRO_API: Record<string, string> = {
   entrada_invalida: "Confira os campos e tente de novo.",
   texto_curto: "O texto é curto demais para ser uma redação. Cole a redação completa.",
-  imagem_ilegivel: "Não conseguimos ler a foto. Tente outra com mais luz e a folha inteira no quadro.",
-  nao_e_redacao: "O conteúdo enviado não parece uma redação dissertativa. Confira o texto ou a foto.",
+  imagem_ilegivel:
+    "Não conseguimos ler a foto. Tente outra com mais luz e a folha inteira no quadro.",
+  nao_e_redacao:
+    "O conteúdo enviado não parece uma redação dissertativa. Confira o texto ou a foto.",
   saida_invalida: "A correção veio incompleta. Tente novamente em alguns segundos.",
   api_indisponivel: "O corretor está fora do ar neste momento. Tente de novo em instantes.",
   configuracao: "O servidor não está configurado (chave da API ausente).",
@@ -60,7 +62,9 @@ export function FormularioCorrigir() {
     const r = lerRascunho();
     return r ? JSON.stringify(r) : null;
   }, null);
-  const rascunho = rascunhoRaw ? (JSON.parse(rascunhoRaw) as { tema: string; texto: string }) : null;
+  const rascunho = rascunhoRaw
+    ? (JSON.parse(rascunhoRaw) as { tema: string; texto: string })
+    : null;
   const mostrarRascunho = Boolean(rascunho && !rascunhoIgnorado && !texto && !tema);
 
   // Salva rascunho (debounce) — sincroniza com sistema externo, sem setState.
@@ -72,11 +76,13 @@ export function FormularioCorrigir() {
 
   function validar(): boolean {
     const e: ErroForm = {};
-    if (!detectar && tema.trim().length < 5) e.tema = "Informe o tema ou marque “detectar pelo texto”.";
+    if (!detectar && tema.trim().length < 5)
+      e.tema = "Informe o tema ou marque “detectar pelo texto”.";
     if (modo === "texto") {
       if (texto.trim().length < TEXTO_MINIMO)
         e.texto = `Texto muito curto para uma redação (mínimo ${TEXTO_MINIMO} caracteres).`;
-      if (texto.length > TEXTO_MAXIMO) e.texto = "Texto longo demais. Uma redação do ENEM tem até 30 linhas.";
+      if (texto.length > TEXTO_MAXIMO)
+        e.texto = "Texto longo demais. Uma redação do ENEM tem até 30 linhas.";
     } else if (!imagem) {
       e.imagem = "Envie a foto da redação.";
     }
@@ -149,139 +155,148 @@ export function FormularioCorrigir() {
   const caracteres = texto.length;
 
   return (
-    <form onSubmit={enviar} noValidate className="space-y-6">
-      {mostrarRascunho && rascunho && (
-        <Aviso tom="info" compacto>
-          <div className="flex flex-wrap items-center justify-between gap-2">
-            <span>Encontramos um rascunho salvo neste aparelho.</span>
-            <span className="flex gap-3">
-              <button
-                type="button"
-                className="min-h-[36px] font-semibold text-azul underline"
-                onClick={() => {
-                  setTema(rascunho.tema);
-                  setTexto(rascunho.texto);
-                  setModo("texto");
-                }}
-              >
-                Recuperar
-              </button>
-              <button
-                type="button"
-                className="min-h-[36px] text-slate underline"
-                onClick={() => {
-                  setRascunhoIgnorado(true);
-                  limparRascunho();
-                }}
-              >
-                Descartar
-              </button>
-            </span>
-          </div>
-        </Aviso>
-      )}
+    <>
+      <form onSubmit={enviar} noValidate className="space-y-6">
+        {mostrarRascunho && rascunho && (
+          <Aviso tom="info" compacto>
+            <div className="flex flex-wrap items-center justify-between gap-2">
+              <span>Encontramos um rascunho salvo neste aparelho.</span>
+              <span className="flex gap-3">
+                <button
+                  type="button"
+                  className="text-azul min-h-[36px] font-semibold underline"
+                  onClick={() => {
+                    setTema(rascunho.tema);
+                    setTexto(rascunho.texto);
+                    setModo("texto");
+                  }}
+                >
+                  Recuperar
+                </button>
+                <button
+                  type="button"
+                  className="text-slate min-h-[36px] underline"
+                  onClick={() => {
+                    setRascunhoIgnorado(true);
+                    limparRascunho();
+                  }}
+                >
+                  Descartar
+                </button>
+              </span>
+            </div>
+          </Aviso>
+        )}
 
-      {/* Abas */}
-      <div role="tablist" aria-label="Forma de envio" className="grid grid-cols-2 gap-1 rounded-xl bg-cinza-fundo p-1">
-        {(
-          [
-            { id: "texto", rotulo: "Colar texto", Icone: IconeTexto },
-            { id: "foto", rotulo: "Enviar foto", Icone: IconeCamera },
-          ] as const
-        ).map((aba) => (
-          <button
-            key={aba.id}
-            type="button"
-            role="tab"
-            id={`${tabsId}-tab-${aba.id}`}
-            aria-selected={modo === aba.id}
-            aria-controls={`${tabsId}-painel-${aba.id}`}
-            onClick={() => setModo(aba.id)}
-            className={cn(
-              "flex min-h-[44px] items-center justify-center gap-2 rounded-lg text-sm font-semibold transition-colors",
-              modo === aba.id ? "bg-white text-azul-escuro shadow-sm" : "text-slate hover:text-navy",
-            )}
-          >
-            <aba.Icone width={18} height={18} />
-            {aba.rotulo}
-          </button>
-        ))}
-      </div>
+        {/* Abas */}
+        <div
+          role="tablist"
+          aria-label="Forma de envio"
+          className="bg-cinza-fundo grid grid-cols-2 gap-1 rounded-xl p-1"
+        >
+          {(
+            [
+              { id: "texto", rotulo: "Colar texto", Icone: IconeTexto },
+              { id: "foto", rotulo: "Enviar foto", Icone: IconeCamera },
+            ] as const
+          ).map((aba) => (
+            <button
+              key={aba.id}
+              type="button"
+              role="tab"
+              id={`${tabsId}-tab-${aba.id}`}
+              aria-selected={modo === aba.id}
+              aria-controls={`${tabsId}-painel-${aba.id}`}
+              onClick={() => setModo(aba.id)}
+              className={cn(
+                "flex min-h-[44px] items-center justify-center gap-2 rounded-lg text-sm font-semibold transition-colors",
+                modo === aba.id
+                  ? "text-azul-escuro bg-white shadow-sm"
+                  : "text-slate hover:text-navy",
+              )}
+            >
+              <aba.Icone width={18} height={18} />
+              {aba.rotulo}
+            </button>
+          ))}
+        </div>
 
-      <SeletorTema
-        tema={tema}
-        detectar={detectar}
-        aoMudarTema={(v) => {
-          setTema(v);
-          if (erros.tema) setErros((e) => ({ ...e, tema: undefined }));
-        }}
-        aoMudarDetectar={(v) => {
-          setDetectar(v);
-          if (v) setErros((e) => ({ ...e, tema: undefined }));
-        }}
-        erro={erros.tema}
-      />
-
-      <div
-        role="tabpanel"
-        id={`${tabsId}-painel-texto`}
-        aria-labelledby={`${tabsId}-tab-texto`}
-        hidden={modo !== "texto"}
-      >
-        <AreaTexto
-          rotulo="Texto da redação"
-          value={texto}
-          onChange={(e) => {
-            setTexto(e.target.value);
-            if (erros.texto) setErros((er) => ({ ...er, texto: undefined }));
+        <SeletorTema
+          tema={tema}
+          detectar={detectar}
+          aoMudarTema={(v) => {
+            setTema(v);
+            if (erros.tema) setErros((e) => ({ ...e, tema: undefined }));
           }}
-          placeholder={
-            "Cole aqui a redação completa, com os 4 parágrafos (introdução, dois desenvolvimentos e conclusão)."
-          }
-          contador={`${caracteres.toLocaleString("pt-BR")} caracteres`}
-          ajuda="Separe os parágrafos com uma linha em branco. Não guardamos o texto depois da correção."
-          erro={erros.texto}
-          spellCheck={false}
-        />
-      </div>
-
-      <div
-        role="tabpanel"
-        id={`${tabsId}-painel-foto`}
-        aria-labelledby={`${tabsId}-tab-foto`}
-        hidden={modo !== "foto"}
-      >
-        <UploadFoto
-          imagem={imagem}
-          aoMudar={(img) => {
-            setImagem(img);
-            if (img && erros.imagem) setErros((e) => ({ ...e, imagem: undefined }));
+          aoMudarDetectar={(v) => {
+            setDetectar(v);
+            if (v) setErros((e) => ({ ...e, tema: undefined }));
           }}
-          erro={erros.imagem}
+          erro={erros.tema}
         />
-      </div>
 
-      {erroApi && (
-        <Aviso tom="erro" titulo="Não foi possível corrigir agora">
-          {erroApi}
-        </Aviso>
-      )}
+        <div
+          role="tabpanel"
+          id={`${tabsId}-painel-texto`}
+          aria-labelledby={`${tabsId}-tab-texto`}
+          hidden={modo !== "texto"}
+        >
+          <AreaTexto
+            rotulo="Texto da redação"
+            value={texto}
+            onChange={(e) => {
+              setTexto(e.target.value);
+              if (erros.texto) setErros((er) => ({ ...er, texto: undefined }));
+            }}
+            placeholder={
+              "Cole aqui a redação completa, com os 4 parágrafos (introdução, dois desenvolvimentos e conclusão)."
+            }
+            contador={`${caracteres.toLocaleString("pt-BR")} caracteres`}
+            ajuda="Separe os parágrafos com uma linha em branco. Não guardamos o texto depois da correção."
+            erro={erros.texto}
+            spellCheck={false}
+          />
+        </div>
 
-      <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-        <p className="text-xs text-slate">
-          Grátis: 1 correção completa por dia neste aparelho. Nota estimada, não oficial.
-        </p>
-        <Botao type="submit" tamanho="lg" className="sm:min-w-[240px]">
-          Corrigir redação
-          <IconeSeta />
-        </Botao>
-      </div>
+        <div
+          role="tabpanel"
+          id={`${tabsId}-painel-foto`}
+          aria-labelledby={`${tabsId}-tab-foto`}
+          hidden={modo !== "foto"}
+        >
+          <UploadFoto
+            imagem={imagem}
+            aoMudar={(img) => {
+              setImagem(img);
+              if (img && erros.imagem) setErros((e) => ({ ...e, imagem: undefined }));
+            }}
+            erro={erros.imagem}
+          />
+        </div>
 
+        {erroApi && (
+          <Aviso tom="erro" titulo="Não foi possível corrigir agora">
+            {erroApi}
+          </Aviso>
+        )}
+
+        <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+          <p className="text-slate text-xs">
+            Grátis: 1 correção completa por dia neste aparelho. Nota estimada, não oficial.
+          </p>
+          <Botao type="submit" tamanho="lg" className="sm:min-w-[240px]">
+            Corrigir redação
+            <IconeSeta />
+          </Botao>
+        </div>
+      </form>
+
+      {/* Fora do <form>: o modal tem seu próprio formulário de e-mail (sem <form> aninhado). */}
       <ModalUpgrade
         aberto={modal.aberto}
         motivo={modal.motivo}
         aoFechar={() => setModal((m) => ({ ...m, aberto: false }))}
       />
-    </form>
+    </>
   );
 }

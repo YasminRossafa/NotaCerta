@@ -102,6 +102,13 @@ export default function PaginaInicial() {
                 Ver a estrutura do método
               </Botao>
             </div>
+            <p className="mt-4 text-sm text-slate">
+              Quer ver antes?{" "}
+              <Link href="/resultado?exemplo=1" className="font-semibold text-azul underline">
+                Veja uma correção de exemplo
+              </Link>
+              .
+            </p>
             <AvisoNotaEstimada className="mt-6 max-w-md" />
           </div>
 

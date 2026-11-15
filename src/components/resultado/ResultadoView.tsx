@@ -14,6 +14,7 @@ import { Botao } from "@/components/ui/Botao";
 import { IconeChevron, IconeLivro, IconeSeta } from "@/components/ui/Icones";
 import { cn } from "@/lib/cn";
 import { CODIGOS_COMPETENCIA } from "@/lib/competencias";
+import { EXEMPLO_CORRECAO } from "@/lib/exemplo-correcao";
 import { planoAtivo } from "@/lib/freemium";
 import { calcularGating, indiceParagrafoMaisCritico } from "@/lib/gating";
 import { repertorioPorId } from "@/lib/repertorios";
@@ -27,7 +28,11 @@ import { useMontado, useSnapshotCliente } from "@/lib/use-cliente";
 export function ResultadoView() {
   const montado = useMontado();
   // Snapshot primitivo (string) para não quebrar a hidratação; parse abaixo.
+  // `?exemplo=1` mostra uma correção de demonstração (sem chamar a API).
   const raw = useSnapshotCliente(() => {
+    if (new URLSearchParams(window.location.search).has("exemplo")) {
+      return JSON.stringify({ correcao: EXEMPLO_CORRECAO, origem: "texto", em: "", exemplo: true });
+    }
     const r = lerResultado();
     return r ? JSON.stringify(r) : null;
   }, null);
@@ -36,11 +41,19 @@ export function ResultadoView() {
   if (!montado) return <EsqueletoResultado />;
   if (!raw) return <ResultadoVazio />;
 
-  const resultado = JSON.parse(raw) as ResultadoSalvo;
-  return <Resultado resultado={resultado} plano={plano} />;
+  const resultado = JSON.parse(raw) as ResultadoSalvo & { exemplo?: boolean };
+  return <Resultado resultado={resultado} plano={plano} exemplo={Boolean(resultado.exemplo)} />;
 }
 
-function Resultado({ resultado, plano }: { resultado: ResultadoSalvo; plano: "gratis" | "fundador" }) {
+function Resultado({
+  resultado,
+  plano,
+  exemplo,
+}: {
+  resultado: ResultadoSalvo;
+  plano: "gratis" | "fundador";
+  exemplo: boolean;
+}) {
   const { correcao } = resultado;
   const [modal, setModal] = useState<{ aberto: boolean; motivo: MotivoUpgrade; recurso?: string }>({
     aberto: false,
@@ -57,6 +70,15 @@ function Resultado({ resultado, plano }: { resultado: ResultadoSalvo; plano: "gr
 
   return (
     <div className="container-nc py-8 md:py-12">
+      {exemplo && (
+        <Aviso tom="info" className="mb-6" compacto>
+          Esta é uma <strong>correção de exemplo</strong> para você conhecer a tela.{" "}
+          <Link href="/corrigir" className="font-semibold underline">
+            Corrija a sua redação
+          </Link>{" "}
+          para ver o feedback do seu texto.
+        </Aviso>
+      )}
       {/* 1. Cabeçalho do resultado */}
       <header className="card flex flex-col items-center gap-6 p-6 text-center sm:p-8 lg:flex-row lg:text-left">
         <AnelDeNota nota={correcao.notaTotal} />
