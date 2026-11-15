@@ -15,15 +15,6 @@ export function ExemploDestacado({ exemplos }: { exemplos: Exemplo[] }) {
   const seletorId = useId();
   const exemplo = exemplos[idx];
 
-  // Legenda global: união das legendas na ordem introdução → desenvolvimento → conclusão, sem repetir.
-  const legenda = Array.from(
-    new Set([
-      ...legendaDoTipo("introducao"),
-      ...legendaDoTipo("desenvolvimento1"),
-      ...legendaDoTipo("conclusao"),
-    ]),
-  );
-
   return (
     <div className="space-y-5">
       {exemplos.length > 1 && (
@@ -54,84 +45,102 @@ export function ExemploDestacado({ exemplos }: { exemplos: Exemplo[] }) {
           </p>
         </div>
 
-        <div className="grid gap-6 p-5 sm:p-7 lg:grid-cols-[minmax(0,1fr)_240px]">
-          {/* Texto colorido */}
-          <div className="space-y-6">
-            {exemplo.paragrafos.map((p, i) => (
-              <section key={`${exemplo.id}-${p.tipo}`} aria-label={ROTULO_PARAGRAFO[p.tipo]}>
-                <p className="text-slate mb-2 text-xs font-semibold tracking-wide uppercase">
-                  {i + 1}. {ROTULO_PARAGRAFO[p.tipo]}
-                </p>
-                <p className="text-navy text-[15.5px] leading-[1.9] sm:text-base">
-                  {p.partes.map((parte, j) => {
-                    const cor = corDoRotulo(parte.rotulo);
-                    const apagado = rotuloAtivo !== null && rotuloAtivo !== parte.rotulo;
-                    return (
-                      <span key={j}>
-                        <span
-                          className={cn(
-                            "rounded-[4px] border-b-2 px-1 py-0.5 transition-opacity",
-                            cor.fundo,
-                            cor.texto,
-                            cor.borda,
-                            apagado && "opacity-35",
-                          )}
-                          title={parte.rotulo}
-                        >
-                          <span className="sr-only">[{parte.rotulo}] </span>
-                          {parte.texto}
-                        </span>{" "}
-                      </span>
-                    );
-                  })}
-                </p>
-              </section>
-            ))}
-          </div>
+        {exemplo.rascunho && (
+          <p className="bg-amber-50 px-5 py-2.5 text-xs text-amber-900 sm:px-7">
+            Exemplo escrito pelo NotaCerta seguindo o método — ainda não revisado pela professora.
+          </p>
+        )}
 
-          {/* Legenda */}
-          <aside className="lg:sticky lg:top-24 lg:self-start" aria-label="Legenda das cores">
-            <p className="text-slate mb-2 text-xs font-semibold tracking-wide uppercase">Legenda</p>
-            <ul className="flex flex-wrap gap-1.5 lg:flex-col lg:gap-1">
-              {legenda.map((r) => {
-                const cor = corDoRotulo(r);
-                const ativo = rotuloAtivo === r;
-                return (
-                  <li key={r}>
-                    <button
-                      type="button"
-                      aria-pressed={ativo}
-                      onClick={() => setRotuloAtivo(ativo ? null : r)}
-                      className={cn(
-                        "flex min-h-[36px] w-full items-center gap-2 rounded-lg px-2 text-left text-sm transition-colors",
-                        ativo ? "bg-cinza-fundo" : "hover:bg-cinza-fundo",
-                      )}
-                    >
-                      <span
-                        className={cn(
-                          "h-3.5 w-3.5 shrink-0 rounded-sm border-b-2",
-                          cor.fundo,
-                          cor.borda,
-                        )}
-                        aria-hidden="true"
-                      />
-                      <span className="text-navy">{r}</span>
-                    </button>
-                  </li>
-                );
-              })}
-            </ul>
-            {rotuloAtivo && (
-              <button
-                type="button"
-                onClick={() => setRotuloAtivo(null)}
-                className="text-azul mt-2 min-h-[36px] text-xs font-semibold underline"
+        <div className="divide-borda divide-y">
+          {exemplo.paragrafos.map((p, i) => {
+            const legendaParagrafo = legendaDoTipo(p.tipo);
+            return (
+              <section
+                key={`${exemplo.id}-${p.tipo}`}
+                aria-label={ROTULO_PARAGRAFO[p.tipo]}
+                className="grid gap-5 p-5 sm:p-7 lg:grid-cols-[minmax(0,1fr)_220px]"
               >
-                Mostrar todos
-              </button>
-            )}
-          </aside>
+                {/* Texto colorido */}
+                <div>
+                  <p className="text-slate mb-2 text-xs font-semibold tracking-wide uppercase">
+                    {i + 1}. {ROTULO_PARAGRAFO[p.tipo]}
+                  </p>
+                  <p className="text-navy text-[15.5px] leading-[1.9] sm:text-base">
+                    {p.partes.map((parte, j) => {
+                      const cor = corDoRotulo(parte.rotulo);
+                      const apagado = rotuloAtivo !== null && rotuloAtivo !== parte.rotulo;
+                      return (
+                        <span key={j}>
+                          <span
+                            className={cn(
+                              "rounded-[4px] border-b-2 px-1 py-0.5 transition-opacity",
+                              cor.fundo,
+                              cor.texto,
+                              cor.borda,
+                              apagado && "opacity-35",
+                            )}
+                            title={parte.rotulo}
+                          >
+                            <span className="sr-only">[{parte.rotulo}] </span>
+                            {parte.texto}
+                          </span>{" "}
+                        </span>
+                      );
+                    })}
+                  </p>
+                </div>
+
+                {/* Legenda deste parágrafo */}
+                <aside aria-label={`Legenda — ${ROTULO_PARAGRAFO[p.tipo]}`}>
+                  <p className="text-slate mb-2 text-xs font-semibold tracking-wide uppercase">
+                    Legenda
+                  </p>
+                  <ul className="flex flex-wrap gap-1.5 lg:flex-col lg:gap-1">
+                    {legendaParagrafo.map((r) => {
+                      const cor = corDoRotulo(r);
+                      const ativo = rotuloAtivo === r;
+                      return (
+                        <li key={r}>
+                          <button
+                            type="button"
+                            aria-pressed={ativo}
+                            onClick={() => setRotuloAtivo(ativo ? null : r)}
+                            className={cn(
+                              "flex min-h-[36px] w-full items-center gap-2 rounded-lg px-2 text-left text-sm transition-colors",
+                              ativo ? "bg-cinza-fundo" : "hover:bg-cinza-fundo",
+                            )}
+                          >
+                            <span
+                              className={cn(
+                                "h-3.5 w-3.5 shrink-0 rounded-sm border-b-2",
+                                cor.fundo,
+                                cor.borda,
+                              )}
+                              aria-hidden="true"
+                            />
+                            <span className="text-navy">{r}</span>
+                          </button>
+                        </li>
+                      );
+                    })}
+                  </ul>
+                </aside>
+              </section>
+            );
+          })}
         </div>
+
+        {rotuloAtivo && (
+          <div className="border-borda border-t px-5 py-3 sm:px-7">
+            <button
+              type="button"
+              onClick={() => setRotuloAtivo(null)}
+              className="text-azul min-h-[36px] text-xs font-semibold underline"
+            >
+              Mostrar todos
+            </button>
+          </div>
+        )}
       </div>
     </div>
   );

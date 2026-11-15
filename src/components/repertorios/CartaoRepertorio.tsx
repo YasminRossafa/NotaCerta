@@ -73,6 +73,8 @@ export function CartaoRepertorio({
         <strong className="text-navy font-semibold">Como usar:</strong> {item.comoUsar}
       </p>
 
+      {item.fonte && <p className="mt-2 text-xs text-amber-700">{item.fonte}</p>}
+
       <ul className="mt-3 flex flex-wrap gap-1.5" aria-label="Temas">
         {item.temas.map((t) => (
           <li key={t} className="bg-cinza-fundo text-slate rounded-full px-2.5 py-0.5 text-xs">

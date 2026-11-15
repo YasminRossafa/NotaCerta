@@ -31,16 +31,14 @@ const INTRO: Elemento[] = [
   },
 ];
 
-const DESENV: Elemento[] = [
+const D1: Elemento[] = [
   {
     rotulo: "Conectivo",
-    texto:
-      "D1: “Primeiramente” ou “Em primeiro lugar”. D2: “Em segundo lugar” ou “Ademais”. Um só por parágrafo.",
+    texto: "Abre com “Primeiramente” ou “Em primeiro lugar”. Um só, só neste parágrafo.",
   },
   {
     rotulo: "Problemática",
-    texto:
-      "Retoma, com suas palavras, a problemática correspondente da introdução (a 1ª no D1, a 2ª no D2).",
+    texto: "Retoma, com suas palavras, a 1ª problemática apresentada na introdução.",
   },
   {
     rotulo: "Motivo",
@@ -49,11 +47,31 @@ const DESENV: Elemento[] = [
   },
   {
     rotulo: "Citação (dados)",
-    texto: "No D1, repertório científico: dado, pesquisa, fato. Sempre confira o número.",
+    texto: "Repertório científico: dado, pesquisa, fato. Sempre confira o número.",
+  },
+  {
+    rotulo: "Argumento",
+    texto: "Aprofunda o impacto e fecha o parágrafo: “Desse modo”, “Logo”, “Dessa forma”.",
+  },
+];
+
+const D2: Elemento[] = [
+  {
+    rotulo: "Conectivo",
+    texto: "Abre com “Em segundo lugar” ou “Ademais”. Um só, só neste parágrafo.",
+  },
+  {
+    rotulo: "Problemática",
+    texto: "Retoma, com suas palavras, a 2ª problemática apresentada na introdução.",
+  },
+  {
+    rotulo: "Motivo",
+    texto:
+      "A frase do “porque”: explica por que aquilo é um problema. Sem ela, o parágrafo fica sem causa.",
   },
   {
     rotulo: "Citação (filosófica/sociológica)",
-    texto: "No D2, repertório filosófico, sociológico ou literário, integrado ao argumento.",
+    texto: "Repertório filosófico, sociológico ou literário, integrado ao argumento.",
   },
   {
     rotulo: "Argumento",
@@ -125,8 +143,7 @@ export default function PaginaEstrutura() {
   return (
     <div className="container-nc py-10 md:py-14">
       <header className="max-w-2xl">
-        <p className="text-azul text-sm font-semibold tracking-wide uppercase">O método</p>
-        <h1 className="text-navy mt-2 font-serif text-3xl font-semibold sm:text-4xl">
+        <h1 className="text-navy font-serif text-3xl font-semibold sm:text-4xl">
           A estrutura da redação, parágrafo por parágrafo
         </h1>
         <p className="text-slate mt-3">
@@ -137,7 +154,7 @@ export default function PaginaEstrutura() {
       </header>
 
       {/* Camada 1: explicação dos elementos */}
-      <section className="mt-10 grid gap-5 lg:grid-cols-3" aria-label="Elementos de cada parágrafo">
+      <section className="mt-10 grid gap-5 lg:grid-cols-4" aria-label="Elementos de cada parágrafo">
         <article className="card p-6">
           <p className="text-slate text-xs font-semibold tracking-wide uppercase">Parágrafo 1</p>
           <h2 className="text-navy mt-1 font-serif text-2xl font-semibold">Introdução</h2>
@@ -148,16 +165,21 @@ export default function PaginaEstrutura() {
         </article>
 
         <article className="card p-6">
-          <p className="text-slate text-xs font-semibold tracking-wide uppercase">
-            Parágrafos 2 e 3
-          </p>
-          <h2 className="text-navy mt-1 font-serif text-2xl font-semibold">
-            Desenvolvimento 1 e 2
-          </h2>
+          <p className="text-slate text-xs font-semibold tracking-wide uppercase">Parágrafo 2</p>
+          <h2 className="text-navy mt-1 font-serif text-2xl font-semibold">Desenvolvimento 1</h2>
           <p className="text-slate mt-1 text-sm">
-            Mesma estrutura nos dois; muda o conectivo e o tipo de citação.
+            Retoma a 1ª problemática, com citação científica.
           </p>
-          <ListaElementos itens={DESENV} />
+          <ListaElementos itens={D1} />
+        </article>
+
+        <article className="card p-6">
+          <p className="text-slate text-xs font-semibold tracking-wide uppercase">Parágrafo 3</p>
+          <h2 className="text-navy mt-1 font-serif text-2xl font-semibold">Desenvolvimento 2</h2>
+          <p className="text-slate mt-1 text-sm">
+            Retoma a 2ª problemática, com citação filosófica, sociológica ou literária.
+          </p>
+          <ListaElementos itens={D2} />
         </article>
 
         <article className="card p-6">
@@ -173,8 +195,7 @@ export default function PaginaEstrutura() {
       {/* Camada 2: exemplos destacados */}
       <section className="mt-14" aria-labelledby="exemplos-titulo">
         <div className="max-w-2xl">
-          <p className="text-azul text-sm font-semibold tracking-wide uppercase">Na prática</p>
-          <h2 id="exemplos-titulo" className="text-navy mt-2 font-serif text-3xl font-semibold">
+          <h2 id="exemplos-titulo" className="text-navy font-serif text-3xl font-semibold">
             Redações-modelo com cada parte destacada
           </h2>
           <p className="text-slate mt-3">
