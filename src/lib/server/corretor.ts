@@ -1,7 +1,5 @@
 import "server-only";
 
-import Anthropic from "@anthropic-ai/sdk";
-import { zodOutputFormat } from "@anthropic-ai/sdk/helpers/zod";
 import { acervoCondensado, repertorioPorId } from "@/lib/repertorios";
 import {
   CorrecaoModeloSchema,
@@ -11,10 +9,11 @@ import {
   type Entrada,
 } from "@/lib/schema";
 import { PROMPT_ACERVO_CABECALHO, PROMPT_METODO } from "@/lib/server/metodo-prompt";
+import { ErroProvider, obterProvider } from "@/lib/ai/provider";
 
 /**
- * Serviço de correção (spec §9). Único lugar do projeto que fala com a Anthropic.
- * A chave vem de process.env.ANTHROPIC_API_KEY (lida pelo SDK) e nunca sai do servidor.
+ * Serviço de correção (spec §9). Único lugar do projeto que fala com o provedor de IA
+ * (Anthropic ou Gemini, escolhido por `AI_PROVIDER` — ver `lib/ai/provider.ts`).
  */
 
 export type CodigoErroCorretor =
@@ -30,63 +29,31 @@ export class ErroCorretor extends Error {
   }
 }
 
-// Spec §5/§6 pede "claude-sonnet-5-5"; o id público da geração Sonnet 5 é "claude-sonnet-5".
-// TODO(claudia): confirmar o id do modelo desejado e ajustar ANTHROPIC_MODEL no .env.
-const MODELO_PADRAO = "claude-sonnet-5";
-
-// Spec §9.3 sugere ~3500; com thinking adaptativo o limite precisa cobrir raciocínio + JSON.
-const MAX_TOKENS = 16000;
-
-let cliente: Anthropic | null = null;
-function obterCliente(): Anthropic {
-  if (!process.env.ANTHROPIC_API_KEY) {
-    throw new ErroCorretor("configuracao", "ANTHROPIC_API_KEY não configurada no servidor.");
-  }
-  cliente ??= new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY, maxRetries: 2 });
-  return cliente;
+/** System prompt estático (método + acervo condensado) — igual em toda chamada. */
+function systemPromptCompleto(): string {
+  return `${PROMPT_METODO}\n\n${PROMPT_ACERVO_CABECALHO}\n${acervoCondensado()}`;
 }
 
-/** Blocos de sistema estáticos, com breakpoint de cache no último (cobre método + acervo). */
-function blocosSistema(): Anthropic.TextBlockParam[] {
-  return [
-    { type: "text", text: PROMPT_METODO },
-    {
-      type: "text",
-      text: `${PROMPT_ACERVO_CABECALHO}\n${acervoCondensado()}`,
-      cache_control: { type: "ephemeral" },
-    },
-  ];
-}
-
-function mensagemUsuario(entrada: Entrada): Anthropic.MessageParam {
+function userContentEntrada(entrada: Entrada): string {
   const linhaTema = entrada.tema
     ? `TEMA DA REDAÇÃO: ${entrada.tema}`
     : "TEMA DA REDAÇÃO: não informado — infira o tema a partir do texto e marque temaDetectado=true.";
 
-  if (entrada.imagemBase64 && entrada.imagemMime) {
-    return {
-      role: "user",
-      content: [
-        {
-          type: "image",
-          source: {
-            type: "base64",
-            media_type: entrada.imagemMime,
-            data: entrada.imagemBase64,
-          },
-        },
-        {
-          type: "text",
-          text: `${linhaTema}\n\nA redação está na imagem acima (manuscrita). Transcreva-a fielmente no campo "transcricao" e depois corrija seguindo o método.`,
-        },
-      ],
-    };
+  if (entrada.imagemBase64) {
+    return `${linhaTema}\n\nA redação está na imagem anexada (manuscrita). Transcreva-a fielmente no campo "transcricao" e depois corrija seguindo o método.`;
   }
 
-  return {
-    role: "user",
-    content: `${linhaTema}\n\nREDAÇÃO DO ALUNO:\n"""\n${entrada.texto}\n"""`,
-  };
+  return `${linhaTema}\n\nREDAÇÃO DO ALUNO:\n"""\n${entrada.texto}\n"""`;
+}
+
+/** Remove possíveis cercas de código (```json ... ```) antes de JSON.parse. */
+function extrairJson(bruto: string): unknown {
+  const limpo = bruto
+    .trim()
+    .replace(/^```(?:json)?/i, "")
+    .replace(/```$/i, "")
+    .trim();
+  return JSON.parse(limpo);
 }
 
 function arredondar40(n: number): number {
@@ -151,63 +118,55 @@ export function normalizarCorrecao(bruto: CorrecaoModelo): unknown {
   };
 }
 
-async function chamarModelo(mensagens: Anthropic.MessageParam[]): Promise<CorrecaoModelo | null> {
-  const client = obterCliente();
-  const modelo = process.env.ANTHROPIC_MODEL || MODELO_PADRAO;
-
-  // Sonnet 5 / Opus 5 rejeitam `temperature` (400) — o spec pedia 0.2; o controle de
-  // variação fica por conta do thinking adaptativo + saída estruturada.
-  // TODO(claudia): ajustar output_config.effort ("medium" reduz latência/custo) após medir.
-  const resposta = await client.messages.parse({
-    model: modelo,
-    max_tokens: MAX_TOKENS,
-    system: blocosSistema(),
-    messages: mensagens,
-    output_config: { format: zodOutputFormat(CorrecaoModeloSchema) },
-  });
-
-  if (resposta.stop_reason === "refusal") {
-    throw new ErroCorretor("saida_invalida", "O modelo recusou a solicitação.");
+/** Chama o provedor e tenta interpretar a resposta como `CorrecaoModelo`; null se inválida. */
+async function chamarProvider(
+  systemPrompt: string,
+  userContent: string,
+  entrada: Entrada,
+): Promise<CorrecaoModelo | null> {
+  const provider = await obterProvider();
+  let bruto: string;
+  try {
+    bruto = await provider.corrigirRedacao({
+      systemPrompt,
+      userContent,
+      imageBase64: entrada.imagemBase64,
+      imageMime: entrada.imagemMime,
+    });
+  } catch (e) {
+    throw traduzirErroProvider(e);
   }
-  if (resposta.stop_reason === "max_tokens") {
-    throw new ErroCorretor("saida_invalida", "A correção foi cortada por limite de tokens.");
+
+  let json: unknown;
+  try {
+    json = extrairJson(bruto);
+  } catch {
+    return null;
   }
-  return resposta.parsed_output ?? null;
+  const analisado = CorrecaoModeloSchema.safeParse(json);
+  return analisado.success ? analisado.data : null;
 }
 
 /**
- * Corrige a redação: chama o modelo, normaliza, valida com Zod.
+ * Corrige a redação: chama o provedor de IA, normaliza, valida com Zod.
  * Se a saída não passar no schema estrito, faz 1 tentativa de reparo; senão lança 502.
  */
 export async function corrigirRedacao(entrada: Entrada): Promise<Correcao> {
-  const mensagens: Anthropic.MessageParam[] = [mensagemUsuario(entrada)];
+  const systemPrompt = systemPromptCompleto();
+  const userContentOriginal = userContentEntrada(entrada);
 
-  let bruto: CorrecaoModelo | null;
-  try {
-    bruto = await chamarModelo(mensagens);
-  } catch (e) {
-    throw traduzirErroSdk(e);
-  }
-
+  let bruto = await chamarProvider(systemPrompt, userContentOriginal, entrada);
   let validado = bruto ? CorrecaoSchema.safeParse(normalizarCorrecao(bruto)) : null;
 
   if (!validado?.success) {
     // Reparo (1 vez): devolve o JSON anterior + problemas e pede a versão corrigida.
     const problemas = validado
       ? validado.error.issues.map((i) => `${i.path.join(".")}: ${i.message}`).join("; ")
-      : "resposta vazia";
-    mensagens.push(
-      { role: "assistant", content: bruto ? JSON.stringify(bruto) : "{}" },
-      {
-        role: "user",
-        content: `O JSON anterior não passou na validação (${problemas}). Reenvie a correção completa, válida no schema, mantendo o conteúdo.`,
-      },
-    );
-    try {
-      bruto = await chamarModelo(mensagens);
-    } catch (e) {
-      throw traduzirErroSdk(e);
-    }
+      : "resposta vazia ou JSON inválido";
+    const anterior = bruto ? JSON.stringify(bruto) : "(a resposta anterior não era um JSON válido)";
+    const userContentReparo = `${userContentOriginal}\n\n---\nSUA TENTATIVA ANTERIOR NÃO FOI ACEITA.\nResposta anterior: ${anterior}\nProblemas: ${problemas}\nReenvie a correção completa, válida no schema, mantendo o conteúdo.`;
+
+    bruto = await chamarProvider(systemPrompt, userContentReparo, entrada);
     validado = bruto ? CorrecaoSchema.safeParse(normalizarCorrecao(bruto)) : null;
   }
 
@@ -217,21 +176,25 @@ export async function corrigirRedacao(entrada: Entrada): Promise<Correcao> {
   return validado.data;
 }
 
-function traduzirErroSdk(e: unknown): ErroCorretor {
+function traduzirErroProvider(e: unknown): ErroCorretor {
+  if (e instanceof ErroProvider) {
+    switch (e.codigo) {
+      case "configuracao":
+        return new ErroCorretor("configuracao", e.message);
+      case "limite_taxa":
+        // Limite momentâneo do provedor (ex.: cota da camada gratuita) — distinto do
+        // limite_diario do plano gratuito do NotaCerta (spec §9.1/§13).
+        return new ErroCorretor(
+          "api_indisponivel",
+          "Limite de uso do provedor de IA atingido, tente em instantes.",
+        );
+      case "recusado":
+        return new ErroCorretor("saida_invalida", e.message);
+      case "indisponivel":
+      default:
+        return new ErroCorretor("api_indisponivel", e.message);
+    }
+  }
   if (e instanceof ErroCorretor) return e;
-  if (e instanceof Anthropic.AuthenticationError || e instanceof Anthropic.PermissionDeniedError) {
-    return new ErroCorretor("configuracao", "Chave da API inválida ou sem permissão.");
-  }
-  if (e instanceof Anthropic.BadRequestError) {
-    return new ErroCorretor("entrada_invalida", "A requisição foi rejeitada pelo modelo.");
-  }
-  if (
-    e instanceof Anthropic.RateLimitError ||
-    e instanceof Anthropic.InternalServerError ||
-    e instanceof Anthropic.APIConnectionError ||
-    e instanceof Anthropic.APIError
-  ) {
-    return new ErroCorretor("api_indisponivel", "O serviço de correção está indisponível.");
-  }
   return new ErroCorretor("api_indisponivel", "Falha inesperada ao corrigir.");
 }

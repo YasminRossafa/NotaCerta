@@ -1,6 +1,7 @@
 import { NextResponse, type NextRequest } from "next/server";
 import { EntradaSchema, TEXTO_MINIMO, type ErroApi } from "@/lib/schema";
 import { ErroCorretor, corrigirRedacao } from "@/lib/server/corretor";
+import { chaveConfigurada } from "@/lib/ai/provider";
 import {
   COOKIE_DISPOSITIVO,
   consumirUso,
@@ -71,7 +72,7 @@ export async function POST(request: NextRequest) {
     );
   }
 
-  if (!process.env.ANTHROPIC_API_KEY) {
+  if (!chaveConfigurada()) {
     return responderErro(
       { erro: "configuracao", mensagem: "Servidor sem chave da API configurada." },
       500,
