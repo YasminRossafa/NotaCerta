@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Fraunces, Inter } from "next/font/google";
+import { Inter } from "next/font/google";
 import { Cabecalho } from "@/components/layout/Cabecalho";
 import { Rodape } from "@/components/layout/Rodape";
 import { SITE } from "@/lib/site";
@@ -11,15 +11,13 @@ const inter = Inter({
   display: "swap",
 });
 
-const fraunces = Fraunces({
-  variable: "--font-fraunces",
-  subsets: ["latin"],
-  display: "swap",
-  axes: ["opsz"],
-});
-
 export const metadata: Metadata = {
   metadataBase: new URL(SITE.url),
+  icons: {
+    icon: "/notacerta-icone.png",
+    shortcut: "/notacerta-icone.png",
+    apple: "/notacerta-icone.png",
+  },
   title: {
     default: "NotaCerta — Corretor de redação ENEM gratuito com método",
     template: "%s · NotaCerta",
@@ -48,7 +46,7 @@ export const viewport: Viewport = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="pt-BR" className={`${inter.variable} ${fraunces.variable} h-full`}>
+    <html lang="pt-BR" className={`${inter.variable} h-full`}>
       <body className="flex min-h-full flex-col">
         <a
           href="#conteudo"

@@ -51,7 +51,7 @@ export function AnelDeNota({
         />
       </svg>
       <div className="absolute inset-0 flex flex-col items-center justify-center leading-none">
-        <span className={cn("text-navy font-serif font-semibold tabular-nums", fonte)}>
+        <span className={cn("text-navy font-semibold tabular-nums", fonte)}>
           {nota == null ? "—" : nota}
         </span>
         <span

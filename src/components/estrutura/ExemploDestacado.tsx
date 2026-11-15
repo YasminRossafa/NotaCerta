@@ -40,7 +40,7 @@ export function ExemploDestacado({ exemplos }: { exemplos: Exemplo[] }) {
       <div className="card overflow-hidden">
         <div className="bg-navy px-5 py-4 text-white sm:px-7">
           <p className="text-xs font-semibold tracking-wide text-white/70 uppercase">Tema</p>
-          <p className="font-serif text-xl leading-snug font-semibold sm:text-2xl">
+          <p className="text-xl leading-snug font-semibold sm:text-2xl">
             {exemplo.tema}
           </p>
         </div>

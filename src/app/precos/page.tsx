@@ -57,7 +57,7 @@ export default function PaginaPrecos() {
   return (
     <div className="container-nc py-10 md:py-14">
       <header className="mx-auto max-w-2xl text-center">
-        <h1 className="text-navy font-serif text-3xl font-semibold sm:text-4xl">
+        <h1 className="text-navy text-3xl font-semibold sm:text-4xl">
           O grátis entrega valor de verdade. O Fundador tira o limite.
         </h1>
         <p className="text-slate mt-3">
@@ -69,11 +69,11 @@ export default function PaginaPrecos() {
       <div className="mx-auto mt-10 grid max-w-4xl gap-5 md:grid-cols-2">
         {/* Grátis */}
         <section className="card flex flex-col p-6 sm:p-7" aria-labelledby="plano-gratis">
-          <h2 id="plano-gratis" className="text-navy font-serif text-2xl font-semibold">
+          <h2 id="plano-gratis" className="text-navy text-2xl font-semibold">
             Grátis
           </h2>
           <p className="text-slate mt-1 text-sm">Para conhecer o método e corrigir todo mês.</p>
-          <p className="text-navy mt-5 font-serif text-4xl font-semibold">
+          <p className="text-navy mt-5 text-4xl font-semibold">
             R$ 0<span className="text-slate text-base font-normal"> / sempre</span>
           </p>
           <ul className="text-navy mt-6 flex-1 space-y-2.5 text-sm">
@@ -105,11 +105,11 @@ export default function PaginaPrecos() {
           <span className="bg-azul absolute -top-3 left-6 rounded-full px-3 py-1 text-xs font-semibold text-white">
             Vagas limitadas
           </span>
-          <h2 id="plano-fundador" className="text-navy font-serif text-2xl font-semibold">
+          <h2 id="plano-fundador" className="text-navy text-2xl font-semibold">
             Plano Fundador
           </h2>
           <p className="text-slate mt-1 text-sm">Para quem treina várias redações por semana.</p>
-          <p className="text-navy mt-5 font-serif text-4xl font-semibold">
+          <p className="text-navy mt-5 text-4xl font-semibold">
             Em breve
             <span className="text-slate block text-base font-normal">
               preço de fundador para a lista
@@ -139,7 +139,7 @@ export default function PaginaPrecos() {
 
       {/* Comparativo */}
       <section className="mx-auto mt-12 max-w-4xl" aria-labelledby="comparativo">
-        <h2 id="comparativo" className="text-navy font-serif text-2xl font-semibold">
+        <h2 id="comparativo" className="text-navy text-2xl font-semibold">
           Comparativo
         </h2>
         <div className="card mt-4 overflow-x-auto">

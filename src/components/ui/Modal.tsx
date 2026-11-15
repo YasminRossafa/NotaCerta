@@ -43,7 +43,7 @@ export function Modal({
     >
       <div className="p-5 sm:p-7">
         <div className="mb-4 flex items-start justify-between gap-4">
-          <h2 className="font-serif text-2xl leading-tight font-semibold">{titulo}</h2>
+          <h2 className="text-2xl leading-tight font-semibold">{titulo}</h2>
           <button
             type="button"
             onClick={aoFechar}

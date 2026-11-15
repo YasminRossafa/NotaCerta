@@ -12,7 +12,7 @@ export default function PaginaPrivacidade() {
   return (
     <div className="container-nc py-10 md:py-14">
       <article className="prose-nc mx-auto max-w-2xl">
-        <h1 className="text-navy font-serif text-3xl font-semibold sm:text-4xl">
+        <h1 className="text-navy text-3xl font-semibold sm:text-4xl">
           Aviso de privacidade
         </h1>
         <p className="text-slate mt-3">
@@ -76,7 +76,7 @@ export default function PaginaPrivacidade() {
 function Secao({ titulo, children }: { titulo: string; children: React.ReactNode }) {
   return (
     <section className="text-navy mt-8 space-y-3 text-[15.5px] leading-relaxed">
-      <h2 className="text-navy font-serif text-2xl font-semibold">{titulo}</h2>
+      <h2 className="text-navy text-2xl font-semibold">{titulo}</h2>
       {children}
     </section>
   );

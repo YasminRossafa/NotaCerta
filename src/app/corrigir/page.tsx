@@ -21,7 +21,7 @@ export default function PaginaCorrigir() {
   return (
     <div className="container-nc py-8 md:py-12">
       <header className="max-w-2xl">
-        <h1 className="text-navy font-serif text-3xl font-semibold sm:text-4xl">
+        <h1 className="text-navy text-3xl font-semibold sm:text-4xl">
           Corrigir redação
         </h1>
         <p className="text-slate mt-2">

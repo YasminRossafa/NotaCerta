@@ -50,7 +50,7 @@ export function CartaoRepertorio({
           <p className="text-slate text-xs font-semibold tracking-wide uppercase">
             {ROTULO_CATEGORIA[item.categoria]}
           </p>
-          <h3 className="text-navy mt-1 font-serif text-xl leading-snug font-semibold">
+          <h3 className="text-navy mt-1 text-xl leading-snug font-semibold">
             {item.titulo}
           </h3>
           {item.autor && <p className="text-slate text-sm">{item.autor}</p>}

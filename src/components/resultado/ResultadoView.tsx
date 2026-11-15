@@ -101,7 +101,7 @@ function Resultado({
             )}
           </div>
           <p className="text-slate mt-3 text-xs font-semibold tracking-wide uppercase">Tema</p>
-          <h1 className="text-navy font-serif text-2xl leading-tight font-semibold sm:text-3xl">
+          <h1 className="text-navy text-2xl leading-tight font-semibold sm:text-3xl">
             {correcao.tema}
           </h1>
           {!correcao.completa && (
@@ -117,7 +117,7 @@ function Resultado({
         {/* Lateral (sticky no desktop): competências + resumo do professor */}
         <aside className="space-y-6 lg:sticky lg:top-20">
           <section className="card p-5" aria-labelledby="competencias-titulo">
-            <h2 id="competencias-titulo" className="text-navy font-serif text-lg font-semibold">
+            <h2 id="competencias-titulo" className="text-navy text-lg font-semibold">
               Competências
             </h2>
             <div className="mt-4 space-y-4">
@@ -153,7 +153,7 @@ function Resultado({
           {/* 3. Parágrafo a parágrafo */}
           <section aria-labelledby="paragrafos-titulo" className="space-y-4">
             <div className="flex items-end justify-between gap-3">
-              <h2 id="paragrafos-titulo" className="text-navy font-serif text-2xl font-semibold">
+              <h2 id="paragrafos-titulo" className="text-navy text-2xl font-semibold">
                 Parágrafo a parágrafo
               </h2>
               <p className="text-slate text-xs">Trecho → problema → motivo</p>
@@ -175,7 +175,7 @@ function Resultado({
             <div>
               <h2
                 id="repertorio-titulo"
-                className="text-navy flex items-center gap-2 font-serif text-2xl font-semibold"
+                className="text-navy flex items-center gap-2 text-2xl font-semibold"
               >
                 <IconeLivro className="text-azul" />
                 Repertório para este tema
@@ -267,7 +267,7 @@ function ResumoProfessor({ texto, className }: { texto: string; className?: stri
       className={cn("card border-l-azul border-l-4 p-5", className)}
       aria-labelledby="resumo-titulo"
     >
-      <h2 id="resumo-titulo" className="text-navy font-serif text-lg font-semibold">
+      <h2 id="resumo-titulo" className="text-navy text-lg font-semibold">
         Resumo do professor
       </h2>
       <p className="text-navy mt-2 text-[15.5px] leading-relaxed">{texto}</p>
@@ -279,7 +279,7 @@ function ResultadoVazio() {
   return (
     <div className="container-nc py-16">
       <div className="card mx-auto max-w-lg p-8 text-center">
-        <p className="text-navy font-serif text-2xl font-semibold">Nenhuma correção para mostrar</p>
+        <p className="text-navy text-2xl font-semibold">Nenhuma correção para mostrar</p>
         <p className="text-slate mt-2">
           O resultado fica disponível só nesta aba, logo após a correção. Envie uma redação para ver
           o feedback completo.

@@ -88,7 +88,7 @@ export default function PaginaInicial() {
               <span className="bg-verde h-2 w-2 rounded-full" aria-hidden="true" />
               Grátis, sem cadastro, 2 correções por mês
             </p>
-            <h1 className="text-navy mt-5 font-serif text-4xl leading-[1.08] font-semibold tracking-tight sm:text-5xl lg:text-[3.4rem]">
+            <h1 className="text-navy mt-5 text-4xl leading-[1.08] font-semibold tracking-tight sm:text-5xl lg:text-[3.4rem]">
               Corretor de redação ENEM com <span className="text-azul">método</span>, não com
               achismo.
             </h1>
@@ -127,7 +127,7 @@ export default function PaginaInicial() {
           </p>
           <h2
             id="diferenciais"
-            className="text-navy mt-2 font-serif text-3xl font-semibold sm:text-4xl"
+            className="text-navy mt-2 text-3xl font-semibold sm:text-4xl"
           >
             Corretores de IA te dão uma nota. O NotaCerta te ensina a subir ela.
           </h2>
@@ -152,7 +152,7 @@ export default function PaginaInicial() {
             <p className="text-azul text-sm font-semibold tracking-wide uppercase">Como funciona</p>
             <h2
               id="como-funciona"
-              className="text-navy mt-2 font-serif text-3xl font-semibold sm:text-4xl"
+              className="text-navy mt-2 text-3xl font-semibold sm:text-4xl"
             >
               Três passos, menos de dois minutos.
             </h2>
@@ -160,7 +160,7 @@ export default function PaginaInicial() {
           <ol className="mt-10 grid gap-5 md:grid-cols-3">
             {passos.map((p) => (
               <li key={p.n} className="card relative p-6 pt-8">
-                <span className="bg-azul absolute -top-4 left-6 flex h-9 w-9 items-center justify-center rounded-full font-serif text-lg font-semibold text-white shadow">
+                <span className="bg-azul absolute -top-4 left-6 flex h-9 w-9 items-center justify-center rounded-full text-lg font-semibold text-white shadow">
                   {p.n}
                 </span>
                 <h3 className="text-navy text-lg font-semibold">{p.titulo}</h3>
@@ -178,7 +178,7 @@ export default function PaginaInicial() {
             <p className="text-azul text-sm font-semibold tracking-wide uppercase">O método</p>
             <h2
               id="metodo"
-              className="text-navy mt-2 font-serif text-3xl font-semibold sm:text-4xl"
+              className="text-navy mt-2 text-3xl font-semibold sm:text-4xl"
             >
               Uma estrutura clara para cada parágrafo.
             </h2>
@@ -247,7 +247,7 @@ export default function PaginaInicial() {
       <section className="bg-navy text-white" aria-labelledby="cta-final">
         <div className="container-nc grid gap-8 py-14 md:grid-cols-[1.2fr_0.8fr] md:items-center md:py-20">
           <div>
-            <h2 id="cta-final" className="font-serif text-3xl font-semibold sm:text-4xl">
+            <h2 id="cta-final" className="text-3xl font-semibold sm:text-4xl">
               Comece agora. A primeira correção não pede cadastro.
             </h2>
             <p className="mt-4 text-white/80">
@@ -325,7 +325,7 @@ function PreviaResultado() {
         <AnelDeNota nota={840} tamanho="md" />
         <div>
           <p className="text-slate text-xs font-semibold tracking-wide uppercase">Nota estimada</p>
-          <p className="text-navy font-serif text-xl leading-tight font-semibold">
+          <p className="text-navy text-xl leading-tight font-semibold">
             Desafios para a formação educacional de surdos no Brasil
           </p>
         </div>

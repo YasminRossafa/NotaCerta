@@ -51,10 +51,10 @@ export function CartaoParagrafo({
       {/* Cabeçalho */}
       <header className="border-borda/60 flex flex-wrap items-center justify-between gap-3 border-b px-5 py-4">
         <div className="flex items-center gap-3">
-          <span className="bg-navy flex h-8 w-8 items-center justify-center rounded-lg font-serif text-sm font-semibold text-white">
+          <span className="bg-navy flex h-8 w-8 items-center justify-center rounded-lg text-sm font-semibold text-white">
             {numero}
           </span>
-          <h3 id={`${idBase}-titulo`} className="text-navy font-serif text-xl font-semibold">
+          <h3 id={`${idBase}-titulo`} className="text-navy text-xl font-semibold">
             {ROTULO_PARAGRAFO[paragrafo.tipo]}
           </h3>
         </div>

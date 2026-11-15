@@ -40,23 +40,53 @@ export function Aviso({
 }
 
 /** Aviso constante de "nota estimada" (spec §3.4 e §14). */
-export function AvisoNotaEstimada({ className }: { className?: string }) {
+export function AvisoNotaEstimada({
+  className,
+  sobreFundoEscuro,
+}: {
+  className?: string;
+  sobreFundoEscuro?: boolean;
+}) {
   return (
-    <p className={cn("text-slate text-xs leading-relaxed", className)}>
-      A nota do NotaCerta é <strong className="text-navy font-semibold">estimada</strong> por
-      inteligência artificial seguindo o método da professora. Ela serve como referência de estudo e
-      não representa a nota oficial do ENEM. O NotaCerta não tem vínculo com o INEP ou com o MEC.
+    <p
+      className={cn(
+        "text-xs leading-relaxed",
+        sobreFundoEscuro ? "text-white/70" : "text-slate",
+        className,
+      )}
+    >
+      A nota do NotaCerta é{" "}
+      <strong className={cn("font-semibold", sobreFundoEscuro ? "text-white" : "text-navy")}>
+        estimada
+      </strong>{" "}
+      por inteligência artificial seguindo o método da professora. Ela serve como referência de
+      estudo e não representa a nota oficial do ENEM. O NotaCerta não tem vínculo com o INEP ou com
+      o MEC.
     </p>
   );
 }
 
 /** Aviso de modo demonstração — exibido no rodapé quando AI_PROVIDER=gemini (camada gratuita). */
-export function AvisoModoDemonstracao({ className }: { className?: string }) {
+export function AvisoModoDemonstracao({
+  className,
+  sobreFundoEscuro,
+}: {
+  className?: string;
+  sobreFundoEscuro?: boolean;
+}) {
   return (
-    <p className={cn("text-slate text-xs leading-relaxed", className)}>
-      <strong className="text-navy font-semibold">Modo demonstração:</strong> as correções desta
-      instância são geradas pelo Gemini (camada gratuita do Google AI Studio). Use apenas redações
-      de exemplo, nunca redações reais de alunos.
+    <p
+      className={cn(
+        "text-xs leading-relaxed",
+        sobreFundoEscuro ? "text-white/70" : "text-slate",
+        className,
+      )}
+    >
+      <strong className={cn("font-semibold", sobreFundoEscuro ? "text-white" : "text-navy")}>
+        Modo demonstração:
+      </strong>{" "}
+      as correções desta instância são geradas pelo Gemini (camada gratuita do Google AI Studio).
+      Use apenas redações de exemplo, nunca redações reais de alunos.
     </p>
   );
 }

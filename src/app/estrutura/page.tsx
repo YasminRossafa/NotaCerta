@@ -143,7 +143,7 @@ export default function PaginaEstrutura() {
   return (
     <div className="container-nc py-10 md:py-14">
       <header className="max-w-2xl">
-        <h1 className="text-navy font-serif text-3xl font-semibold sm:text-4xl">
+        <h1 className="text-navy text-3xl font-semibold sm:text-4xl">
           A estrutura da redação, parágrafo por parágrafo
         </h1>
         <p className="text-slate mt-3">
@@ -157,7 +157,7 @@ export default function PaginaEstrutura() {
       <section className="mt-10 grid gap-5 lg:grid-cols-4" aria-label="Elementos de cada parágrafo">
         <article className="card p-6">
           <p className="text-slate text-xs font-semibold tracking-wide uppercase">Parágrafo 1</p>
-          <h2 className="text-navy mt-1 font-serif text-2xl font-semibold">Introdução</h2>
+          <h2 className="text-navy mt-1 text-2xl font-semibold">Introdução</h2>
           <p className="text-slate mt-1 text-sm">
             Três frases, impessoal, sem 1ª pessoa, sem dado estatístico.
           </p>
@@ -166,7 +166,7 @@ export default function PaginaEstrutura() {
 
         <article className="card p-6">
           <p className="text-slate text-xs font-semibold tracking-wide uppercase">Parágrafo 2</p>
-          <h2 className="text-navy mt-1 font-serif text-2xl font-semibold">Desenvolvimento 1</h2>
+          <h2 className="text-navy mt-1 text-2xl font-semibold">Desenvolvimento 1</h2>
           <p className="text-slate mt-1 text-sm">
             Retoma a 1ª problemática, com citação científica.
           </p>
@@ -175,7 +175,7 @@ export default function PaginaEstrutura() {
 
         <article className="card p-6">
           <p className="text-slate text-xs font-semibold tracking-wide uppercase">Parágrafo 3</p>
-          <h2 className="text-navy mt-1 font-serif text-2xl font-semibold">Desenvolvimento 2</h2>
+          <h2 className="text-navy mt-1 text-2xl font-semibold">Desenvolvimento 2</h2>
           <p className="text-slate mt-1 text-sm">
             Retoma a 2ª problemática, com citação filosófica, sociológica ou literária.
           </p>
@@ -184,7 +184,7 @@ export default function PaginaEstrutura() {
 
         <article className="card p-6">
           <p className="text-slate text-xs font-semibold tracking-wide uppercase">Parágrafo 4</p>
-          <h2 className="text-navy mt-1 font-serif text-2xl font-semibold">Conclusão</h2>
+          <h2 className="text-navy mt-1 text-2xl font-semibold">Conclusão</h2>
           <p className="text-slate mt-1 text-sm">
             Proposta de intervenção completa: os 7 elementos, nesta ordem.
           </p>
@@ -195,7 +195,7 @@ export default function PaginaEstrutura() {
       {/* Camada 2: exemplos destacados */}
       <section className="mt-14" aria-labelledby="exemplos-titulo">
         <div className="max-w-2xl">
-          <h2 id="exemplos-titulo" className="text-navy font-serif text-3xl font-semibold">
+          <h2 id="exemplos-titulo" className="text-navy text-3xl font-semibold">
             Redações-modelo com cada parte destacada
           </h2>
           <p className="text-slate mt-3">

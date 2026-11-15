@@ -16,7 +16,7 @@ export default function PaginaRepertorios() {
     <div className="container-nc py-10 md:py-14">
       <header className="max-w-2xl">
         <p className="text-azul text-sm font-semibold tracking-wide uppercase">Acervo curado</p>
-        <h1 className="text-navy mt-2 font-serif text-3xl font-semibold sm:text-4xl">
+        <h1 className="text-navy mt-2 text-3xl font-semibold sm:text-4xl">
           Repertórios socioculturais por tema
         </h1>
         <p className="text-slate mt-3">

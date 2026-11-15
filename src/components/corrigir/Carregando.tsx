@@ -34,7 +34,7 @@ export function Carregando({ comImagem }: { comImagem?: boolean }) {
           <span className="border-borda border-t-azul absolute inset-0 animate-spin rounded-full border-4" />
         </span>
         <div>
-          <p className="text-navy font-serif text-xl font-semibold">Corrigindo sua redação…</p>
+          <p className="text-navy text-xl font-semibold">Corrigindo sua redação…</p>
           <p className="text-slate text-sm">
             {comImagem ? "Transcrevendo a foto e " : ""}analisando pelo método, competência por
             competência. Leva cerca de um minuto.
