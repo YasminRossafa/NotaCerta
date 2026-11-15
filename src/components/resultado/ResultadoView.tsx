@@ -230,7 +230,7 @@ function Resultado({
             <div>
               <p className="text-navy font-semibold">Quer corrigir outra redação?</p>
               <p className="text-slate text-sm">
-                O plano grátis libera 1 por dia. Para corrigir sem limite, conheça o Plano Fundador.
+                O plano grátis libera 2 por mês. Para corrigir sem limite, conheça o Plano Fundador.
               </p>
             </div>
             <div className="flex shrink-0 flex-col gap-2 sm:flex-row">

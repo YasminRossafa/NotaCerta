@@ -8,7 +8,7 @@ import {
   cookieDispositivo,
   devolverUso,
   gerarIdDispositivo,
-  limiteDiario,
+  limiteMensal,
 } from "@/lib/server/rate-limit";
 
 /**
@@ -84,10 +84,10 @@ export async function POST(request: NextRequest) {
   if (!consumirUso(idDispositivo)) {
     return responderErro(
       {
-        erro: "limite_diario",
-        mensagem: "Você já usou sua correção gratuita de hoje.",
+        erro: "limite_mensal",
+        mensagem: "Você já usou suas correções gratuitas deste mês.",
         upgrade: true,
-        limite: limiteDiario(),
+        limite: limiteMensal(),
       },
       429,
       cookieNovo,
@@ -102,7 +102,7 @@ export async function POST(request: NextRequest) {
     res.headers.set("Cache-Control", "no-store");
     return res;
   } catch (e) {
-    devolverUso(idDispositivo); // o aluno não recebeu nada: não cobrar do saldo diário
+    devolverUso(idDispositivo); // o aluno não recebeu nada: não cobrar do saldo mensal
     const erro =
       e instanceof ErroCorretor
         ? e

@@ -176,7 +176,7 @@ export type Entrada = z.infer<typeof EntradaSchema>;
 export const CODIGOS_ERRO = [
   "entrada_invalida",
   "texto_curto",
-  "limite_diario",
+  "limite_mensal",
   "imagem_ilegivel",
   "nao_e_redacao",
   "saida_invalida",

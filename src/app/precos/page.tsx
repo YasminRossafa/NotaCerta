@@ -8,12 +8,12 @@ import { cn } from "@/lib/cn";
 export const metadata: Metadata = {
   title: "Planos: grátis e Plano Fundador",
   description:
-    "Corrija 1 redação por dia de graça, com nota estimada, apontamentos com motivo e resumo do professor. O Plano Fundador libera correções ilimitadas, todas as reescritas, repertório completo e histórico.",
+    "Corrija 2 redações por mês de graça, com nota estimada, apontamentos com motivo e resumo do professor. O Plano Fundador libera correções ilimitadas, todas as reescritas, repertório completo e histórico.",
   alternates: { canonical: "/precos" },
 };
 
 const LINHAS: { recurso: string; gratis: boolean | string; fundador: boolean | string }[] = [
-  { recurso: "Correções por dia", gratis: "1", fundador: "Ilimitadas" },
+  { recurso: "Correções por mês", gratis: "2", fundador: "Ilimitadas" },
   { recurso: "Nota estimada + 5 competências", gratis: true, fundador: true },
   { recurso: "Apontamentos de todos os parágrafos, com motivo", gratis: true, fundador: true },
   { recurso: "Checklist do modelo por parágrafo", gratis: true, fundador: true },
@@ -57,8 +57,7 @@ export default function PaginaPrecos() {
   return (
     <div className="container-nc py-10 md:py-14">
       <header className="mx-auto max-w-2xl text-center">
-        <p className="text-azul text-sm font-semibold tracking-wide uppercase">Planos</p>
-        <h1 className="text-navy mt-2 font-serif text-3xl font-semibold sm:text-4xl">
+        <h1 className="text-navy font-serif text-3xl font-semibold sm:text-4xl">
           O grátis entrega valor de verdade. O Fundador tira o limite.
         </h1>
         <p className="text-slate mt-3">
@@ -73,13 +72,13 @@ export default function PaginaPrecos() {
           <h2 id="plano-gratis" className="text-navy font-serif text-2xl font-semibold">
             Grátis
           </h2>
-          <p className="text-slate mt-1 text-sm">Para conhecer o método e corrigir todo dia.</p>
+          <p className="text-slate mt-1 text-sm">Para conhecer o método e corrigir todo mês.</p>
           <p className="text-navy mt-5 font-serif text-4xl font-semibold">
             R$ 0<span className="text-slate text-base font-normal"> / sempre</span>
           </p>
           <ul className="text-navy mt-6 flex-1 space-y-2.5 text-sm">
             {[
-              "1 correção completa por dia",
+              "2 correções completas por mês",
               "Nota estimada e 5 competências",
               "Apontamentos com motivo em todos os parágrafos",
               "1 reescrita (parágrafo mais crítico)",

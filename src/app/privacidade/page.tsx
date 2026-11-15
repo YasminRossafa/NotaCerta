@@ -37,7 +37,7 @@ export default function PaginaPrivacidade() {
             contato.
           </p>
           <p>
-            Usamos um identificador anônimo (cookie) para aplicar o limite diário gratuito. Ele não
+            Usamos um identificador anônimo (cookie) para aplicar o limite mensal gratuito. Ele não
             contém nome, e-mail ou qualquer dado que identifique você.
           </p>
         </Secao>

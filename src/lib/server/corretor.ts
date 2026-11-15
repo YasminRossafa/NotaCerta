@@ -183,7 +183,7 @@ function traduzirErroProvider(e: unknown): ErroCorretor {
         return new ErroCorretor("configuracao", e.message);
       case "limite_taxa":
         // Limite momentâneo do provedor (ex.: cota da camada gratuita) — distinto do
-        // limite_diario do plano gratuito do NotaCerta (spec §9.1/§13).
+        // limite_mensal do plano gratuito do NotaCerta (spec §9.1/§13).
         return new ErroCorretor(
           "api_indisponivel",
           "Limite de uso do provedor de IA atingido, tente em instantes.",

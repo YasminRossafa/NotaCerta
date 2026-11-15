@@ -13,10 +13,13 @@ import { IconeCamera, IconeSeta, IconeTexto } from "@/components/ui/Icones";
 import { cn } from "@/lib/cn";
 import {
   lerRascunho,
+  LIMITE_GRATIS_PADRAO,
   limparRascunho,
+  planoAtivo,
   podeCorrigirGratis,
   registrarUso,
   salvarRascunho,
+  usosNoMes,
 } from "@/lib/freemium";
 import type { ImagemPreparada } from "@/lib/imagem";
 import { salvarResultado } from "@/lib/resultado-store";
@@ -56,6 +59,10 @@ export function FormularioCorrigir() {
     motivo: "limite",
   });
   const [rascunhoIgnorado, setRascunhoIgnorado] = useState(false);
+
+  // Contador do plano grátis (hidratação segura: no servidor é null).
+  const usos = useSnapshotCliente(() => usosNoMes(), null);
+  const plano = useSnapshotCliente(() => planoAtivo(), null);
 
   // Rascunho salvo (hidratação segura: no servidor é null).
   const rascunhoRaw = useSnapshotCliente(() => {
@@ -121,7 +128,7 @@ export function FormularioCorrigir() {
 
       if (!resp.ok) {
         const erro = ErroApiSchema.safeParse(json);
-        if (resp.status === 429 && erro.success && erro.data.erro === "limite_diario") {
+        if (resp.status === 429 && erro.success && erro.data.erro === "limite_mensal") {
           setModal({ aberto: true, motivo: "limite" });
           return;
         }
@@ -282,7 +289,9 @@ export function FormularioCorrigir() {
 
         <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
           <p className="text-slate text-xs">
-            Grátis: 1 correção completa por dia neste aparelho. Nota estimada, não oficial.
+            {plano === "fundador"
+              ? "Plano Fundador: correções ilimitadas. Nota estimada, não oficial."
+              : `Grátis: ${Math.min(usos ?? 0, LIMITE_GRATIS_PADRAO)} de ${LIMITE_GRATIS_PADRAO} neste mês, neste aparelho. Nota estimada, não oficial.`}
           </p>
           <Botao type="submit" tamanho="lg" className="sm:min-w-[240px]">
             Corrigir redação

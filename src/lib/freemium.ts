@@ -1,12 +1,12 @@
 /**
- * Freemium no cliente (spec §13): limite diário por dispositivo, plano (stub) e captura de e-mail.
+ * Freemium no cliente (spec §13): limite mensal por dispositivo, plano (stub) e captura de e-mail.
  * Tudo em localStorage, sempre dentro de try/catch (spec §4).
  *
  * O limite "de verdade" é aplicado no servidor (rota /api/corrigir); aqui é só a experiência
- * (abrir o ModalUpgrade antes de gastar uma chamada).
+ * (abrir o ModalUpgrade antes de gastar uma chamada). Reseta no mês civil.
  */
 
-export const LIMITE_GRATIS_PADRAO = 1;
+export const LIMITE_GRATIS_PADRAO = 2;
 
 const CHAVES = {
   uso: "nc:uso",
@@ -34,8 +34,8 @@ function gravar(chave: string, valor: unknown): void {
   }
 }
 
-function hoje(): string {
-  return new Date().toISOString().slice(0, 10);
+function mesAtual(): string {
+  return new Date().toISOString().slice(0, 7);
 }
 
 /** Plano ativo. Stub: sempre "gratis" salvo marcação manual em localStorage. */
@@ -45,18 +45,18 @@ export function planoAtivo(): Plano {
   return p?.plano === "fundador" ? "fundador" : "gratis";
 }
 
-export function usosHoje(): number {
-  const u = ler<{ dia: string; total: number }>(CHAVES.uso);
-  return u && u.dia === hoje() ? u.total : 0;
+export function usosNoMes(): number {
+  const u = ler<{ mes: string; total: number }>(CHAVES.uso);
+  return u && u.mes === mesAtual() ? u.total : 0;
 }
 
 export function registrarUso(): void {
-  gravar(CHAVES.uso, { dia: hoje(), total: usosHoje() + 1 });
+  gravar(CHAVES.uso, { mes: mesAtual(), total: usosNoMes() + 1 });
 }
 
 export function podeCorrigirGratis(limite = LIMITE_GRATIS_PADRAO): boolean {
   if (planoAtivo() === "fundador") return true;
-  return usosHoje() < limite;
+  return usosNoMes() < limite;
 }
 
 /* ------------------------------ captura de e-mail ------------------------------ */

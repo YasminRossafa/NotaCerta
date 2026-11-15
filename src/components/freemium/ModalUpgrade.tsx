@@ -31,14 +31,16 @@ export function ModalUpgrade({
   recurso?: string;
 }) {
   const titulo =
-    motivo === "limite" ? "Você já usou sua correção grátis de hoje" : "Recurso do Plano Fundador";
+    motivo === "limite"
+      ? "Você já usou suas correções grátis deste mês"
+      : "Recurso do Plano Fundador";
 
   return (
     <Modal aberto={aberto} aoFechar={aoFechar} titulo={titulo}>
       <p className="text-slate text-sm leading-relaxed">
         {motivo === "limite"
-          ? "O plano gratuito libera 1 correção completa por dia. Volte amanhã para outra, ou entre na lista do Plano Fundador para corrigir sem limite."
-          : `“${recurso ?? "Este recurso"}” faz parte do Plano Fundador. Estamos abrindo as primeiras vagas: deixe seu e-mail para entrar com condição de fundador.`}
+          ? "O plano gratuito libera 2 correções completas por mês. Volte no próximo mês para mais, ou entre na lista do Plano Fundador para corrigir sem limite."
+          : `"${recurso ?? "Este recurso"}" faz parte do Plano Fundador. Estamos abrindo as primeiras vagas: deixe seu e-mail para entrar com condição de fundador.`}
       </p>
 
       <ul className="text-navy mt-4 space-y-2 text-sm">
@@ -65,7 +67,7 @@ export function ModalUpgrade({
 
       <div className="mt-4 flex flex-col gap-2 sm:flex-row sm:justify-end">
         <Botao variante="fantasma" onClick={aoFechar}>
-          {motivo === "limite" ? "Volto amanhã" : "Agora não"}
+          {motivo === "limite" ? "Volto no próximo mês" : "Agora não"}
         </Botao>
         <Botao href="/precos" variante="secundario" onClick={aoFechar}>
           Ver planos

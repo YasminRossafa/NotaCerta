@@ -55,21 +55,20 @@ npm run format     # prettier
 
 ## Variáveis de ambiente
 
-| Variável                      | Obrigatória                | Descrição                                                                                        |
-| ----------------------------- | -------------------------- | ------------------------------------------------------------------------------------------------ |
-| `AI_PROVIDER`                 | não                        | `gemini` (padrão, camada gratuita) ou `anthropic`.                                               |
-| `GEMINI_API_KEY`              | se `AI_PROVIDER=gemini`    | Chave do Google AI Studio. Só no servidor. **Nunca** `NEXT_PUBLIC_`.                             |
-| `GEMINI_MODEL`                | se `AI_PROVIDER=gemini`    | Modelo Gemini (família Flash/Flash-Lite — ver seção acima).                                      |
-| `ANTHROPIC_API_KEY`           | se `AI_PROVIDER=anthropic` | Chave secreta da Anthropic. Só no servidor. **Nunca** `NEXT_PUBLIC_`.                            |
-| `ANTHROPIC_MODEL`             | não                        | Modelo quando `AI_PROVIDER=anthropic`. Padrão: `claude-sonnet-5`.                                |
-| `NOTACERTA_FREE_LIMIT_DIARIO` | não                        | Correções grátis por dia por dispositivo. Padrão: `1`.                                           |
-| `NOTACERTA_FREE_LIMIT_MENSAL` | não                        | Reservado para um limite mensal (ainda não lido pelo código — ver comentário no `.env.example`). |
-| `NEXT_PUBLIC_SITE_URL`        | não                        | URL pública (canonical/OpenGraph).                                                               |
+| Variável                      | Obrigatória                | Descrição                                                                    |
+| ----------------------------- | -------------------------- | ---------------------------------------------------------------------------- |
+| `AI_PROVIDER`                 | não                        | `gemini` (padrão, camada gratuita) ou `anthropic`.                           |
+| `GEMINI_API_KEY`              | se `AI_PROVIDER=gemini`    | Chave do Google AI Studio. Só no servidor. **Nunca** `NEXT_PUBLIC_`.         |
+| `GEMINI_MODEL`                | se `AI_PROVIDER=gemini`    | Modelo Gemini (família Flash/Flash-Lite — ver seção acima).                  |
+| `ANTHROPIC_API_KEY`           | se `AI_PROVIDER=anthropic` | Chave secreta da Anthropic. Só no servidor. **Nunca** `NEXT_PUBLIC_`.        |
+| `ANTHROPIC_MODEL`             | não                        | Modelo quando `AI_PROVIDER=anthropic`. Padrão: `claude-sonnet-5`.            |
+| `NOTACERTA_FREE_LIMIT_MENSAL` | não                        | Correções grátis por mês por dispositivo (reseta no mês civil). Padrão: `2`. |
+| `NEXT_PUBLIC_SITE_URL`        | não                        | URL pública (canonical/OpenGraph).                                           |
 
 ## Deploy na Vercel
 
 1. Suba o repositório no GitHub e importe o projeto na Vercel (framework detectado: Next.js).
-2. Em **Settings → Environment Variables**, cadastre `AI_PROVIDER` e as chaves do provedor escolhido (`GEMINI_API_KEY`/`GEMINI_MODEL` ou `ANTHROPIC_API_KEY`/`ANTHROPIC_MODEL`), além de `NOTACERTA_FREE_LIMIT_DIARIO` e `NEXT_PUBLIC_SITE_URL` se quiser.
+2. Em **Settings → Environment Variables**, cadastre `AI_PROVIDER` e as chaves do provedor escolhido (`GEMINI_API_KEY`/`GEMINI_MODEL` ou `ANTHROPIC_API_KEY`/`ANTHROPIC_MODEL`), além de `NOTACERTA_FREE_LIMIT_MENSAL` e `NEXT_PUBLIC_SITE_URL` se quiser.
 3. Deploy. A rota `/api/corrigir` declara `maxDuration = 120` segundos; no plano Hobby confirme que o Fluid Compute está ativo para o limite valer.
 
 ## Estrutura

@@ -86,7 +86,7 @@ export default function PaginaInicial() {
           <div className="max-w-xl">
             <p className="border-borda text-azul-escuro inline-flex items-center gap-2 rounded-full border bg-white px-3 py-1 text-xs font-semibold">
               <span className="bg-verde h-2 w-2 rounded-full" aria-hidden="true" />
-              Grátis, sem cadastro, 1 correção por dia
+              Grátis, sem cadastro, 2 correções por mês
             </p>
             <h1 className="text-navy mt-5 font-serif text-4xl leading-[1.08] font-semibold tracking-tight sm:text-5xl lg:text-[3.4rem]">
               Corretor de redação ENEM com <span className="text-azul">método</span>, não com
@@ -251,7 +251,7 @@ export default function PaginaInicial() {
               Comece agora. A primeira correção não pede cadastro.
             </h2>
             <p className="mt-4 text-white/80">
-              Uma correção completa por dia, de graça. Quando quiser mais volume, todas as
+              Duas correções completas por mês, de graça. Quando quiser mais volume, todas as
               reescritas e o histórico, existe o Plano Fundador.
             </p>
             <div className="mt-8 flex flex-col gap-3 sm:flex-row">

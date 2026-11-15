@@ -1,7 +1,8 @@
 import "server-only";
 
 /**
- * Rate limit por dispositivo (spec §9.1): cookie anônimo `nc_did` + contador diário em memória.
+ * Rate limit por dispositivo (spec §13): cookie anônimo `nc_did` + contador mensal em memória.
+ * Reseta no mês civil (ex.: virou dia 1, o contador zera).
  *
  * TODO(claudia): em serverless (Vercel) a memória não é compartilhada entre instâncias nem
  * sobrevive a cold starts, então este limite é "melhor esforço". Para valer de verdade,
@@ -11,47 +12,47 @@ import "server-only";
 export const COOKIE_DISPOSITIVO = "nc_did";
 const UM_ANO_S = 60 * 60 * 24 * 365;
 
-export function limiteDiario(): number {
-  const n = Number(process.env.NOTACERTA_FREE_LIMIT_DIARIO ?? "1");
-  return Number.isFinite(n) && n > 0 ? Math.floor(n) : 1;
+export function limiteMensal(): number {
+  const n = Number(process.env.NOTACERTA_FREE_LIMIT_MENSAL ?? "2");
+  return Number.isFinite(n) && n > 0 ? Math.floor(n) : 2;
 }
 
-type Registro = { dia: string; total: number };
+type Registro = { mes: string; total: number };
 const contadores = new Map<string, Registro>();
 
-function hoje(): string {
-  return new Date().toISOString().slice(0, 10);
+function mesAtual(): string {
+  return new Date().toISOString().slice(0, 7);
 }
 
 /** Limpeza preguiçosa para o Map não crescer sem limite. */
 function limparAntigos(): void {
   if (contadores.size < 5000) return;
-  const d = hoje();
-  for (const [k, v] of contadores) if (v.dia !== d) contadores.delete(k);
+  const m = mesAtual();
+  for (const [k, v] of contadores) if (v.mes !== m) contadores.delete(k);
 }
 
 export function gerarIdDispositivo(): string {
   return crypto.randomUUID();
 }
 
-export function usosHoje(id: string): number {
+export function usosNoMes(id: string): number {
   const r = contadores.get(id);
-  return r && r.dia === hoje() ? r.total : 0;
+  return r && r.mes === mesAtual() ? r.total : 0;
 }
 
-/** Tenta consumir uma correção. Retorna false se o limite diário já foi atingido. */
+/** Tenta consumir uma correção. Retorna false se o limite mensal já foi atingido. */
 export function consumirUso(id: string): boolean {
   limparAntigos();
-  const atual = usosHoje(id);
-  if (atual >= limiteDiario()) return false;
-  contadores.set(id, { dia: hoje(), total: atual + 1 });
+  const atual = usosNoMes(id);
+  if (atual >= limiteMensal()) return false;
+  contadores.set(id, { mes: mesAtual(), total: atual + 1 });
   return true;
 }
 
 /** Devolve a correção ao saldo (quando a chamada ao modelo falhou e o aluno não recebeu nada). */
 export function devolverUso(id: string): void {
-  const atual = usosHoje(id);
-  if (atual > 0) contadores.set(id, { dia: hoje(), total: atual - 1 });
+  const atual = usosNoMes(id);
+  if (atual > 0) contadores.set(id, { mes: mesAtual(), total: atual - 1 });
 }
 
 export function cookieDispositivo(id: string): string {
