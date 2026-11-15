@@ -15,7 +15,6 @@ import {
  * Único ponto de contato com a Anthropic. Não loga o conteúdo da redação (spec §14).
  */
 
-export const runtime = "nodejs";
 export const maxDuration = 120; // segundos — correção com visão pode levar ~1 min
 
 const STATUS_POR_ERRO: Record<ErroCorretor["codigo"], number> = {
