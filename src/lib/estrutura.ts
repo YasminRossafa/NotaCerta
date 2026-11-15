@@ -5,20 +5,30 @@ import type { TipoParagrafo } from "@/lib/schema";
 
 export type ParteExemplo = { rotulo: string; texto: string };
 export type ParagrafoExemplo = { tipo: TipoParagrafo; partes: ParteExemplo[] };
-export type Exemplo = { id: string; tema: string; paragrafos: ParagrafoExemplo[] };
+export type Exemplo = {
+  id: string;
+  tema: string;
+  paragrafos: ParagrafoExemplo[];
+  /** true para exemplos escritos pelo NotaCerta (fora da apostila original) — revisar pela professora. */
+  rascunho?: boolean;
+  /** observação de revisão, exibida apenas quando rascunho=true. */
+  observacao?: string;
+};
+
+type LegendaPorParagrafo = Record<TipoParagrafo, string[]>;
 
 type Arquivo = {
   versao: number;
   fonte: string;
   observacao: string;
-  legendaRotulos: { introducao: string[]; desenvolvimento: string[]; conclusao: string[] };
+  legendaPorParagrafo: LegendaPorParagrafo;
   exemplos: Exemplo[];
 };
 
 const arquivo = exemplosBrutos as Arquivo;
 
 export const EXEMPLOS: Exemplo[] = arquivo.exemplos;
-export const LEGENDA_ROTULOS = arquivo.legendaRotulos;
+export const LEGENDA_POR_PARAGRAFO = arquivo.legendaPorParagrafo;
 export const FONTE_EXEMPLOS = arquivo.fonte;
 
 export type CorRotulo = { fundo: string; texto: string; borda: string };
@@ -75,9 +85,7 @@ export function corDoRotulo(rotulo: string): CorRotulo {
   return COR_ROTULO[rotulo] ?? COR_PADRAO;
 }
 
-/** Legenda por tipo de parágrafo (ordem do método). */
+/** Legenda por tipo de parágrafo (ordem do método) — uma legenda por parágrafo (spec §18.2). */
 export function legendaDoTipo(tipo: TipoParagrafo): string[] {
-  if (tipo === "introducao") return LEGENDA_ROTULOS.introducao;
-  if (tipo === "conclusao") return LEGENDA_ROTULOS.conclusao;
-  return LEGENDA_ROTULOS.desenvolvimento;
+  return LEGENDA_POR_PARAGRAFO[tipo];
 }

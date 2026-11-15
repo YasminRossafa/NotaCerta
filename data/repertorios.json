@@ -2,67 +2,549 @@
   "versao": 1,
   "fonte": "Apostila de Redação para o ENEM — CEC (Cursinho Educação e Cidadania), UFSCar Sorocaba",
   "observacao": "Acervo curado. 'uso' indica onde o repertório encaixa no método: introducao (contextualização), d1 (citação científica/dados/fatos), d2 (citação filosófica/literária/sociológica). 'temas' são tags para busca e para casar com o tema da redação.",
-  "categorias": ["filme", "conto-fabula", "obra-br", "obra-estrangeira", "fato-historico", "filosofia", "sociologia", "dado", "conceito"],
+  "categorias": [
+    "filme",
+    "conto-fabula",
+    "obra-br",
+    "obra-estrangeira",
+    "fato-historico",
+    "filosofia",
+    "sociologia",
+    "dado",
+    "conceito"
+  ],
   "itens": [
-    { "id": "parasita", "titulo": "Parasita", "autor": "Bong Joon-ho", "categoria": "filme", "resumo": "Retrata a desigualdade social, a luta de classes e a hierarquia econômica.", "comoUsar": "Abrir uma introdução sobre desigualdade, exclusão social ou disparidade de renda.", "temas": ["desigualdade", "classe social", "economia", "trabalho"], "uso": ["introducao", "d2"] },
-    { "id": "cidade-de-deus", "titulo": "Cidade de Deus", "autor": "Fernando Meirelles", "categoria": "filme", "resumo": "Violência urbana, criminalidade e marginalização de jovens das periferias.", "comoUsar": "Contextualizar temas de violência, segurança pública ou exclusão periférica.", "temas": ["violência", "periferia", "juventude", "segurança"], "uso": ["introducao", "d2"] },
-    { "id": "matrix", "titulo": "Matrix", "autor": "Irmãs Wachowski", "categoria": "filme", "resumo": "Manipulação da informação, controle e a ilusão da realidade pela tecnologia.", "comoUsar": "Temas de tecnologia, dependência digital, fake news e alienação.", "temas": ["tecnologia", "informação", "fake news", "alienação"], "uso": ["introducao", "d2"] },
-    { "id": "tempos-modernos", "titulo": "Tempos Modernos", "autor": "Charlie Chaplin", "categoria": "filme", "resumo": "Crítica à desumanização do trabalho e à alienação na sociedade industrial.", "comoUsar": "Temas de trabalho, exploração, automação e condições laborais.", "temas": ["trabalho", "indústria", "exploração", "tecnologia"], "uso": ["introducao", "d2"] },
-    { "id": "wall-e", "titulo": "Wall-E", "autor": "Andrew Stanton", "categoria": "filme", "resumo": "Consumismo exagerado, poluição e degradação ambiental levados ao extremo.", "comoUsar": "Temas de meio ambiente, consumo e sustentabilidade.", "temas": ["meio ambiente", "consumo", "sustentabilidade"], "uso": ["introducao", "d2"] },
-    { "id": "a-rede-social", "titulo": "A Rede Social", "autor": "David Fincher", "categoria": "filme", "resumo": "Origem das redes sociais, privacidade de dados e impactos das relações digitais.", "comoUsar": "Temas de privacidade, redes sociais e relações mediadas por tecnologia.", "temas": ["tecnologia", "privacidade", "redes sociais"], "uso": ["introducao", "d2"] },
-    { "id": "o-poco", "titulo": "O Poço", "autor": "Galder Gaztelu-Urrutia", "categoria": "filme", "resumo": "Alegoria da distribuição desigual de recursos e do egoísmo humano.", "comoUsar": "Temas de desigualdade, fome, distribuição de renda e solidariedade.", "temas": ["desigualdade", "fome", "economia", "solidariedade"], "uso": ["introducao", "d2"] },
-    { "id": "laranja-mecanica", "titulo": "Laranja Mecânica", "autor": "Stanley Kubrick", "categoria": "filme", "resumo": "Violência, livre-arbítrio, controle estatal e a eficácia/ética da punição.", "comoUsar": "Temas de violência, sistema prisional e papel do Estado.", "temas": ["violência", "Estado", "punição", "liberdade"], "uso": ["introducao", "d2"] },
-
-    { "id": "patinho-feio", "titulo": "O Patinho Feio", "autor": "Hans Christian Andersen", "categoria": "conto-fabula", "resumo": "Exclusão pela diferença, preconceito e busca por identidade e aceitação.", "comoUsar": "Temas de inclusão, preconceito, bullying e diversidade.", "temas": ["inclusão", "preconceito", "diversidade", "bullying"], "uso": ["introducao"] },
-    { "id": "joao-e-maria", "titulo": "João e Maria", "autor": "Irmãos Grimm", "categoria": "conto-fabula", "resumo": "Abandono infantil, vulnerabilidade e fragilidade da infância diante do descaso.", "comoUsar": "Temas de infância, abandono e vulnerabilidade social.", "temas": ["infância", "vulnerabilidade", "família"], "uso": ["introducao"] },
-    { "id": "chapeuzinho-vermelho", "titulo": "Chapeuzinho Vermelho", "autor": "Tradição popular / Perrault", "categoria": "conto-fabula", "resumo": "Ingenuidade e os riscos da falta de vigilância e de informação.", "comoUsar": "Temas de segurança, proteção e educação preventiva.", "temas": ["segurança", "infância", "informação"], "uso": ["introducao"] },
-    { "id": "roupa-nova-imperador", "titulo": "A Roupa Nova do Imperador", "autor": "Hans Christian Andersen", "categoria": "conto-fabula", "resumo": "Hipocrisia social, manipulação coletiva e a importância de questionar.", "comoUsar": "Temas de senso crítico, manipulação e opinião pública.", "temas": ["senso crítico", "manipulação", "informação"], "uso": ["introducao"] },
-    { "id": "tres-porquinhos", "titulo": "Os Três Porquinhos", "autor": "Tradição popular", "categoria": "conto-fabula", "resumo": "Planejamento, esforço e resiliência diante de ameaças e crises.", "comoUsar": "Temas de prevenção, planejamento e políticas de longo prazo.", "temas": ["planejamento", "prevenção"], "uso": ["introducao"] },
-
-    { "id": "capitaes-da-areia", "titulo": "Capitães da Areia", "autor": "Jorge Amado", "categoria": "obra-br", "resumo": "Abandono infantil, exclusão social, vida nas ruas e marginalização de jovens.", "comoUsar": "Temas de infância, vulnerabilidade, criminalidade e desigualdade.", "temas": ["infância", "exclusão", "juventude", "desigualdade"], "uso": ["introducao", "d2"] },
-    { "id": "vidas-secas", "titulo": "Vidas Secas", "autor": "Graciliano Ramos", "categoria": "obra-br", "resumo": "Seca, miséria, migração e desigualdade regional no Nordeste brasileiro.", "comoUsar": "Temas de desigualdade regional, pobreza e migração.", "temas": ["desigualdade", "pobreza", "Nordeste", "migração"], "uso": ["introducao", "d2"] },
-    { "id": "quarto-de-despejo", "titulo": "Quarto de Despejo", "autor": "Carolina Maria de Jesus", "categoria": "obra-br", "resumo": "Relato real de uma catadora de lixo privada de direitos básicos; pobreza e invisibilidade.", "comoUsar": "Temas de pobreza, direitos, fome, trabalho de cuidado e invisibilidade social.", "temas": ["pobreza", "direitos", "mulher", "trabalho", "fome"], "uso": ["introducao", "d2"] },
-    { "id": "o-cortico", "titulo": "O Cortiço", "autor": "Aluísio Azevedo", "categoria": "obra-br", "resumo": "Retrata a influência do ambiente na formação do indivíduo e a miséria urbana.", "comoUsar": "Temas de moradia, desigualdade urbana e condições de vida.", "temas": ["moradia", "desigualdade", "urbano"], "uso": ["introducao", "d2"] },
-    { "id": "bras-cubas", "titulo": "Memórias Póstumas de Brás Cubas", "autor": "Machado de Assis", "categoria": "obra-br", "resumo": "Crítica à elite e à hipocrisia social por meio de um narrador cínico.", "comoUsar": "Temas de desigualdade, privilégio e crítica social.", "temas": ["desigualdade", "privilégio", "crítica social"], "uso": ["introducao", "d2"] },
-
-    { "id": "admiravel-mundo-novo", "titulo": "Admirável Mundo Novo", "autor": "Aldous Huxley", "categoria": "obra-estrangeira", "resumo": "Padronização, alienação pelo prazer e manipulação genética e social.", "comoUsar": "Temas de tecnologia, controle social, consumo e padronização.", "temas": ["tecnologia", "controle", "consumo", "ciência"], "uso": ["introducao", "d2"] },
-    { "id": "1984", "titulo": "1984", "autor": "George Orwell", "categoria": "obra-estrangeira", "resumo": "Vigilância, controle do Estado e manipulação da verdade e da informação.", "comoUsar": "Temas de privacidade, vigilância, fake news e liberdade de expressão.", "temas": ["vigilância", "informação", "fake news", "liberdade", "Estado"], "uso": ["introducao", "d2"] },
-    { "id": "fahrenheit-451", "titulo": "Fahrenheit 451", "autor": "Ray Bradbury", "categoria": "obra-estrangeira", "resumo": "Censura, apagamento do conhecimento e perigo da alienação coletiva.", "comoUsar": "Temas de censura, educação, leitura e acesso ao conhecimento.", "temas": ["censura", "educação", "conhecimento", "informação"], "uso": ["introducao", "d2"] },
-    { "id": "a-metamorfose", "titulo": "A Metamorfose", "autor": "Franz Kafka", "categoria": "obra-estrangeira", "resumo": "Desumanização das relações, utilidade produtiva e exclusão do diferente.", "comoUsar": "Temas de trabalho, saúde mental, inclusão e relações familiares.", "temas": ["trabalho", "saúde mental", "inclusão", "família"], "uso": ["introducao", "d2"] },
-
-    { "id": "revolucao-industrial", "titulo": "Revolução Industrial", "categoria": "fato-historico", "resumo": "Início da desigualdade social moderna, exploração do trabalho e impacto ambiental.", "comoUsar": "Dado/fato histórico para temas de trabalho, tecnologia e meio ambiente.", "temas": ["trabalho", "tecnologia", "meio ambiente", "economia"], "uso": ["d1", "introducao"] },
-    { "id": "ditadura-militar", "titulo": "Ditadura Militar (Brasil, 1964–1985)", "categoria": "fato-historico", "resumo": "Censura, repressão e supressão de direitos civis e da liberdade de expressão.", "comoUsar": "Temas de democracia, censura, direitos e liberdade de expressão.", "temas": ["democracia", "censura", "direitos", "liberdade"], "uso": ["d1", "introducao"] },
-    { "id": "constituicao-1988", "titulo": "Constituição de 1988 ('Constituição Cidadã')", "categoria": "fato-historico", "resumo": "Marco de garantia de direitos sociais, cidadania e liberdades fundamentais no Brasil.", "comoUsar": "Fundamentar direitos (educação, saúde, cultura) como garantia legal.", "temas": ["direitos", "cidadania", "saúde", "educação", "cultura"], "uso": ["d1"] },
-    { "id": "iluminismo", "titulo": "Iluminismo", "categoria": "fato-historico", "resumo": "Valorização da razão, dos direitos humanos e do pensamento crítico.", "comoUsar": "Temas de educação, ciência, democracia e cidadania.", "temas": ["educação", "razão", "democracia", "ciência"], "uso": ["d1", "introducao"] },
-    { "id": "guerra-fria", "titulo": "Guerra Fria", "categoria": "fato-historico", "resumo": "Disputa ideológica, corrida tecnológica e manipulação da informação.", "comoUsar": "Temas de geopolítica, tecnologia e propaganda/informação.", "temas": ["geopolítica", "tecnologia", "informação"], "uso": ["d1"] },
-    { "id": "era-vargas", "titulo": "Era Vargas", "categoria": "fato-historico", "resumo": "Consolidação das leis trabalhistas e do papel do Estado na economia.", "comoUsar": "Temas de trabalho, direitos trabalhistas e papel do Estado.", "temas": ["trabalho", "direitos", "Estado"], "uso": ["d1"] },
-    { "id": "holocausto", "titulo": "Holocausto", "categoria": "fato-historico", "resumo": "Consequência extrema da intolerância, do preconceito e da desumanização.", "comoUsar": "Temas de intolerância, direitos humanos e discurso de ódio.", "temas": ["intolerância", "direitos humanos", "preconceito"], "uso": ["d1", "introducao"] },
-
-    { "id": "kant", "titulo": "Immanuel Kant", "categoria": "filosofia", "resumo": "'O homem é aquilo que a educação faz dele' — a educação como formadora do sujeito.", "comoUsar": "Citação filosófica (D2) para temas de educação e formação.", "temas": ["educação", "formação", "cidadania"], "uso": ["d2"] },
-    { "id": "sartre", "titulo": "Jean-Paul Sartre", "categoria": "filosofia", "resumo": "Existencialismo: 'o homem está condenado a ser livre' e é responsável por suas escolhas.", "comoUsar": "Citação filosófica (D2) para temas de liberdade, responsabilidade e reconhecimento.", "temas": ["liberdade", "responsabilidade", "inclusão"], "uso": ["d2"] },
-    { "id": "voltaire", "titulo": "Voltaire", "categoria": "filosofia", "resumo": "Defesa da liberdade de expressão e da tolerância às opiniões divergentes.", "comoUsar": "Citação filosófica (D2) para temas de liberdade de expressão e tolerância.", "temas": ["liberdade", "expressão", "tolerância", "informação"], "uso": ["d2"] },
-    { "id": "beauvoir", "titulo": "Simone de Beauvoir", "categoria": "filosofia", "resumo": "'Ninguém nasce mulher, torna-se mulher' — gênero como construção social.", "comoUsar": "Citação filosófica (D2) para temas de feminismo, gênero e trabalho de cuidado.", "temas": ["feminismo", "gênero", "mulher", "igualdade"], "uso": ["d2"] },
-    { "id": "rousseau", "titulo": "Jean-Jacques Rousseau", "categoria": "filosofia", "resumo": "Contrato social: o homem nasce bom e a sociedade o corrompe; pacto coletivo.", "comoUsar": "Citação filosófica (D2) para temas de cidadania, Estado e vida em sociedade.", "temas": ["cidadania", "Estado", "sociedade"], "uso": ["d2"] },
-    { "id": "hobbes", "titulo": "Thomas Hobbes", "categoria": "filosofia", "resumo": "Contratualismo: 'o homem é o lobo do homem'; necessidade do Estado para a ordem.", "comoUsar": "Citação filosófica (D2) para temas de segurança, Estado e violência.", "temas": ["Estado", "segurança", "violência"], "uso": ["d2"] },
-    { "id": "platao", "titulo": "Platão (Mito da Caverna)", "categoria": "filosofia", "resumo": "Ignorância x conhecimento; a educação como caminho para enxergar a verdade.", "comoUsar": "Citação filosófica (D2) para temas de educação, acesso ao conhecimento e alienação.", "temas": ["educação", "conhecimento", "informação"], "uso": ["d2"] },
-    { "id": "bauman", "titulo": "Zygmunt Bauman (Modernidade Líquida)", "categoria": "filosofia", "resumo": "Relações e consumo tornam-se passageiros; 'consumidores falhos' excluídos do mercado.", "comoUsar": "Citação filosófica/sociológica (D2) para consumo, exclusão e descartabilidade.", "temas": ["consumo", "exclusão", "desigualdade", "cultura"], "uso": ["d2"] },
-    { "id": "arendt", "titulo": "Hannah Arendt (Banalidade do Mal)", "categoria": "filosofia", "resumo": "A condução acrítica e a omissão que normalizam injustiças e violências.", "comoUsar": "Citação filosófica (D2) para temas de intolerância, omissão e responsabilidade social.", "temas": ["intolerância", "responsabilidade", "direitos humanos"], "uso": ["d2"] },
-
-    { "id": "durkheim", "titulo": "Émile Durkheim (Fato Social)", "categoria": "sociologia", "resumo": "Comportamentos são moldados por instituições sociais, não pela natureza.", "comoUsar": "Citação sociológica (D2) para temas de educação, família e papéis sociais.", "temas": ["educação", "família", "sociedade", "mulher"], "uso": ["d2"] },
-    { "id": "foucault", "titulo": "Michel Foucault (Poder Disciplinar)", "categoria": "sociologia", "resumo": "Instituições controlam corpos e condutas por vigilância e normas.", "comoUsar": "Citação sociológica (D2) para temas de vigilância, punição e controle social.", "temas": ["vigilância", "punição", "Estado", "privacidade"], "uso": ["d2"] },
-    { "id": "weber", "titulo": "Max Weber (Ação Social e Burocracia)", "categoria": "sociologia", "resumo": "A ação social e a racionalização burocrática que ordenam as instituições modernas.", "comoUsar": "Citação sociológica (D2) para temas de Estado, instituições e serviços públicos.", "temas": ["Estado", "instituições", "burocracia"], "uso": ["d2"] },
-    { "id": "bourdieu", "titulo": "Pierre Bourdieu (Capital Cultural)", "categoria": "sociologia", "resumo": "O acesso a bens culturais é condicionado pelas desigualdades sociais (capital cultural, violência simbólica).", "comoUsar": "Citação sociológica (D2) para cultura, educação e desigualdade de acesso.", "temas": ["cultura", "educação", "desigualdade", "acesso"], "uso": ["d2"] },
-    { "id": "marx", "titulo": "Karl Marx (Luta de Classes)", "categoria": "sociologia", "resumo": "A história das sociedades é a história da luta entre classes sociais.", "comoUsar": "Citação sociológica (D2) para desigualdade, trabalho e economia.", "temas": ["desigualdade", "trabalho", "economia", "classe social"], "uso": ["d2"] },
-    { "id": "florestan", "titulo": "Florestan Fernandes", "categoria": "sociologia", "resumo": "Análise das desigualdades e do racismo estruturais na formação da sociedade brasileira.", "comoUsar": "Citação sociológica (D2) para racismo, desigualdade e cidadania no Brasil.", "temas": ["racismo", "desigualdade", "Brasil", "cidadania"], "uso": ["d2"] },
-
-    { "id": "ibge", "titulo": "IBGE", "categoria": "dado", "resumo": "Fonte oficial de dados sobre demografia, economia, educação, trabalho e desigualdade.", "comoUsar": "Citação científica (D1) com dado concreto; sempre confira o número antes de usar.", "temas": ["desigualdade", "trabalho", "educação", "economia", "mulher"], "uso": ["d1"] },
-    { "id": "ipea", "titulo": "IPEA", "categoria": "dado", "resumo": "Pesquisa aplicada sobre políticas públicas, desenvolvimento social e economia.", "comoUsar": "Citação científica (D1) para políticas públicas, segurança e desigualdade.", "temas": ["políticas públicas", "segurança", "desigualdade", "economia"], "uso": ["d1"] },
-    { "id": "oms-ms", "titulo": "OMS / Ministério da Saúde", "categoria": "dado", "resumo": "Dados sobre saúde pública, doenças, vacinação e saúde mental.", "comoUsar": "Citação científica (D1) para temas de saúde física e mental.", "temas": ["saúde", "saúde mental", "vacinação"], "uso": ["d1"] },
-    { "id": "atlas-violencia", "titulo": "Atlas da Violência (IPEA/FBSP)", "categoria": "dado", "resumo": "Dados e análises sobre violência e segurança pública no Brasil.", "comoUsar": "Citação científica (D1) para temas de violência, segurança e grupos vulneráveis.", "temas": ["violência", "segurança", "direitos humanos"], "uso": ["d1"] },
-
-    { "id": "cidadania", "titulo": "Cidadania", "categoria": "conceito", "resumo": "Conjunto de direitos e deveres que garante a participação plena na sociedade.", "comoUsar": "Fundamentar a defesa de direitos e da participação social em qualquer tema social.", "temas": ["direitos", "cidadania", "participação"], "uso": ["d1", "d2"] },
-    { "id": "sustentabilidade", "titulo": "Sustentabilidade", "categoria": "conceito", "resumo": "Equilíbrio entre desenvolvimento econômico, proteção ambiental e justiça social.", "comoUsar": "Temas de meio ambiente, consumo e desenvolvimento.", "temas": ["meio ambiente", "consumo", "economia"], "uso": ["d1", "d2"] },
-    { "id": "capitalismo-vigilancia", "titulo": "Capitalismo de Vigilância (Shoshana Zuboff)", "categoria": "conceito", "resumo": "Dados pessoais como mercadoria; monitoramento e lucro sobre o comportamento online.", "comoUsar": "Temas de privacidade, tecnologia, redes sociais e proteção de dados.", "temas": ["privacidade", "tecnologia", "redes sociais", "informação"], "uso": ["d1", "d2"] },
-    { "id": "empatia", "titulo": "Empatia", "categoria": "conceito", "resumo": "Capacidade de se colocar no lugar do outro, base da convivência e do respeito.", "comoUsar": "Temas de inclusão, preconceito, saúde mental e direitos humanos.", "temas": ["inclusão", "preconceito", "direitos humanos"], "uso": ["d1", "d2"] }
+    {
+      "id": "parasita",
+      "titulo": "Parasita",
+      "autor": "Bong Joon-ho",
+      "categoria": "filme",
+      "resumo": "Retrata a desigualdade social, a luta de classes e a hierarquia econômica.",
+      "comoUsar": "Abrir uma introdução sobre desigualdade, exclusão social ou disparidade de renda.",
+      "temas": ["desigualdade", "classe social", "economia", "trabalho"],
+      "uso": ["introducao", "d2"]
+    },
+    {
+      "id": "cidade-de-deus",
+      "titulo": "Cidade de Deus",
+      "autor": "Fernando Meirelles",
+      "categoria": "filme",
+      "resumo": "Violência urbana, criminalidade e marginalização de jovens das periferias.",
+      "comoUsar": "Contextualizar temas de violência, segurança pública ou exclusão periférica.",
+      "temas": ["violência", "periferia", "juventude", "segurança"],
+      "uso": ["introducao", "d2"]
+    },
+    {
+      "id": "matrix",
+      "titulo": "Matrix",
+      "autor": "Irmãs Wachowski",
+      "categoria": "filme",
+      "resumo": "Manipulação da informação, controle e a ilusão da realidade pela tecnologia.",
+      "comoUsar": "Temas de tecnologia, dependência digital, fake news e alienação.",
+      "temas": ["tecnologia", "informação", "fake news", "alienação"],
+      "uso": ["introducao", "d2"]
+    },
+    {
+      "id": "tempos-modernos",
+      "titulo": "Tempos Modernos",
+      "autor": "Charlie Chaplin",
+      "categoria": "filme",
+      "resumo": "Crítica à desumanização do trabalho e à alienação na sociedade industrial.",
+      "comoUsar": "Temas de trabalho, exploração, automação e condições laborais.",
+      "temas": ["trabalho", "indústria", "exploração", "tecnologia"],
+      "uso": ["introducao", "d2"]
+    },
+    {
+      "id": "wall-e",
+      "titulo": "Wall-E",
+      "autor": "Andrew Stanton",
+      "categoria": "filme",
+      "resumo": "Consumismo exagerado, poluição e degradação ambiental levados ao extremo.",
+      "comoUsar": "Temas de meio ambiente, consumo e sustentabilidade.",
+      "temas": ["meio ambiente", "consumo", "sustentabilidade"],
+      "uso": ["introducao", "d2"]
+    },
+    {
+      "id": "a-rede-social",
+      "titulo": "A Rede Social",
+      "autor": "David Fincher",
+      "categoria": "filme",
+      "resumo": "Origem das redes sociais, privacidade de dados e impactos das relações digitais.",
+      "comoUsar": "Temas de privacidade, redes sociais e relações mediadas por tecnologia.",
+      "temas": ["tecnologia", "privacidade", "redes sociais"],
+      "uso": ["introducao", "d2"]
+    },
+    {
+      "id": "o-poco",
+      "titulo": "O Poço",
+      "autor": "Galder Gaztelu-Urrutia",
+      "categoria": "filme",
+      "resumo": "Alegoria da distribuição desigual de recursos e do egoísmo humano.",
+      "comoUsar": "Temas de desigualdade, fome, distribuição de renda e solidariedade.",
+      "temas": ["desigualdade", "fome", "economia", "solidariedade"],
+      "uso": ["introducao", "d2"]
+    },
+    {
+      "id": "laranja-mecanica",
+      "titulo": "Laranja Mecânica",
+      "autor": "Stanley Kubrick",
+      "categoria": "filme",
+      "resumo": "Violência, livre-arbítrio, controle estatal e a eficácia/ética da punição.",
+      "comoUsar": "Temas de violência, sistema prisional e papel do Estado.",
+      "temas": ["violência", "Estado", "punição", "liberdade"],
+      "uso": ["introducao", "d2"]
+    },
+    {
+      "id": "patinho-feio",
+      "titulo": "O Patinho Feio",
+      "autor": "Hans Christian Andersen",
+      "categoria": "conto-fabula",
+      "resumo": "Exclusão pela diferença, preconceito e busca por identidade e aceitação.",
+      "comoUsar": "Temas de inclusão, preconceito, bullying e diversidade.",
+      "temas": ["inclusão", "preconceito", "diversidade", "bullying"],
+      "uso": ["introducao"]
+    },
+    {
+      "id": "joao-e-maria",
+      "titulo": "João e Maria",
+      "autor": "Irmãos Grimm",
+      "categoria": "conto-fabula",
+      "resumo": "Abandono infantil, vulnerabilidade e fragilidade da infância diante do descaso.",
+      "comoUsar": "Temas de infância, abandono e vulnerabilidade social.",
+      "temas": ["infância", "vulnerabilidade", "família"],
+      "uso": ["introducao"]
+    },
+    {
+      "id": "chapeuzinho-vermelho",
+      "titulo": "Chapeuzinho Vermelho",
+      "autor": "Tradição popular / Perrault",
+      "categoria": "conto-fabula",
+      "resumo": "Ingenuidade e os riscos da falta de vigilância e de informação.",
+      "comoUsar": "Temas de segurança, proteção e educação preventiva.",
+      "temas": ["segurança", "infância", "informação"],
+      "uso": ["introducao"]
+    },
+    {
+      "id": "roupa-nova-imperador",
+      "titulo": "A Roupa Nova do Imperador",
+      "autor": "Hans Christian Andersen",
+      "categoria": "conto-fabula",
+      "resumo": "Hipocrisia social, manipulação coletiva e a importância de questionar.",
+      "comoUsar": "Temas de senso crítico, manipulação e opinião pública.",
+      "temas": ["senso crítico", "manipulação", "informação"],
+      "uso": ["introducao"]
+    },
+    {
+      "id": "tres-porquinhos",
+      "titulo": "Os Três Porquinhos",
+      "autor": "Tradição popular",
+      "categoria": "conto-fabula",
+      "resumo": "Planejamento, esforço e resiliência diante de ameaças e crises.",
+      "comoUsar": "Temas de prevenção, planejamento e políticas de longo prazo.",
+      "temas": ["planejamento", "prevenção"],
+      "uso": ["introducao"]
+    },
+    {
+      "id": "capitaes-da-areia",
+      "titulo": "Capitães da Areia",
+      "autor": "Jorge Amado",
+      "categoria": "obra-br",
+      "resumo": "Abandono infantil, exclusão social, vida nas ruas e marginalização de jovens.",
+      "comoUsar": "Temas de infância, vulnerabilidade, criminalidade e desigualdade.",
+      "temas": ["infância", "exclusão", "juventude", "desigualdade"],
+      "uso": ["introducao", "d2"]
+    },
+    {
+      "id": "vidas-secas",
+      "titulo": "Vidas Secas",
+      "autor": "Graciliano Ramos",
+      "categoria": "obra-br",
+      "resumo": "Seca, miséria, migração e desigualdade regional no Nordeste brasileiro.",
+      "comoUsar": "Temas de desigualdade regional, pobreza e migração.",
+      "temas": ["desigualdade", "pobreza", "Nordeste", "migração"],
+      "uso": ["introducao", "d2"]
+    },
+    {
+      "id": "quarto-de-despejo",
+      "titulo": "Quarto de Despejo",
+      "autor": "Carolina Maria de Jesus",
+      "categoria": "obra-br",
+      "resumo": "Relato real de uma catadora de lixo privada de direitos básicos; pobreza e invisibilidade.",
+      "comoUsar": "Temas de pobreza, direitos, fome, trabalho de cuidado e invisibilidade social.",
+      "temas": ["pobreza", "direitos", "mulher", "trabalho", "fome"],
+      "uso": ["introducao", "d2"]
+    },
+    {
+      "id": "o-cortico",
+      "titulo": "O Cortiço",
+      "autor": "Aluísio Azevedo",
+      "categoria": "obra-br",
+      "resumo": "Retrata a influência do ambiente na formação do indivíduo e a miséria urbana.",
+      "comoUsar": "Temas de moradia, desigualdade urbana e condições de vida.",
+      "temas": ["moradia", "desigualdade", "urbano"],
+      "uso": ["introducao", "d2"]
+    },
+    {
+      "id": "bras-cubas",
+      "titulo": "Memórias Póstumas de Brás Cubas",
+      "autor": "Machado de Assis",
+      "categoria": "obra-br",
+      "resumo": "Crítica à elite e à hipocrisia social por meio de um narrador cínico.",
+      "comoUsar": "Temas de desigualdade, privilégio e crítica social.",
+      "temas": ["desigualdade", "privilégio", "crítica social"],
+      "uso": ["introducao", "d2"]
+    },
+    {
+      "id": "admiravel-mundo-novo",
+      "titulo": "Admirável Mundo Novo",
+      "autor": "Aldous Huxley",
+      "categoria": "obra-estrangeira",
+      "resumo": "Padronização, alienação pelo prazer e manipulação genética e social.",
+      "comoUsar": "Temas de tecnologia, controle social, consumo e padronização.",
+      "temas": ["tecnologia", "controle", "consumo", "ciência"],
+      "uso": ["introducao", "d2"]
+    },
+    {
+      "id": "1984",
+      "titulo": "1984",
+      "autor": "George Orwell",
+      "categoria": "obra-estrangeira",
+      "resumo": "Vigilância, controle do Estado e manipulação da verdade e da informação.",
+      "comoUsar": "Temas de privacidade, vigilância, fake news e liberdade de expressão.",
+      "temas": ["vigilância", "informação", "fake news", "liberdade", "Estado"],
+      "uso": ["introducao", "d2"]
+    },
+    {
+      "id": "fahrenheit-451",
+      "titulo": "Fahrenheit 451",
+      "autor": "Ray Bradbury",
+      "categoria": "obra-estrangeira",
+      "resumo": "Censura, apagamento do conhecimento e perigo da alienação coletiva.",
+      "comoUsar": "Temas de censura, educação, leitura e acesso ao conhecimento.",
+      "temas": ["censura", "educação", "conhecimento", "informação"],
+      "uso": ["introducao", "d2"]
+    },
+    {
+      "id": "a-metamorfose",
+      "titulo": "A Metamorfose",
+      "autor": "Franz Kafka",
+      "categoria": "obra-estrangeira",
+      "resumo": "Desumanização das relações, utilidade produtiva e exclusão do diferente.",
+      "comoUsar": "Temas de trabalho, saúde mental, inclusão e relações familiares.",
+      "temas": ["trabalho", "saúde mental", "inclusão", "família"],
+      "uso": ["introducao", "d2"]
+    },
+    {
+      "id": "revolucao-industrial",
+      "titulo": "Revolução Industrial",
+      "categoria": "fato-historico",
+      "resumo": "Início da desigualdade social moderna, exploração do trabalho e impacto ambiental.",
+      "comoUsar": "Dado/fato histórico para temas de trabalho, tecnologia e meio ambiente.",
+      "temas": ["trabalho", "tecnologia", "meio ambiente", "economia"],
+      "uso": ["d1", "introducao"]
+    },
+    {
+      "id": "ditadura-militar",
+      "titulo": "Ditadura Militar (Brasil, 1964–1985)",
+      "categoria": "fato-historico",
+      "resumo": "Censura, repressão e supressão de direitos civis e da liberdade de expressão.",
+      "comoUsar": "Temas de democracia, censura, direitos e liberdade de expressão.",
+      "temas": ["democracia", "censura", "direitos", "liberdade"],
+      "uso": ["d1", "introducao"]
+    },
+    {
+      "id": "constituicao-1988",
+      "titulo": "Constituição de 1988 ('Constituição Cidadã')",
+      "categoria": "fato-historico",
+      "resumo": "Marco de garantia de direitos sociais, cidadania e liberdades fundamentais no Brasil.",
+      "comoUsar": "Fundamentar direitos (educação, saúde, cultura) como garantia legal.",
+      "temas": ["direitos", "cidadania", "saúde", "educação", "cultura"],
+      "uso": ["d1"]
+    },
+    {
+      "id": "iluminismo",
+      "titulo": "Iluminismo",
+      "categoria": "fato-historico",
+      "resumo": "Valorização da razão, dos direitos humanos e do pensamento crítico.",
+      "comoUsar": "Temas de educação, ciência, democracia e cidadania.",
+      "temas": ["educação", "razão", "democracia", "ciência"],
+      "uso": ["d1", "introducao"]
+    },
+    {
+      "id": "guerra-fria",
+      "titulo": "Guerra Fria",
+      "categoria": "fato-historico",
+      "resumo": "Disputa ideológica, corrida tecnológica e manipulação da informação.",
+      "comoUsar": "Temas de geopolítica, tecnologia e propaganda/informação.",
+      "temas": ["geopolítica", "tecnologia", "informação"],
+      "uso": ["d1"]
+    },
+    {
+      "id": "era-vargas",
+      "titulo": "Era Vargas",
+      "categoria": "fato-historico",
+      "resumo": "Consolidação das leis trabalhistas e do papel do Estado na economia.",
+      "comoUsar": "Temas de trabalho, direitos trabalhistas e papel do Estado.",
+      "temas": ["trabalho", "direitos", "Estado"],
+      "uso": ["d1"]
+    },
+    {
+      "id": "holocausto",
+      "titulo": "Holocausto",
+      "categoria": "fato-historico",
+      "resumo": "Consequência extrema da intolerância, do preconceito e da desumanização.",
+      "comoUsar": "Temas de intolerância, direitos humanos e discurso de ódio.",
+      "temas": ["intolerância", "direitos humanos", "preconceito"],
+      "uso": ["d1", "introducao"]
+    },
+    {
+      "id": "kant",
+      "titulo": "Immanuel Kant",
+      "categoria": "filosofia",
+      "resumo": "'O homem é aquilo que a educação faz dele' — a educação como formadora do sujeito.",
+      "comoUsar": "Citação filosófica (D2) para temas de educação e formação.",
+      "temas": ["educação", "formação", "cidadania"],
+      "uso": ["d2"]
+    },
+    {
+      "id": "sartre",
+      "titulo": "Jean-Paul Sartre",
+      "categoria": "filosofia",
+      "resumo": "Existencialismo: 'o homem está condenado a ser livre' e é responsável por suas escolhas.",
+      "comoUsar": "Citação filosófica (D2) para temas de liberdade, responsabilidade e reconhecimento.",
+      "temas": ["liberdade", "responsabilidade", "inclusão"],
+      "uso": ["d2"]
+    },
+    {
+      "id": "voltaire",
+      "titulo": "Voltaire",
+      "categoria": "filosofia",
+      "resumo": "Defesa da liberdade de expressão e da tolerância às opiniões divergentes.",
+      "comoUsar": "Citação filosófica (D2) para temas de liberdade de expressão e tolerância.",
+      "temas": ["liberdade", "expressão", "tolerância", "informação"],
+      "uso": ["d2"]
+    },
+    {
+      "id": "beauvoir",
+      "titulo": "Simone de Beauvoir",
+      "categoria": "filosofia",
+      "resumo": "'Ninguém nasce mulher, torna-se mulher' — gênero como construção social.",
+      "comoUsar": "Citação filosófica (D2) para temas de feminismo, gênero e trabalho de cuidado.",
+      "temas": ["feminismo", "gênero", "mulher", "igualdade"],
+      "uso": ["d2"]
+    },
+    {
+      "id": "rousseau",
+      "titulo": "Jean-Jacques Rousseau",
+      "categoria": "filosofia",
+      "resumo": "Contrato social: o homem nasce bom e a sociedade o corrompe; pacto coletivo.",
+      "comoUsar": "Citação filosófica (D2) para temas de cidadania, Estado e vida em sociedade.",
+      "temas": ["cidadania", "Estado", "sociedade"],
+      "uso": ["d2"]
+    },
+    {
+      "id": "hobbes",
+      "titulo": "Thomas Hobbes",
+      "categoria": "filosofia",
+      "resumo": "Contratualismo: 'o homem é o lobo do homem'; necessidade do Estado para a ordem.",
+      "comoUsar": "Citação filosófica (D2) para temas de segurança, Estado e violência.",
+      "temas": ["Estado", "segurança", "violência"],
+      "uso": ["d2"]
+    },
+    {
+      "id": "platao",
+      "titulo": "Platão (Mito da Caverna)",
+      "categoria": "filosofia",
+      "resumo": "Ignorância x conhecimento; a educação como caminho para enxergar a verdade.",
+      "comoUsar": "Citação filosófica (D2) para temas de educação, acesso ao conhecimento e alienação.",
+      "temas": ["educação", "conhecimento", "informação"],
+      "uso": ["d2"]
+    },
+    {
+      "id": "bauman",
+      "titulo": "Zygmunt Bauman (Modernidade Líquida)",
+      "categoria": "filosofia",
+      "resumo": "Relações e consumo tornam-se passageiros; 'consumidores falhos' excluídos do mercado.",
+      "comoUsar": "Citação filosófica/sociológica (D2) para consumo, exclusão e descartabilidade.",
+      "temas": ["consumo", "exclusão", "desigualdade", "cultura"],
+      "uso": ["d2"]
+    },
+    {
+      "id": "arendt",
+      "titulo": "Hannah Arendt (Banalidade do Mal)",
+      "categoria": "filosofia",
+      "resumo": "A condução acrítica e a omissão que normalizam injustiças e violências.",
+      "comoUsar": "Citação filosófica (D2) para temas de intolerância, omissão e responsabilidade social.",
+      "temas": ["intolerância", "responsabilidade", "direitos humanos"],
+      "uso": ["d2"]
+    },
+    {
+      "id": "durkheim",
+      "titulo": "Émile Durkheim (Fato Social)",
+      "categoria": "sociologia",
+      "resumo": "Comportamentos são moldados por instituições sociais, não pela natureza.",
+      "comoUsar": "Citação sociológica (D2) para temas de educação, família e papéis sociais.",
+      "temas": ["educação", "família", "sociedade", "mulher"],
+      "uso": ["d2"]
+    },
+    {
+      "id": "foucault",
+      "titulo": "Michel Foucault (Poder Disciplinar)",
+      "categoria": "sociologia",
+      "resumo": "Instituições controlam corpos e condutas por vigilância e normas.",
+      "comoUsar": "Citação sociológica (D2) para temas de vigilância, punição e controle social.",
+      "temas": ["vigilância", "punição", "Estado", "privacidade"],
+      "uso": ["d2"]
+    },
+    {
+      "id": "weber",
+      "titulo": "Max Weber (Ação Social e Burocracia)",
+      "categoria": "sociologia",
+      "resumo": "A ação social e a racionalização burocrática que ordenam as instituições modernas.",
+      "comoUsar": "Citação sociológica (D2) para temas de Estado, instituições e serviços públicos.",
+      "temas": ["Estado", "instituições", "burocracia"],
+      "uso": ["d2"]
+    },
+    {
+      "id": "bourdieu",
+      "titulo": "Pierre Bourdieu (Capital Cultural)",
+      "categoria": "sociologia",
+      "resumo": "O acesso a bens culturais é condicionado pelas desigualdades sociais (capital cultural, violência simbólica).",
+      "comoUsar": "Citação sociológica (D2) para cultura, educação e desigualdade de acesso.",
+      "temas": ["cultura", "educação", "desigualdade", "acesso"],
+      "uso": ["d2"]
+    },
+    {
+      "id": "marx",
+      "titulo": "Karl Marx (Luta de Classes)",
+      "categoria": "sociologia",
+      "resumo": "A história das sociedades é a história da luta entre classes sociais.",
+      "comoUsar": "Citação sociológica (D2) para desigualdade, trabalho e economia.",
+      "temas": ["desigualdade", "trabalho", "economia", "classe social"],
+      "uso": ["d2"]
+    },
+    {
+      "id": "florestan",
+      "titulo": "Florestan Fernandes",
+      "categoria": "sociologia",
+      "resumo": "Análise das desigualdades e do racismo estruturais na formação da sociedade brasileira.",
+      "comoUsar": "Citação sociológica (D2) para racismo, desigualdade e cidadania no Brasil.",
+      "temas": ["racismo", "desigualdade", "Brasil", "cidadania"],
+      "uso": ["d2"]
+    },
+    {
+      "id": "ibge",
+      "titulo": "IBGE",
+      "categoria": "dado",
+      "resumo": "Fonte oficial de dados sobre demografia, economia, educação, trabalho e desigualdade.",
+      "comoUsar": "Citação científica (D1) com dado concreto; sempre confira o número antes de usar.",
+      "temas": ["desigualdade", "trabalho", "educação", "economia", "mulher"],
+      "uso": ["d1"]
+    },
+    {
+      "id": "ipea",
+      "titulo": "IPEA",
+      "categoria": "dado",
+      "resumo": "Pesquisa aplicada sobre políticas públicas, desenvolvimento social e economia.",
+      "comoUsar": "Citação científica (D1) para políticas públicas, segurança e desigualdade.",
+      "temas": ["políticas públicas", "segurança", "desigualdade", "economia"],
+      "uso": ["d1"]
+    },
+    {
+      "id": "oms-ms",
+      "titulo": "OMS / Ministério da Saúde",
+      "categoria": "dado",
+      "resumo": "Dados sobre saúde pública, doenças, vacinação e saúde mental.",
+      "comoUsar": "Citação científica (D1) para temas de saúde física e mental.",
+      "temas": ["saúde", "saúde mental", "vacinação"],
+      "uso": ["d1"]
+    },
+    {
+      "id": "atlas-violencia",
+      "titulo": "Atlas da Violência (IPEA/FBSP)",
+      "categoria": "dado",
+      "resumo": "Dados e análises sobre violência e segurança pública no Brasil.",
+      "comoUsar": "Citação científica (D1) para temas de violência, segurança e grupos vulneráveis.",
+      "temas": ["violência", "segurança", "direitos humanos"],
+      "uso": ["d1"]
+    },
+    {
+      "id": "cidadania",
+      "titulo": "Cidadania",
+      "categoria": "conceito",
+      "resumo": "Conjunto de direitos e deveres que garante a participação plena na sociedade.",
+      "comoUsar": "Fundamentar a defesa de direitos e da participação social em qualquer tema social.",
+      "temas": ["direitos", "cidadania", "participação"],
+      "uso": ["d1", "d2"]
+    },
+    {
+      "id": "sustentabilidade",
+      "titulo": "Sustentabilidade",
+      "categoria": "conceito",
+      "resumo": "Equilíbrio entre desenvolvimento econômico, proteção ambiental e justiça social.",
+      "comoUsar": "Temas de meio ambiente, consumo e desenvolvimento.",
+      "temas": ["meio ambiente", "consumo", "economia"],
+      "uso": ["d1", "d2"]
+    },
+    {
+      "id": "capitalismo-vigilancia",
+      "titulo": "Capitalismo de Vigilância (Shoshana Zuboff)",
+      "categoria": "conceito",
+      "resumo": "Dados pessoais como mercadoria; monitoramento e lucro sobre o comportamento online.",
+      "comoUsar": "Temas de privacidade, tecnologia, redes sociais e proteção de dados.",
+      "temas": ["privacidade", "tecnologia", "redes sociais", "informação"],
+      "uso": ["d1", "d2"]
+    },
+    {
+      "id": "empatia",
+      "titulo": "Empatia",
+      "categoria": "conceito",
+      "resumo": "Capacidade de se colocar no lugar do outro, base da convivência e do respeito.",
+      "comoUsar": "Temas de inclusão, preconceito, saúde mental e direitos humanos.",
+      "temas": ["inclusão", "preconceito", "direitos humanos"],
+      "uso": ["d1", "d2"]
+    },
+    {
+      "id": "sicko",
+      "titulo": "Sicko",
+      "autor": "Michael Moore",
+      "categoria": "filme",
+      "resumo": "Documentário que expõe as falhas do sistema de saúde privado dos EUA e compara com sistemas públicos universais.",
+      "comoUsar": "Abrir introdução sobre direito à saúde, SUS ou desigualdade no acesso a tratamento.",
+      "temas": ["saúde", "SUS", "desigualdade", "direito"],
+      "uso": ["introducao", "d1"],
+      "fonte": "complemento NotaCerta — revisar pela professora"
+    },
+    {
+      "id": "a-peste",
+      "titulo": "A Peste",
+      "autor": "Albert Camus",
+      "categoria": "obra-estrangeira",
+      "resumo": "Romance em que uma cidade enfrenta uma epidemia e precisa agir coletivamente e com solidariedade.",
+      "comoUsar": "Repertório sobre saúde pública, epidemias, vacinação e responsabilidade coletiva.",
+      "temas": ["saúde", "epidemia", "vacinação", "solidariedade"],
+      "uso": ["introducao", "d2"],
+      "fonte": "complemento NotaCerta — revisar pela professora"
+    },
+    {
+      "id": "pni",
+      "titulo": "Programa Nacional de Imunizações (PNI)",
+      "categoria": "fato-historico",
+      "resumo": "Criado em 1973, é referência mundial em vacinação gratuita e universal, ofertada pelo SUS.",
+      "comoUsar": "Fato para D1: exemplo de política pública que funciona por meio do SUS.",
+      "temas": ["saúde", "SUS", "vacinação", "política pública"],
+      "uso": ["d1", "d2"],
+      "fonte": "complemento NotaCerta — revisar pela professora"
+    },
+    {
+      "id": "lei-organica-saude",
+      "titulo": "Lei Orgânica da Saúde (Lei 8.080/1990)",
+      "categoria": "fato-historico",
+      "resumo": "Regulamenta o SUS e define princípios como universalidade, integralidade e equidade.",
+      "comoUsar": "Citação/fato para D1 em temas de saúde e direitos sociais.",
+      "temas": ["saúde", "SUS", "direito", "legislação"],
+      "uso": ["d1"],
+      "fonte": "complemento NotaCerta — revisar pela professora"
+    }
   ]
 }

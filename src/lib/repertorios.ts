@@ -47,6 +47,10 @@ export type Repertorio = {
   comoUsar: string;
   temas: string[];
   uso: UsoRepertorio[];
+  /** true para itens complementados pelo NotaCerta (fora da apostila original) — revisar pela professora. */
+  rascunho?: boolean;
+  /** origem do item quando não é a apostila (ex.: "complemento NotaCerta — revisar pela professora"). */
+  fonte?: string;
 };
 
 type AcervoArquivo = {
