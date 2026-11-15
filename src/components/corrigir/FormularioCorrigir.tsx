@@ -39,7 +39,8 @@ const MENSAGENS_ERRO_API: Record<string, string> = {
     "O conteúdo enviado não parece uma redação dissertativa. Confira o texto ou a foto.",
   saida_invalida: "A correção veio incompleta. Tente novamente em alguns segundos.",
   api_indisponivel: "O corretor está fora do ar neste momento. Tente de novo em instantes.",
-  configuracao: "O servidor não está configurado (chave da API ausente).",
+  configuracao:
+    "O servidor não está configurado: falta a chave da API. Crie um .env.local com ANTHROPIC_API_KEY (veja o README, seção “Como obter e configurar a chave de API”) e reinicie o servidor.",
 };
 
 export function FormularioCorrigir() {

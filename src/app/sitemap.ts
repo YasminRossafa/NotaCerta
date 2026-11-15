@@ -12,12 +12,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 1,
     },
     {
-      url: `${SITE.url}/corrigir`,
-      lastModified: ULTIMA_ATUALIZACAO,
-      changeFrequency: "monthly",
-      priority: 0.9,
-    },
-    {
       url: `${SITE.url}/estrutura`,
       lastModified: ULTIMA_ATUALIZACAO,
       changeFrequency: "monthly",

@@ -75,7 +75,7 @@ function Resultado({
       {exemplo && (
         <Aviso tom="info" className="mb-6" compacto>
           Esta é uma <strong>correção de exemplo</strong> para você conhecer a tela.{" "}
-          <Link href="/corrigir" className="font-semibold underline">
+          <Link href="/" className="font-semibold underline">
             Corrija a sua redação
           </Link>{" "}
           para ver o feedback do seu texto.
@@ -234,7 +234,7 @@ function Resultado({
               </p>
             </div>
             <div className="flex shrink-0 flex-col gap-2 sm:flex-row">
-              <Botao href="/corrigir" variante="secundario" className="whitespace-nowrap">
+              <Botao href="/" variante="secundario" className="whitespace-nowrap">
                 Corrigir outra redação
                 <IconeSeta />
               </Botao>
@@ -284,7 +284,7 @@ function ResultadoVazio() {
           O resultado fica disponível só nesta aba, logo após a correção. Envie uma redação para ver
           o feedback completo.
         </p>
-        <Botao href="/corrigir" className="mt-6" tamanho="lg">
+        <Botao href="/" className="mt-6" tamanho="lg">
           Corrigir uma redação
           <IconeSeta />
         </Botao>

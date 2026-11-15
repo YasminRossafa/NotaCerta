@@ -45,7 +45,7 @@ export function Cabecalho() {
         </nav>
 
         <div className="flex items-center gap-2">
-          <Botao href="/corrigir" tamanho="sm" className="hidden sm:inline-flex">
+          <Botao href="/" tamanho="sm" className="hidden sm:inline-flex">
             Corrigir grátis
           </Botao>
           <button
@@ -83,7 +83,7 @@ export function Cabecalho() {
               </Link>
             );
           })}
-          <Botao href="/corrigir" cheio className="mt-2">
+          <Botao href="/" cheio className="mt-2">
             Corrigir redação grátis
           </Botao>
         </nav>

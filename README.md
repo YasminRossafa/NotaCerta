@@ -30,18 +30,25 @@ O padrão do projeto é o **Gemini**, porque a camada gratuita do Google AI Stud
 
 ### Opcional: usar a Anthropic em vez do Gemini
 
-Se preferir (ou for para produção), dá para usar a Anthropic — é uma conta separada e cobrada por uso:
+Se preferir (ou for para produção), dá para usar a Anthropic — é uma conta separada e cobrada por uso. Veja como obter e configurar a chave na seção abaixo.
 
-1. Crie uma conta em [console.anthropic.com](https://console.anthropic.com), vá em **API Keys** e gere uma chave.
-2. No `.env.local`:
+Com `AI_PROVIDER=anthropic`, o aviso de "modo demonstração" no rodapé do site desaparece automaticamente.
+
+## Como obter e configurar a chave de API (Anthropic)
+
+1. Crie uma conta no [Console da Anthropic](https://console.anthropic.com).
+2. No menu, vá em **"API Keys"** e gere uma chave nova.
+3. Na raiz do projeto, crie o arquivo `.env.local` (se ainda não existir) com:
    ```
    AI_PROVIDER=anthropic
    ANTHROPIC_API_KEY=cole_sua_chave_aqui
    ANTHROPIC_MODEL=claude-sonnet-5
+   NOTACERTA_FREE_LIMIT_MENSAL=2
    ```
-3. Reinicie `npm run dev`.
+4. Reinicie o servidor: `npm run dev` (pare com `Ctrl+C` e rode de novo se já estava rodando).
+5. **Nunca** faça commit do `.env.local` (ele já está no `.gitignore`).
 
-Com `AI_PROVIDER=anthropic`, o aviso de "modo demonstração" no rodapé do site desaparece automaticamente.
+> ⚠️ **Sobre custos:** o uso da API da Anthropic é cobrado **separadamente** da assinatura do Claude (Free/Pro/Max) — são produtos diferentes. Não há crédito grátis garantido: confira os créditos e limites disponíveis na sua conta, em **Console → Billing**. Como referência, uma correção completa custa aproximadamente **R$ 0,15**, mas o valor real depende do tamanho da redação e pode mudar com o tempo.
 
 Outros comandos:
 

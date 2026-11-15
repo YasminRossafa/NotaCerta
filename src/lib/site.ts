@@ -8,7 +8,7 @@ export const SITE = {
 } as const;
 
 export const NAV_LINKS = [
-  { href: "/corrigir", rotulo: "Corrigir" },
+  { href: "/", rotulo: "Corrigir" },
   { href: "/estrutura", rotulo: "Estrutura" },
   { href: "/repertorios", rotulo: "Repertórios" },
   { href: "/precos", rotulo: "Planos" },

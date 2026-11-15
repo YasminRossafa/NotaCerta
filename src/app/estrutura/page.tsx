@@ -218,7 +218,7 @@ export default function PaginaEstrutura() {
             O corretor aponta qual elemento falta e explica o motivo.
           </p>
         </div>
-        <Botao href="/corrigir">Corrigir redação grátis</Botao>
+        <Botao href="/">Corrigir redação grátis</Botao>
       </div>
     </div>
   );

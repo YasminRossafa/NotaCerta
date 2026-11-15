@@ -92,7 +92,7 @@ export default function PaginaPrecos() {
               </li>
             ))}
           </ul>
-          <Botao href="/corrigir" variante="secundario" tamanho="lg" cheio className="mt-7">
+          <Botao href="/" variante="secundario" tamanho="lg" cheio className="mt-7">
             Corrigir redação grátis
           </Botao>
         </section>

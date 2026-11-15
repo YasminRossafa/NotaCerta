@@ -8,7 +8,7 @@ export default function NaoEncontrado() {
         <h1 className="text-navy mt-2 text-2xl font-semibold">Página não encontrada</h1>
         <p className="text-slate mt-2">O endereço pode ter mudado. Que tal corrigir uma redação?</p>
         <div className="mt-6 flex flex-col gap-2 sm:flex-row sm:justify-center">
-          <Botao href="/corrigir">Corrigir redação</Botao>
+          <Botao href="/">Corrigir redação</Botao>
           <Botao href="/" variante="secundario">
             Ir para o início
           </Botao>

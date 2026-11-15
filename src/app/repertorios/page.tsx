@@ -15,8 +15,7 @@ export default function PaginaRepertorios() {
   return (
     <div className="container-nc py-10 md:py-14">
       <header className="max-w-2xl">
-        <p className="text-azul text-sm font-semibold tracking-wide uppercase">Acervo curado</p>
-        <h1 className="text-navy mt-2 text-3xl font-semibold sm:text-4xl">
+        <h1 className="text-navy text-3xl font-semibold sm:text-4xl">
           Repertórios socioculturais por tema
         </h1>
         <p className="text-slate mt-3">
@@ -41,7 +40,7 @@ export default function PaginaRepertorios() {
             Corrija sua redação e receba 2 a 3 sugestões deste acervo, com o motivo de cada uma.
           </p>
         </div>
-        <Botao href="/corrigir">Corrigir redação grátis</Botao>
+        <Botao href="/">Corrigir redação grátis</Botao>
       </div>
     </div>
   );
