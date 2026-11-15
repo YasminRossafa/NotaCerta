@@ -49,3 +49,14 @@ export function AvisoNotaEstimada({ className }: { className?: string }) {
     </p>
   );
 }
+
+/** Aviso de modo demonstração — exibido no rodapé quando AI_PROVIDER=gemini (camada gratuita). */
+export function AvisoModoDemonstracao({ className }: { className?: string }) {
+  return (
+    <p className={cn("text-slate text-xs leading-relaxed", className)}>
+      <strong className="text-navy font-semibold">Modo demonstração:</strong> as correções desta
+      instância são geradas pelo Gemini (camada gratuita do Google AI Studio). Use apenas redações
+      de exemplo, nunca redações reais de alunos.
+    </p>
+  );
+}

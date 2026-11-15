@@ -1,12 +1,15 @@
 import Link from "next/link";
 import { Logo } from "@/components/layout/Logo";
-import { AvisoNotaEstimada } from "@/components/ui/Aviso";
+import { AvisoModoDemonstracao, AvisoNotaEstimada } from "@/components/ui/Aviso";
+import { nomeProvider } from "@/lib/ai/provider";
 import { NAV_LINKS, SITE } from "@/lib/site";
 
 // Constante para manter o rodapé estático sob Cache Components (sem Date no render).
 const ANO_ATUAL = 2026;
 
 export function Rodape() {
+  const modoDemonstracao = nomeProvider() === "gemini";
+
   return (
     <footer className="border-borda/60 bg-cinza-fundo mt-auto border-t">
       <div className="container-nc grid gap-8 py-10 md:grid-cols-[1.4fr_1fr_1fr]">
@@ -14,6 +17,7 @@ export function Rodape() {
           <Logo />
           <p className="text-slate mt-3 text-sm">{SITE.slogan}</p>
           <AvisoNotaEstimada className="mt-4" />
+          {modoDemonstracao && <AvisoModoDemonstracao className="mt-2" />}
         </div>
 
         <div>
