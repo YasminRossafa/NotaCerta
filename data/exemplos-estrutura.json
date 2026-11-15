@@ -1,0 +1,104 @@
+{
+  "versao": 1,
+  "fonte": "Apostila de Redação para o ENEM — CEC (Cursinho Educação e Cidadania), UFSCar Sorocaba",
+  "observacao": "Redações-modelo já segmentadas. Cada parágrafo é dividido em 'partes', e cada parte traz o 'rotulo' do elemento do método (ex.: Repertório, Motivo, Agente). A página /estrutura mostra o tema no topo e destaca cada parte com uma cor, conforme a legenda de rótulos. Poucos exemplos de propósito, para não poluir.",
+  "legendaRotulos": {
+    "introducao": ["Repertório sociocultural", "Tema + Brasil", "Duas problemáticas"],
+    "desenvolvimento": ["Conectivo", "Problemática", "Motivo", "Citação (dados)", "Citação (filosófica/sociológica)", "Argumento"],
+    "conclusao": ["Conectivo conclusivo", "Agente", "Ação", "Modo/Meio", "Finalidade", "Detalhamento", "Retomada do repertório"]
+  },
+  "exemplos": [
+    {
+      "id": "educacao-surdos",
+      "tema": "Desafios para a formação educacional de surdos no Brasil",
+      "paragrafos": [
+        {
+          "tipo": "introducao",
+          "partes": [
+            { "rotulo": "Repertório sociocultural", "texto": "No filme 'O Milagre de Anne Sullivan', é retratada a história de Helen Keller, uma menina surda e cega que enfrenta grandes dificuldades para se comunicar e ser compreendida pela sociedade." },
+            { "rotulo": "Tema + Brasil", "texto": "Fora da ficção, os desafios enfrentados por pessoas surdas no Brasil ainda são evidentes, sobretudo na educação do país." },
+            { "rotulo": "Duas problemáticas", "texto": "A falta de acessibilidade nas escolas e o preconceito social são dois entraves que comprometem o pleno desenvolvimento acadêmico e pessoal dessa parcela da população." }
+          ]
+        },
+        {
+          "tipo": "desenvolvimento1",
+          "partes": [
+            { "rotulo": "Conectivo", "texto": "Primeiramente," },
+            { "rotulo": "Problemática", "texto": "destaca-se a falta de acessibilidade nas instituições de ensino como um dos principais entraves à inclusão educacional de surdos," },
+            { "rotulo": "Motivo", "texto": "uma vez que muitas escolas públicas não possuem intérpretes de Libras disponíveis em tempo integral." },
+            { "rotulo": "Citação (dados)", "texto": "Segundo dados do IBGE, apenas 1% das escolas brasileiras têm estrutura completa de acessibilidade." },
+            { "rotulo": "Argumento", "texto": "Desse modo, a ausência de recursos inclusivos contribui para o sentimento de exclusão, levando ao abandono escolar e à limitação de oportunidades no futuro." }
+          ]
+        },
+        {
+          "tipo": "desenvolvimento2",
+          "partes": [
+            { "rotulo": "Conectivo", "texto": "Em segundo lugar," },
+            { "rotulo": "Problemática", "texto": "observa-se o preconceito social como um fator que dificulta a integração de pessoas surdas no ambiente educacional." },
+            { "rotulo": "Motivo", "texto": "Isso ocorre porque, historicamente, a sociedade marginaliza indivíduos com deficiência." },
+            { "rotulo": "Citação (filosófica/sociológica)", "texto": "Conforme defendeu Jean-Paul Sartre, o homem é condenado a ser livre, mas essa liberdade só é possível se houver reconhecimento mútuo." },
+            { "rotulo": "Argumento", "texto": "Logo, o preconceito impede a construção de uma convivência saudável e democrática, afetando diretamente o desempenho e a permanência dos alunos surdos nas escolas." }
+          ]
+        },
+        {
+          "tipo": "conclusao",
+          "partes": [
+            { "rotulo": "Conectivo conclusivo", "texto": "Portanto," },
+            { "rotulo": "Agente", "texto": "o Ministério da Educação (MEC)" },
+            { "rotulo": "Ação", "texto": "deve investir em infraestrutura" },
+            { "rotulo": "Modo/Meio", "texto": "por meio da destinação de verba específica para a compra de equipamentos tecnológicos," },
+            { "rotulo": "Finalidade", "texto": "com a finalidade de garantir a acessibilidade plena nas escolas." },
+            { "rotulo": "Detalhamento", "texto": "Em detalhe, é urgente que todas as instituições de ensino contratem intérpretes de Libras disponíveis em tempo integral." },
+            { "rotulo": "Retomada do repertório", "texto": "Dessa forma, casos como o de Helen Keller, do filme 'O Milagre de Anne Sullivan', não se repetirão na realidade brasileira." }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "trabalho-de-cuidado",
+      "tema": "Invisibilidade do trabalho de cuidado exercido pela mulher na sociedade brasileira",
+      "paragrafos": [
+        {
+          "tipo": "introducao",
+          "partes": [
+            { "rotulo": "Repertório sociocultural", "texto": "No filme 'Que Horas Ela Volta?', a protagonista Val mora e trabalha na casa de uma família rica, abdicando da própria vida e se afastando da filha em nome do trabalho de cuidado que exerce." },
+            { "rotulo": "Tema + Brasil", "texto": "Assim como no longa-metragem, no Brasil, ainda existem desafios para enfrentar a invisibilidade do trabalho de cuidado exercido pela mulher." },
+            { "rotulo": "Duas problemáticas", "texto": "Dois problemas desse tema são que as mulheres são responsáveis por grande parte do serviço, além daquele que não é remunerado." }
+          ]
+        },
+        {
+          "tipo": "desenvolvimento1",
+          "partes": [
+            { "rotulo": "Conectivo", "texto": "Primeiramente," },
+            { "rotulo": "Problemática", "texto": "destaca-se que as mulheres são responsáveis por grande parte dos serviços de cuidado, e isso é um problema" },
+            { "rotulo": "Motivo", "texto": "pois tais trabalhos são invisibilizados diante da sociedade." },
+            { "rotulo": "Citação (dados)", "texto": "Segundo dados do IBGE, as mulheres trabalham o dobro dos homens em serviços domésticos." },
+            { "rotulo": "Argumento", "texto": "Isto se deve pelo fato de elas não terem seu esforço reconhecido devido ao seu círculo social." }
+          ]
+        },
+        {
+          "tipo": "desenvolvimento2",
+          "partes": [
+            { "rotulo": "Conectivo", "texto": "Ademais," },
+            { "rotulo": "Problemática", "texto": "observa-se que há uma construção social na qual o trabalho domiciliar não remunerado é visto como uma obrigação da mulher," },
+            { "rotulo": "Motivo", "texto": "pois isso é majoritariamente atribuído como um papel de submissão." },
+            { "rotulo": "Citação (filosófica/sociológica)", "texto": "De acordo com os conceitos de Durkheim, essas funções seriam desenvolvidas pelas instituições socializadoras e não de forma natural." },
+            { "rotulo": "Argumento", "texto": "Logo, esse padrão é enraizado na sociedade." }
+          ]
+        },
+        {
+          "tipo": "conclusao",
+          "partes": [
+            { "rotulo": "Conectivo conclusivo", "texto": "Sendo assim," },
+            { "rotulo": "Agente", "texto": "o Ministério da Mulher, da Família e dos Direitos Humanos" },
+            { "rotulo": "Ação", "texto": "deve criar campanhas nacionais de conscientização" },
+            { "rotulo": "Modo/Meio", "texto": "através de parcerias com emissoras de televisão e redes sociais," },
+            { "rotulo": "Finalidade", "texto": "a fim de desnaturalizar a ideia de que os cuidados domésticos são responsabilidade exclusiva da mulher." },
+            { "rotulo": "Detalhamento", "texto": "Isto é, promover debates nas escolas e empresas sobre a divisão igualitária das tarefas." },
+            { "rotulo": "Retomada do repertório", "texto": "Assim, a sociedade deixa de reproduzir a realidade de exclusão retratada em 'Que Horas Ela Volta?'." }
+          ]
+        }
+      ]
+    }
+  ]
+}
