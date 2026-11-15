@@ -3,6 +3,10 @@
  * TODO(claudia): confirmar e acrescentar o tema de 2025 e temas de simulados do cursinho.
  */
 export const TEMAS_ENEM: { ano: string; tema: string }[] = [
+  {
+    ano: "2026",
+    tema: "A valorização do Sistema Único de Saúde (SUS) como direito universal",
+  },
   { ano: "2024", tema: "Desafios para a valorização da herança africana no Brasil" },
   {
     ano: "2023",
