@@ -94,6 +94,22 @@ mark.nc-destaque[data-ativo="true"] {
   pointer-events: none;
 }
 
+/* Flash de "aqui está" ao clicar num trecho destacado e pular até o apontamento (spec §11) */
+@keyframes nc-flash {
+  0%,
+  100% {
+    background-color: transparent;
+    box-shadow: none;
+  }
+  25% {
+    background-color: var(--color-ambar-claro);
+    box-shadow: 0 0 0 2px var(--color-ambar);
+  }
+}
+.nc-flash {
+  animation: nc-flash 900ms ease-out;
+}
+
 @keyframes nc-pulse {
   0%,
   100% {
@@ -113,5 +129,15 @@ mark.nc-destaque[data-ativo="true"] {
   }
   .nc-pulse {
     animation: none;
+  }
+  .nc-flash {
+    animation: none;
+  }
+}
+
+@media print {
+  .nc-borrado {
+    /* mantém o bloqueio visível também na exportação em PDF (spec §13) */
+    filter: blur(6px);
   }
 }

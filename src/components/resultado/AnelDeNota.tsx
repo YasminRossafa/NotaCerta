@@ -2,6 +2,7 @@ import { CORES_FAIXA, faixaDaNotaTotal } from "@/lib/competencias";
 import { cn } from "@/lib/cn";
 
 const TAMANHOS = {
+  sm: { px: 56, traco: 5, fonte: "text-sm" },
   md: { px: 96, traco: 8, fonte: "text-2xl" },
   lg: { px: 168, traco: 12, fonte: "text-5xl" },
 } as const;

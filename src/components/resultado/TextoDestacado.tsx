@@ -53,52 +53,57 @@ export function segmentarTexto(texto: string, apontamentos: Apontamento[]): Segm
 
 /**
  * Texto original do parágrafo com os trechos problemáticos destacados.
- * `ativo` sincroniza o destaque com o apontamento em foco na lista.
+ * `ativo`/`aoFocar` sincronizam o destaque (hover/foco) com o apontamento na lista; `aoClicar`
+ * é disparado ao clicar/Enter num trecho, para quem chama decidir como revelar e rolar até o
+ * cartão correspondente (ex.: limpando um filtro que o esconderia).
  */
 export function TextoDestacado({
   texto,
   apontamentos,
   ativo,
   aoFocar,
+  aoClicar,
   idBase,
 }: {
   texto: string;
   apontamentos: Apontamento[];
   ativo: number | null;
   aoFocar: (indice: number | null) => void;
+  aoClicar?: (indice: number) => void;
   idBase: string;
 }): ReactNode {
   const segmentos = segmentarTexto(texto, apontamentos);
   return (
     <p className="text-navy text-[15.5px] leading-[1.75] sm:text-base">
-      {segmentos.map((s, i) =>
-        s.indice == null ? (
-          <span key={i}>{s.texto}</span>
-        ) : (
+      {segmentos.map((s, i) => {
+        if (s.indice == null) return <span key={i}>{s.texto}</span>;
+        const indice = s.indice;
+        return (
           <mark
             key={i}
             className="nc-destaque"
-            data-ativo={ativo === s.indice ? "true" : "false"}
+            data-ativo={ativo === indice ? "true" : "false"}
             tabIndex={0}
             role="button"
-            aria-describedby={`${idBase}-ap-${s.indice}`}
-            aria-label={`Trecho com apontamento ${s.indice + 1}: ${apontamentos[s.indice].problema}`}
-            onMouseEnter={() => aoFocar(s.indice)}
+            aria-describedby={`${idBase}-ap-${indice}`}
+            aria-label={`Trecho com apontamento ${indice + 1}: ${apontamentos[indice].problema}`}
+            onMouseEnter={() => aoFocar(indice)}
             onMouseLeave={() => aoFocar(null)}
-            onFocus={() => aoFocar(s.indice)}
+            onFocus={() => aoFocar(indice)}
             onBlur={() => aoFocar(null)}
-            onClick={() => {
-              document.getElementById(`${idBase}-ap-${s.indice}`)?.scrollIntoView({
-                behavior: "smooth",
-                block: "center",
-              });
+            onClick={() => aoClicar?.(indice)}
+            onKeyDown={(e) => {
+              if (e.key === "Enter" || e.key === " ") {
+                e.preventDefault();
+                aoClicar?.(indice);
+              }
             }}
           >
             {s.texto}
-            <sup className="ml-0.5 text-[10px] font-bold text-amber-700">{s.indice + 1}</sup>
+            <sup className="ml-0.5 text-[10px] font-bold text-amber-700">{indice + 1}</sup>
           </mark>
-        ),
-      )}
+        );
+      })}
     </p>
   );
 }
