@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { FormularioCorrigir } from "@/components/corrigir/FormularioCorrigir";
+import { DemoCorrecao } from "@/components/home/DemoCorrecao";
+import { Revelar } from "@/components/motion/Revelar";
 import { Botao } from "@/components/ui/Botao";
 import { AvisoNotaEstimada } from "@/components/ui/Aviso";
 import { IconeChevron } from "@/components/ui/Icones";
@@ -21,9 +23,20 @@ export const metadata: Metadata = {
 };
 
 const PASSOS = [
-  "Cole o texto ou tire uma foto da redação, e informe o tema (ou deixe que a gente detecte).",
-  "Analisamos introdução, D1, D2 e conclusão competência por competência, seguindo o método.",
-  "Você recebe nota estimada, apontamentos com motivo, reescrita e repertório para o tema.",
+  {
+    titulo: "Envie a redação",
+    texto: "Cole o texto ou tire uma foto da folha. Diga o tema — ou deixe que a gente detecte.",
+  },
+  {
+    titulo: "O método roda inteiro",
+    texto:
+      "Introdução, D1, D2 e conclusão, competência por competência, do jeito que a professora corrige.",
+  },
+  {
+    titulo: "Você entende o porquê",
+    texto:
+      "Nota estimada, cada apontamento com o motivo, a reescrita que ensina e repertório para o tema.",
+  },
 ];
 
 const FAQ = [
@@ -52,92 +65,145 @@ const FAQ = [
 export default function PaginaInicial() {
   return (
     <>
-      <section className="container-nc py-10 md:py-14">
-        <div className="grid gap-8 lg:grid-cols-[1fr_1.1fr] lg:items-start lg:gap-14">
-          <div className="max-w-lg lg:pt-2">
-            <h1 className="text-navy text-4xl leading-[1.1] font-semibold tracking-tight sm:text-5xl">
-              Corretor de redação ENEM com <span className="text-azul">método</span>, não com
-              achismo.
+      {/* ---------------------------------------------------------------
+          Herói: a ferramenta é a página (spec §18.1)
+          --------------------------------------------------------------- */}
+      <section className="container-nc py-8 md:py-14">
+        <div className="grid gap-8 lg:grid-cols-[minmax(0,0.85fr)_minmax(0,1.15fr)] lg:items-start lg:gap-12">
+          <div className="max-w-xl lg:pt-4">
+            <h1 className="text-navy text-[2.6rem] leading-[1.02] font-extrabold tracking-[-0.035em] sm:text-6xl">
+              Corretor de redação ENEM com <span className="marca">método,</span> não com achismo.
             </h1>
-            <p className="text-slate mt-5 text-lg leading-relaxed">
-              Envie sua redação e receba nota estimada por competência, cada erro explicado com o
-              motivo, a reescrita que ensina e repertório curado para o seu tema.
+            <p className="text-slate mt-6 text-lg leading-relaxed sm:text-xl">
+              Envie sua redação e receba nota estimada por competência, cada erro explicado{" "}
+              <span className="text-navy font-semibold">com o motivo</span>, a reescrita que ensina
+              e repertório curado para o seu tema.
             </p>
-            <p className="text-slate mt-4 text-sm">
+            <p className="text-slate mt-5 text-sm">
               Quer ver antes?{" "}
-              <Link href="/resultado?exemplo=1" className="text-azul font-semibold underline">
+              <Link href="/resultado?exemplo=1" className="text-azul sublinhado font-bold">
                 Veja uma correção de exemplo
               </Link>
               .
             </p>
-            <AvisoNotaEstimada className="mt-6" />
+            <AvisoNotaEstimada className="mt-7 max-w-md" />
           </div>
 
-          <div className="card p-5 sm:p-7">
+          {/* O cartão grande: é aqui que o aluno age. */}
+          <div className="card shadow-alto p-5 sm:p-7">
             <FormularioCorrigir />
           </div>
         </div>
       </section>
 
-      {/* 3 passos */}
-      <section className="bg-cinza-fundo" aria-labelledby="passos-titulo">
-        <div className="container-nc py-12 md:py-16">
-          <h2 id="passos-titulo" className="text-navy text-2xl font-semibold sm:text-3xl">
+      {/* ---------------------------------------------------------------
+          Demo interativa — seção escura, o contraponto ao claro
+          --------------------------------------------------------------- */}
+      <section className="secao-escura" aria-labelledby="demo-titulo">
+        <div className="container-nc py-14 md:py-20">
+          <Revelar>
+            <div className="max-w-2xl">
+              <h2
+                id="demo-titulo"
+                className="text-3xl leading-tight font-extrabold tracking-tight text-white sm:text-4xl"
+              >
+                Todo corretor diz o que está errado.
+                <br />
+                <span className="marca-forte">Este explica por quê.</span>
+              </h2>
+              <p className="mt-5 text-lg leading-relaxed text-white/75">
+                Abaixo está um parágrafo de verdade, corrigido pelo método. Cada trecho marcado tem
+                um motivo atrás — é o que faz você não repetir o erro na próxima.
+              </p>
+            </div>
+          </Revelar>
+          <Revelar atraso={0.08} className="mt-8">
+            <DemoCorrecao />
+          </Revelar>
+        </div>
+      </section>
+
+      {/* ---------------------------------------------------------------
+          3 passos
+          --------------------------------------------------------------- */}
+      <section className="container-nc py-14 md:py-20" aria-labelledby="passos-titulo">
+        <Revelar>
+          <h2
+            id="passos-titulo"
+            className="text-navy text-3xl font-extrabold tracking-tight sm:text-4xl"
+          >
             Como funciona
           </h2>
-          <ol className="mt-6 space-y-3">
-            {PASSOS.map((texto, i) => (
-              <li key={texto} className="flex items-start gap-3 text-sm sm:text-base">
-                <span className="bg-azul flex h-6 w-6 shrink-0 items-center justify-center rounded-full text-xs font-semibold text-white">
-                  {i + 1}
-                </span>
-                <span className="text-navy pt-0.5">{texto}</span>
-              </li>
-            ))}
-          </ol>
-        </div>
-      </section>
-
-      {/* Planos (teaser) */}
-      <section className="container-nc py-12 md:py-16" aria-labelledby="planos-titulo">
-        <div className="card flex flex-col items-start gap-4 p-6 sm:flex-row sm:items-center sm:justify-between sm:p-7">
-          <div>
-            <h2 id="planos-titulo" className="text-navy text-lg font-semibold">
-              Grátis: 2 correções completas por mês.
-            </h2>
-            <p className="text-slate mt-1 text-sm">
-              Quer mais volume, todas as reescritas e histórico? Conheça o{" "}
-              <Link href="/precos" className="text-azul font-semibold underline">
-                Plano Fundador
-              </Link>
-              .
-            </p>
-          </div>
-          <Botao href="/precos" variante="secundario">
-            Ver planos
-          </Botao>
-        </div>
-      </section>
-
-      {/* FAQ */}
-      <section className="container-nc pb-14 md:pb-20" aria-labelledby="faq-titulo">
-        <h2 id="faq-titulo" className="text-navy text-2xl font-semibold sm:text-3xl">
-          Perguntas frequentes
-        </h2>
-        <div className="divide-borda mt-6 max-w-2xl divide-y">
-          {FAQ.map((item) => (
-            <details key={item.p} className="group py-4">
-              <summary className="text-navy flex cursor-pointer list-none items-center justify-between gap-4 font-semibold">
-                {item.p}
-                <IconeChevron
-                  className="text-slate shrink-0 transition-transform group-open:rotate-180"
-                  width={18}
-                  height={18}
-                />
-              </summary>
-              <p className="text-slate mt-2 text-sm leading-relaxed">{item.r}</p>
-            </details>
+        </Revelar>
+        <ol className="mt-8 grid gap-6 sm:grid-cols-3 sm:gap-8">
+          {PASSOS.map((passo, i) => (
+            <Revelar as="li" key={passo.titulo} atraso={i * 0.08}>
+              {/* Número grande, sem ícone-em-círculo (spec §18.5). */}
+              <p className="text-ambar text-5xl leading-none font-extrabold tabular-nums">
+                {i + 1}
+              </p>
+              <h3 className="text-navy mt-3 text-xl font-bold">{passo.titulo}</h3>
+              <p className="text-slate mt-2 leading-relaxed">{passo.texto}</p>
+            </Revelar>
           ))}
+        </ol>
+      </section>
+
+      {/* ---------------------------------------------------------------
+          Planos (teaser) + FAQ
+          --------------------------------------------------------------- */}
+      <section className="container-nc pb-14 md:pb-20" aria-labelledby="planos-titulo">
+        <Revelar>
+          <div className="card card-elevavel border-ambar/40 bg-ambar-claro/40 flex flex-col items-start gap-5 p-6 sm:flex-row sm:items-center sm:justify-between sm:p-8">
+            <div>
+              <h2 id="planos-titulo" className="text-navy text-xl font-bold tracking-tight">
+                Grátis: 2 correções completas por mês.
+              </h2>
+              <p className="text-slate mt-1.5">
+                Quer mais volume, todas as reescritas e histórico? Conheça o{" "}
+                <Link href="/precos" className="text-azul sublinhado font-bold">
+                  Plano Fundador
+                </Link>
+                .
+              </p>
+            </div>
+            <Botao href="/precos" variante="secundario" className="shrink-0">
+              Ver planos
+            </Botao>
+          </div>
+        </Revelar>
+      </section>
+
+      <section
+        className="bg-superficie-2 border-borda/70 border-y"
+        aria-labelledby="faq-titulo"
+      >
+        <div className="container-nc py-14 md:py-20">
+          <Revelar>
+            <h2
+              id="faq-titulo"
+              className="text-navy text-3xl font-extrabold tracking-tight sm:text-4xl"
+            >
+              Perguntas frequentes
+            </h2>
+          </Revelar>
+          <div className="divide-borda mt-8 max-w-3xl divide-y">
+            {FAQ.map((item, i) => (
+              <Revelar key={item.p} atraso={i * 0.04}>
+                <details className="group py-4">
+                  <summary className="text-navy flex min-h-[44px] cursor-pointer list-none items-center justify-between gap-4 text-lg font-bold">
+                    {item.p}
+                    <IconeChevron
+                      className="text-slate group-hover:text-azul shrink-0 transition-transform group-open:rotate-180 motion-reduce:transition-none"
+                      width={20}
+                      height={20}
+                    />
+                  </summary>
+                  <p className="text-slate mt-2 leading-relaxed">{item.r}</p>
+                </details>
+              </Revelar>
+            ))}
+          </div>
         </div>
       </section>
 

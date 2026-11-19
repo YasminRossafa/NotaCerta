@@ -1,8 +1,10 @@
 "use client";
 
+import { motion, useReducedMotion } from "motion/react";
 import { useRouter } from "next/navigation";
 import { useEffect, useId, useState, type FormEvent } from "react";
 import { Carregando } from "@/components/corrigir/Carregando";
+import { ContadorPalavras } from "@/components/corrigir/ContadorPalavras";
 import { SeletorTema } from "@/components/corrigir/SeletorTema";
 import { UploadFoto } from "@/components/corrigir/UploadFoto";
 import { ModalUpgrade, type MotivoUpgrade } from "@/components/freemium/ModalUpgrade";
@@ -47,6 +49,7 @@ const MENSAGENS_ERRO_API: Record<string, string> = {
 export function FormularioCorrigir() {
   const router = useRouter();
   const tabsId = useId();
+  const reduzido = useReducedMotion();
 
   const [modo, setModo] = useState<Modo>("texto");
   const [tema, setTema] = useState("");
@@ -166,8 +169,6 @@ export function FormularioCorrigir() {
 
   if (enviando) return <Carregando comImagem={modo === "foto"} />;
 
-  const caracteres = texto.length;
-
   return (
     <>
       <form onSubmit={enviar} noValidate className="space-y-6">
@@ -223,14 +224,26 @@ export function FormularioCorrigir() {
               aria-controls={`${tabsId}-painel-${aba.id}`}
               onClick={() => setModo(aba.id)}
               className={cn(
-                "flex min-h-[44px] items-center justify-center gap-2 rounded-lg text-sm font-semibold transition-colors",
-                modo === aba.id
-                  ? "text-azul-escuro bg-superficie shadow-sm"
-                  : "text-slate hover:text-navy",
+                "relative flex min-h-[44px] items-center justify-center gap-2 rounded-lg text-sm font-semibold transition-colors",
+                modo === aba.id ? "text-azul-escuro" : "text-slate hover:text-navy",
               )}
             >
-              <aba.Icone width={18} height={18} />
-              {aba.rotulo}
+              {/* Fundo que desliza de uma aba para a outra (spec §18.5). */}
+              {modo === aba.id && (
+                <motion.span
+                  layoutId={`${tabsId}-aba-ativa`}
+                  className="bg-superficie absolute inset-0 rounded-lg shadow-sm"
+                  transition={
+                    reduzido
+                      ? { duration: 0 }
+                      : { type: "spring", stiffness: 480, damping: 36, mass: 0.6 }
+                  }
+                />
+              )}
+              <span className="relative flex items-center gap-2">
+                <aba.Icone width={18} height={18} />
+                {aba.rotulo}
+              </span>
             </button>
           ))}
         </div>
@@ -265,7 +278,7 @@ export function FormularioCorrigir() {
             placeholder={
               "Cole aqui a redação completa, com os 4 parágrafos (introdução, dois desenvolvimentos e conclusão)."
             }
-            contador={`${caracteres.toLocaleString("pt-BR")} caracteres`}
+            contador={<ContadorPalavras texto={texto} />}
             ajuda={
               fundador
                 ? "Separe os parágrafos com uma linha em branco. Como você é Fundador, esta correção entra no seu histórico de evolução, salvo só neste navegador."
@@ -304,9 +317,14 @@ export function FormularioCorrigir() {
               ? "Plano Fundador: correções ilimitadas. Nota estimada, não oficial."
               : `Grátis: ${Math.min(usos ?? 0, LIMITE_GRATIS_PADRAO)} de ${LIMITE_GRATIS_PADRAO} neste mês, neste aparelho. Nota estimada, não oficial.`}
           </p>
-          <Botao type="submit" tamanho="lg" className="sm:min-w-[240px]">
+          <Botao
+            type="submit"
+            variante="destaque"
+            tamanho="lg"
+            className="group sm:min-w-[240px]"
+          >
             Corrigir redação
-            <IconeSeta />
+            <IconeSeta className="transition-transform group-hover:translate-x-1 motion-reduce:transition-none" />
           </Botao>
         </div>
       </form>

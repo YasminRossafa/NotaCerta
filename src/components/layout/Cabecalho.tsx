@@ -65,9 +65,12 @@ export function Cabecalho() {
         <div className="flex items-center gap-2">
           <ControleFundador className="hidden lg:flex" />
           <AlternadorTema />
-          <Botao href="/" tamanho="sm" className="hidden sm:inline-flex">
-            Corrigir grátis
-          </Botao>
+          {/* O wrapper é quem esconde: `hidden` perderia para o `inline-flex` do Botao. */}
+          <span className="hidden sm:contents">
+            <Botao href="/" tamanho="sm">
+              Corrigir grátis
+            </Botao>
+          </span>
           <button
             type="button"
             onClick={() => setAberto((v) => !v)}

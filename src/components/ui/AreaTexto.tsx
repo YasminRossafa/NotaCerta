@@ -7,7 +7,7 @@ type Props = Omit<TextareaHTMLAttributes<HTMLTextAreaElement>, "className"> & {
   rotulo: string;
   ajuda?: ReactNode;
   erro?: string;
-  contador?: string;
+  contador?: ReactNode;
   className?: string;
 };
 
@@ -27,7 +27,7 @@ export const AreaTexto = forwardRef<HTMLTextAreaElement, Props>(function AreaTex
         <label htmlFor={areaId} className="text-navy text-sm font-semibold">
           {rotulo}
         </label>
-        {contador && <span className="text-slate text-xs tabular-nums">{contador}</span>}
+        {contador}
       </div>
       <textarea
         ref={ref}
@@ -35,8 +35,8 @@ export const AreaTexto = forwardRef<HTMLTextAreaElement, Props>(function AreaTex
         aria-invalid={erro ? true : undefined}
         aria-describedby={describedBy || undefined}
         className={cn(
-          "text-navy placeholder:text-slate/70 min-h-[260px] w-full resize-y rounded-xl border bg-superficie px-3.5 py-3 text-base leading-relaxed",
-          "focus:border-azul focus:outline-none",
+          "text-navy placeholder:text-slate/70 bg-superficie min-h-[260px] w-full resize-y rounded-xl border px-3.5 py-3 text-base leading-relaxed",
+          "focus:border-azul focus:ring-azul/20 transition-colors focus:ring-4 focus:outline-none",
           erro ? "border-vermelho" : "border-borda",
         )}
         {...rest}

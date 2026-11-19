@@ -71,6 +71,18 @@
   --nc-eixo: #e2e8f0;
 }
 
+/* Traço opaco, para quando a marca cai sobre fundo escuro (o translúcido sumiria).
+   Aqui a faixa cobre a linha inteira — o texto fica DENTRO do traço, não por cima dele. */
+:root,
+:root[data-theme="dark"] {
+  --nc-marca-img-forte: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 100' preserveAspectRatio='none'%3E%3Cpath d='M1 10 C34 3 72 8 108 5 C142 2 172 7 199 2 L198 95 C166 100 128 94 92 97 C58 100 28 95 2 98 Z' fill='%23f5b70b'/%3E%3C/svg%3E");
+  --nc-secao-escura: #0f172a;
+}
+:root[data-theme="dark"] {
+  /* No escuro a separação vem de um navy MAIS claro que o fundo da página. */
+  --nc-secao-escura: #131f38;
+}
+
 /* --------------------------------------------------------------------------
    Tema escuro (base navy) — mesmo conjunto de tokens, outros valores.
    -------------------------------------------------------------------------- */
@@ -191,7 +203,7 @@ h1 {
 
 /** Seção escura — o contraponto ao claro, nos dois temas (spec §18.5). */
 @utility secao-escura {
-  background: var(--color-navy-fixo);
+  background: var(--nc-secao-escura);
   color: #fff;
   background-image: radial-gradient(
     120% 80% at 15% 0%,
@@ -210,6 +222,17 @@ h1 {
   background-repeat: no-repeat;
   background-size: 100% 100%;
   padding-inline: 0.12em;
+  box-decoration-break: clone;
+  -webkit-box-decoration-break: clone;
+}
+
+/** A mesma marca, opaca — para uso sobre as seções escuras. Exige texto navy. */
+@utility marca-forte {
+  background-image: var(--nc-marca-img-forte);
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  padding-inline: 0.14em;
+  color: var(--color-navy-fixo);
   box-decoration-break: clone;
   -webkit-box-decoration-break: clone;
 }
@@ -239,8 +262,10 @@ h1 {
 
 /* Marcações de trecho na tela de resultado */
 mark.nc-destaque {
-  background-image: var(--nc-marca-img);
-  background-repeat: no-repeat;
+  /* Shorthand de propósito: <mark> vem com amarelo do navegador e só o `background`
+     zera essa cor de forma confiável (um `background-color: transparent` solto é
+     descartado pelo minificador por parecer o valor inicial). */
+  background: var(--nc-marca-img) no-repeat;
   background-size: 100% 100%;
   color: inherit;
   padding: 0 0.15em;

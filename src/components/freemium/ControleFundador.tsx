@@ -40,8 +40,8 @@ export function ControleFundador({ className }: { className?: string }) {
         type="button"
         onClick={() => setAberto(true)}
         className={cn(
-          "text-slate hover:text-navy min-h-[44px] px-1 text-sm font-medium",
-          className,
+          "text-slate hover:text-navy min-h-[44px] items-center justify-center px-2 text-sm font-semibold",
+          className ?? "flex",
         )}
       >
         Entrar
