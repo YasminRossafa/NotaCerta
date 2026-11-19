@@ -34,16 +34,26 @@ function systemPromptCompleto(): string {
   return `${PROMPT_METODO}\n\n${PROMPT_ACERVO_CABECALHO}\n${acervoCondensado()}`;
 }
 
-function userContentEntrada(entrada: Entrada): string {
+/**
+ * Instrução de repertório: fica no turno do usuário (não no system prompt cacheado) porque
+ * varia por plano — Fundador pede mais sugestões (spec §18.4) sem invalidar o cache.
+ */
+function linhaRepertorio(maxRepertorio: number): string {
+  if (maxRepertorio <= 3) return "";
+  return `\n\nEste aluno é do Plano Fundador: selecione 4 a 5 itens do acervo em "repertorioSugestoes" (em vez de 2 a 3), mantendo a mesma curadoria por tema.`;
+}
+
+function userContentEntrada(entrada: Entrada, maxRepertorio: number): string {
   const linhaTema = entrada.tema
     ? `TEMA DA REDAÇÃO: ${entrada.tema}`
     : "TEMA DA REDAÇÃO: não informado — infira o tema a partir do texto e marque temaDetectado=true.";
+  const extra = linhaRepertorio(maxRepertorio);
 
   if (entrada.imagemBase64) {
-    return `${linhaTema}\n\nA redação está na imagem anexada (manuscrita). Transcreva-a fielmente no campo "transcricao" e depois corrija seguindo o método.`;
+    return `${linhaTema}${extra}\n\nA redação está na imagem anexada (manuscrita). Transcreva-a fielmente no campo "transcricao" e depois corrija seguindo o método.`;
   }
 
-  return `${linhaTema}\n\nREDAÇÃO DO ALUNO:\n"""\n${entrada.texto}\n"""`;
+  return `${linhaTema}${extra}\n\nREDAÇÃO DO ALUNO:\n"""\n${entrada.texto}\n"""`;
 }
 
 /** Remove possíveis cercas de código (```json ... ```) antes de JSON.parse. */
@@ -62,7 +72,7 @@ function arredondar40(n: number): number {
 }
 
 /** Ajusta pequenas imperfeições da saída do modelo e aplica as regras duras do spec §12. */
-export function normalizarCorrecao(bruto: CorrecaoModelo): unknown {
+export function normalizarCorrecao(bruto: CorrecaoModelo, maxRepertorio = 3): unknown {
   const competencias = Object.fromEntries(
     (["c1", "c2", "c3", "c4", "c5"] as const).map((c) => [
       c,
@@ -75,7 +85,7 @@ export function normalizarCorrecao(bruto: CorrecaoModelo): unknown {
 
   const soma = (Object.values(competencias) as { nota: number }[]).reduce((a, c) => a + c.nota, 0);
 
-  // Repertório: só ids do acervo curado, sem duplicatas, no máximo 3 (spec §8.6/§12).
+  // Repertório: só ids do acervo curado, sem duplicatas, no máximo `maxRepertorio` (spec §8.6/§12).
   const vistos = new Set<string>();
   const repertorioSugestoes = bruto.repertorioSugestoes
     .filter((s) => {
@@ -84,7 +94,7 @@ export function normalizarCorrecao(bruto: CorrecaoModelo): unknown {
       vistos.add(id);
       return true;
     })
-    .slice(0, 3)
+    .slice(0, maxRepertorio)
     .map((s) => ({ id: s.id.trim(), porqueCombina: s.porqueCombina.trim() }));
 
   return {
@@ -150,13 +160,15 @@ async function chamarProvider(
 /**
  * Corrige a redação: chama o provedor de IA, normaliza, valida com Zod.
  * Se a saída não passar no schema estrito, faz 1 tentativa de reparo; senão lança 502.
+ *
+ * `maxRepertorio`: 3 no grátis, 5 no Plano Fundador (spec §18.4, demo em `/api/fundador`).
  */
-export async function corrigirRedacao(entrada: Entrada): Promise<Correcao> {
+export async function corrigirRedacao(entrada: Entrada, maxRepertorio = 3): Promise<Correcao> {
   const systemPrompt = systemPromptCompleto();
-  const userContentOriginal = userContentEntrada(entrada);
+  const userContentOriginal = userContentEntrada(entrada, maxRepertorio);
 
   let bruto = await chamarProvider(systemPrompt, userContentOriginal, entrada);
-  let validado = bruto ? CorrecaoSchema.safeParse(normalizarCorrecao(bruto)) : null;
+  let validado = bruto ? CorrecaoSchema.safeParse(normalizarCorrecao(bruto, maxRepertorio)) : null;
 
   if (!validado?.success) {
     // Reparo (1 vez): devolve o JSON anterior + problemas e pede a versão corrigida.
@@ -167,7 +179,7 @@ export async function corrigirRedacao(entrada: Entrada): Promise<Correcao> {
     const userContentReparo = `${userContentOriginal}\n\n---\nSUA TENTATIVA ANTERIOR NÃO FOI ACEITA.\nResposta anterior: ${anterior}\nProblemas: ${problemas}\nReenvie a correção completa, válida no schema, mantendo o conteúdo.`;
 
     bruto = await chamarProvider(systemPrompt, userContentReparo, entrada);
-    validado = bruto ? CorrecaoSchema.safeParse(normalizarCorrecao(bruto)) : null;
+    validado = bruto ? CorrecaoSchema.safeParse(normalizarCorrecao(bruto, maxRepertorio)) : null;
   }
 
   if (!validado?.success) {

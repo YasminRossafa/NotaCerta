@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next";
 import { Inter } from "next/font/google";
 import { Cabecalho } from "@/components/layout/Cabecalho";
 import { Rodape } from "@/components/layout/Rodape";
+import { FundadorProvider } from "@/lib/fundador-context";
 import { SITE } from "@/lib/site";
 import "./globals.css";
 
@@ -54,11 +55,13 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         >
           Pular para o conteúdo
         </a>
-        <Cabecalho />
-        <main id="conteudo" className="flex-1">
-          {children}
-        </main>
-        <Rodape />
+        <FundadorProvider>
+          <Cabecalho />
+          <main id="conteudo" className="flex-1">
+            {children}
+          </main>
+          <Rodape />
+        </FundadorProvider>
       </body>
     </html>
   );
