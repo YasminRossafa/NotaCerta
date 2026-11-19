@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
+import { ControleFundador } from "@/components/freemium/ControleFundador";
 import { Logo } from "@/components/layout/Logo";
 import { Botao } from "@/components/ui/Botao";
 import { IconeMenu, IconeX } from "@/components/ui/Icones";
@@ -45,6 +46,7 @@ export function Cabecalho() {
         </nav>
 
         <div className="flex items-center gap-2">
+          <ControleFundador className="hidden md:flex" />
           <Botao href="/" tamanho="sm" className="hidden sm:inline-flex">
             Corrigir grátis
           </Botao>
@@ -86,6 +88,9 @@ export function Cabecalho() {
           <Botao href="/" cheio className="mt-2">
             Corrigir redação grátis
           </Botao>
+          <div className="border-borda/60 mt-2 flex items-center justify-center border-t pt-3">
+            <ControleFundador />
+          </div>
         </nav>
       </div>
     </header>

@@ -15,7 +15,7 @@ import { IconeChevron, IconeLivro, IconeSeta } from "@/components/ui/Icones";
 import { cn } from "@/lib/cn";
 import { CODIGOS_COMPETENCIA } from "@/lib/competencias";
 import { EXEMPLO_CORRECAO } from "@/lib/exemplo-correcao";
-import { planoAtivo } from "@/lib/freemium";
+import { useFundador } from "@/lib/fundador-context";
 import { calcularGating, indiceParagrafoMaisCritico } from "@/lib/gating";
 import { repertorioPorId } from "@/lib/repertorios";
 import { lerResultado, type ResultadoSalvo } from "@/lib/resultado-store";
@@ -36,7 +36,8 @@ export function ResultadoView() {
     const r = lerResultado();
     return r ? JSON.stringify(r) : null;
   }, null);
-  const plano = useSnapshotCliente(planoAtivo, "gratis");
+  const { fundador } = useFundador();
+  const plano = fundador ? "fundador" : "gratis";
 
   if (!montado) return <EsqueletoResultado />;
   if (!raw) return <ResultadoVazio />;

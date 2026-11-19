@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { AvisoFundadorRodape } from "@/components/freemium/AvisoFundadorRodape";
 import { Logo } from "@/components/layout/Logo";
 import { AvisoModoDemonstracao, AvisoNotaEstimada } from "@/components/ui/Aviso";
 import { nomeProvider } from "@/lib/ai/provider";
@@ -18,6 +19,7 @@ export function Rodape() {
           <p className="mt-3 text-sm text-white/70">{SITE.slogan}</p>
           <AvisoNotaEstimada className="mt-4" sobreFundoEscuro />
           {modoDemonstracao && <AvisoModoDemonstracao className="mt-2" sobreFundoEscuro />}
+          <AvisoFundadorRodape />
         </div>
 
         <div>

@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { BotaoFundador } from "@/components/freemium/BotaoFundador";
+import { CartaoFundadorPrecos } from "@/components/freemium/CartaoFundadorPrecos";
 import { Botao } from "@/components/ui/Botao";
 import { AvisoNotaEstimada } from "@/components/ui/Aviso";
 import { IconeCheck, IconeX } from "@/components/ui/Icones";
@@ -26,7 +26,7 @@ const LINHAS: { recurso: string; gratis: boolean | string; fundador: boolean | s
   {
     recurso: "Repertório curado para o tema",
     gratis: "1 sugestão",
-    fundador: "Completo (2–3 por tema)",
+    fundador: "Completo (4–5 por tema)",
   },
   { recurso: "Histórico e progresso", gratis: false, fundador: true },
   { recurso: "Exportar em PDF", gratis: false, fundador: true },
@@ -132,7 +132,7 @@ export default function PaginaPrecos() {
             ))}
           </ul>
           <div className="mt-7">
-            <BotaoFundador>Entrar na lista do Fundador</BotaoFundador>
+            <CartaoFundadorPrecos />
           </div>
         </section>
       </div>

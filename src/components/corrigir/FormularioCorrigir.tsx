@@ -15,12 +15,12 @@ import {
   lerRascunho,
   LIMITE_GRATIS_PADRAO,
   limparRascunho,
-  planoAtivo,
   podeCorrigirGratis,
   registrarUso,
   salvarRascunho,
   usosNoMes,
 } from "@/lib/freemium";
+import { useFundador } from "@/lib/fundador-context";
 import type { ImagemPreparada } from "@/lib/imagem";
 import { salvarResultado } from "@/lib/resultado-store";
 import { CorrecaoSchema, ErroApiSchema, TEXTO_MAXIMO, TEXTO_MINIMO } from "@/lib/schema";
@@ -63,7 +63,7 @@ export function FormularioCorrigir() {
 
   // Contador do plano grátis (hidratação segura: no servidor é null).
   const usos = useSnapshotCliente(() => usosNoMes(), null);
-  const plano = useSnapshotCliente(() => planoAtivo(), null);
+  const { fundador } = useFundador();
 
   // Rascunho salvo (hidratação segura: no servidor é null).
   const rascunhoRaw = useSnapshotCliente(() => {
@@ -103,7 +103,7 @@ export function FormularioCorrigir() {
     setErroApi(null);
     if (!validar()) return;
 
-    if (!podeCorrigirGratis()) {
+    if (!fundador && !podeCorrigirGratis()) {
       setModal({ aberto: true, motivo: "limite" });
       return;
     }
@@ -147,7 +147,7 @@ export function FormularioCorrigir() {
         return;
       }
 
-      registrarUso();
+      if (!fundador) registrarUso();
       limparRascunho();
       salvarResultado({ correcao: parsed.data, origem: modo === "foto" ? "imagem" : "texto" });
       router.push("/resultado");
@@ -290,7 +290,7 @@ export function FormularioCorrigir() {
 
         <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
           <p className="text-slate text-xs">
-            {plano === "fundador"
+            {fundador
               ? "Plano Fundador: correções ilimitadas. Nota estimada, não oficial."
               : `Grátis: ${Math.min(usos ?? 0, LIMITE_GRATIS_PADRAO)} de ${LIMITE_GRATIS_PADRAO} neste mês, neste aparelho. Nota estimada, não oficial.`}
           </p>
