@@ -134,3 +134,15 @@ export const IconeImpressora = (p: P) => (
     <path d="M6 16v4h12v-4" />
   </Svg>
 );
+export const IconeLixeira = (p: P) => (
+  <Svg {...p}>
+    <path d="M5 7h14M9 7V5a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v2m-9 0 1 13a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1l1-13" />
+    <path d="M10 11v6M14 11v6" />
+  </Svg>
+);
+export const IconeTendencia = (p: P) => (
+  <Svg {...p}>
+    <path d="M4 16l5.5-5.5 4 4L20 7" />
+    <path d="M14 7h6v6" />
+  </Svg>
+);

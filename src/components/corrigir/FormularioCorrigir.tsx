@@ -21,6 +21,7 @@ import {
   usosNoMes,
 } from "@/lib/freemium";
 import { useFundador } from "@/lib/fundador-context";
+import { salvarCorrecaoNoHistorico } from "@/lib/historico";
 import type { ImagemPreparada } from "@/lib/imagem";
 import { salvarResultado } from "@/lib/resultado-store";
 import { CorrecaoSchema, ErroApiSchema, TEXTO_MAXIMO, TEXTO_MINIMO } from "@/lib/schema";
@@ -150,6 +151,11 @@ export function FormularioCorrigir() {
       if (!fundador) registrarUso();
       limparRascunho();
       salvarResultado({ correcao: parsed.data, origem: modo === "foto" ? "imagem" : "texto" });
+      if (fundador) {
+        // Histórico (spec "Minha evolução"): só para o Plano Fundador, só neste navegador.
+        const textoOriginal = modo === "foto" ? (parsed.data.transcricao ?? "") : texto.trim();
+        salvarCorrecaoNoHistorico({ resultado: parsed.data, textoOriginal });
+      }
       router.push("/resultado");
     } catch {
       setErroApi("Sem conexão com o servidor. Verifique sua internet e tente de novo.");
@@ -260,7 +266,11 @@ export function FormularioCorrigir() {
               "Cole aqui a redação completa, com os 4 parágrafos (introdução, dois desenvolvimentos e conclusão)."
             }
             contador={`${caracteres.toLocaleString("pt-BR")} caracteres`}
-            ajuda="Separe os parágrafos com uma linha em branco. Não guardamos o texto depois da correção."
+            ajuda={
+              fundador
+                ? "Separe os parágrafos com uma linha em branco. Como você é Fundador, esta correção entra no seu histórico de evolução, salvo só neste navegador."
+                : "Separe os parágrafos com uma linha em branco. Não guardamos o texto depois da correção."
+            }
             erro={erros.texto}
             spellCheck={false}
           />

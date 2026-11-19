@@ -11,5 +11,6 @@ export const NAV_LINKS = [
   { href: "/", rotulo: "Corrigir" },
   { href: "/estrutura", rotulo: "Estrutura" },
   { href: "/repertorios", rotulo: "Repertórios" },
+  { href: "/evolucao", rotulo: "Minha evolução" },
   { href: "/precos", rotulo: "Planos" },
 ] as const;

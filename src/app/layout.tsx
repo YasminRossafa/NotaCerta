@@ -47,7 +47,7 @@ export const viewport: Viewport = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="pt-BR" className={`${inter.variable} h-full`}>
+    <html lang="pt-BR" className={`${inter.variable} h-full`} data-scroll-behavior="smooth">
       <body className="flex min-h-full flex-col">
         <a
           href="#conteudo"
