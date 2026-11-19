@@ -29,7 +29,7 @@ export function ApontamentosAgrupados({
 }) {
   if (apontamentos.length === 0) {
     return (
-      <p className="bg-verde-claro flex items-center gap-2 rounded-xl px-4 py-3 text-sm text-green-900">
+      <p className="bg-verde-claro flex items-center gap-2 rounded-xl px-4 py-3 text-sm text-verde-texto">
         <IconeCheck width={18} height={18} />
         Dentro do modelo. Nada a apontar aqui.
       </p>
@@ -94,12 +94,12 @@ export function ApontamentosAgrupados({
                     "rounded-xl border p-4 transition-colors",
                     ativo === a.indiceOriginal
                       ? "border-ambar bg-ambar-claro/40"
-                      : "border-borda/70 bg-white",
+                      : "border-borda/70 bg-superficie",
                   )}
                 >
                   <div className="flex items-start justify-between gap-3">
                     <p className="text-navy text-sm">
-                      <span className="bg-ambar-claro mr-1.5 inline-flex h-5 w-5 items-center justify-center rounded-full text-[11px] font-bold text-amber-800">
+                      <span className="bg-ambar-claro mr-1.5 inline-flex h-5 w-5 items-center justify-center rounded-full text-[11px] font-bold text-ambar-texto">
                         {a.indiceOriginal + 1}
                       </span>
                       <q className="font-medium">{a.trecho}</q>

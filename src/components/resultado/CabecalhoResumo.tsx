@@ -19,7 +19,7 @@ export function CabecalhoResumo({
   aoExportar: () => void;
 }) {
   return (
-    <div className="border-borda/60 bg-white/95 py-4 backdrop-blur lg:sticky lg:top-16 lg:z-30 lg:border-b print:static print:border-0 print:bg-white print:py-0">
+    <div className="border-borda/60 bg-superficie/95 py-4 backdrop-blur lg:sticky lg:top-16 lg:z-30 lg:border-b print:static print:border-0 print:bg-superficie print:py-0">
       <div className="container-nc flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
         <div className="flex min-w-0 items-center gap-4">
           <AnelDeNota nota={correcao.notaTotal} tamanho="sm" />
@@ -27,7 +27,7 @@ export function CabecalhoResumo({
             <p className="text-slate text-xs font-semibold tracking-wide uppercase">Tema</p>
             <p className="text-navy truncate text-base font-semibold sm:text-lg">{correcao.tema}</p>
             {!correcao.completa && (
-              <p className="text-xs font-semibold text-amber-700">
+              <p className="text-xs font-semibold text-ambar-texto">
                 Redação incompleta — nota não estimada
               </p>
             )}

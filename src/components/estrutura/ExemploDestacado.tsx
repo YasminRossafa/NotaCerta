@@ -26,7 +26,7 @@ export function ExemploDestacado({ exemplos }: { exemplos: Exemplo[] }) {
             id={seletorId}
             value={idx}
             onChange={(e) => setIdx(Number(e.target.value))}
-            className="border-borda text-navy focus:border-azul min-h-[44px] w-full rounded-xl border bg-white px-3 text-base focus:outline-none sm:max-w-xl"
+            className="border-borda text-navy focus:border-azul min-h-[44px] w-full rounded-xl border bg-superficie px-3 text-base focus:outline-none sm:max-w-xl"
           >
             {exemplos.map((ex, i) => (
               <option key={ex.id} value={i}>
@@ -38,7 +38,7 @@ export function ExemploDestacado({ exemplos }: { exemplos: Exemplo[] }) {
       )}
 
       <div className="card overflow-hidden">
-        <div className="bg-navy px-5 py-4 text-white sm:px-7">
+        <div className="bg-navy-fixo px-5 py-4 text-white sm:px-7">
           <p className="text-xs font-semibold tracking-wide text-white/70 uppercase">Tema</p>
           <p className="text-xl leading-snug font-semibold sm:text-2xl">
             {exemplo.tema}
@@ -46,7 +46,7 @@ export function ExemploDestacado({ exemplos }: { exemplos: Exemplo[] }) {
         </div>
 
         {exemplo.rascunho && (
-          <p className="bg-amber-50 px-5 py-2.5 text-xs text-amber-900 sm:px-7">
+          <p className="bg-ambar-claro px-5 py-2.5 text-xs text-ambar-texto sm:px-7">
             Exemplo escrito pelo NotaCerta seguindo o método — ainda não revisado pela professora.
           </p>
         )}

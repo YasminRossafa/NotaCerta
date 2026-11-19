@@ -116,7 +116,7 @@ function ListaElementos({ itens, inicio = 1 }: { itens: Elemento[]; inicio?: num
         const cor = corDoRotulo(el.rotulo);
         return (
           <li key={el.rotulo} className="flex gap-3">
-            <span className="bg-navy mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-full text-xs font-bold text-white">
+            <span className="bg-navy-fixo mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-full text-xs font-bold text-white">
               {inicio + i}
             </span>
             <div>

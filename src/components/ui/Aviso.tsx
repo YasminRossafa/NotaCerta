@@ -5,9 +5,9 @@ type Tom = "info" | "atencao" | "erro" | "sucesso";
 
 const tons: Record<Tom, string> = {
   info: "border-borda bg-azul-claro text-azul-escuro",
-  atencao: "border-ambar/50 bg-ambar-claro text-amber-900",
-  erro: "border-vermelho/40 bg-vermelho-claro text-red-900",
-  sucesso: "border-verde/40 bg-verde-claro text-green-900",
+  atencao: "border-ambar/50 bg-ambar-claro text-ambar-texto",
+  erro: "border-vermelho/40 bg-vermelho-claro text-vermelho-texto",
+  sucesso: "border-verde/40 bg-verde-claro text-verde-texto",
 };
 
 export function Aviso({

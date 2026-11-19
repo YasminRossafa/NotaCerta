@@ -32,7 +32,7 @@ export function EntrarFundadorForm({
 
   if (estado === "sucesso") {
     return (
-      <div className="border-verde/40 bg-verde-claro flex items-start gap-3 rounded-xl border px-4 py-3 text-sm text-green-900">
+      <div className="border-verde/40 bg-verde-claro flex items-start gap-3 rounded-xl border px-4 py-3 text-sm text-verde-texto">
         <span className="bg-verde mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full text-white">
           <IconeCheck width={14} height={14} />
         </span>

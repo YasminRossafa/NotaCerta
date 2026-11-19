@@ -61,7 +61,7 @@ export function Carregando({ comImagem }: { comImagem?: boolean }) {
                     ? "border-verde bg-verde text-white"
                     : atual
                       ? "nc-pulse border-azul bg-azul-claro"
-                      : "border-borda bg-white",
+                      : "border-borda bg-superficie",
                 )}
                 aria-hidden="true"
               >

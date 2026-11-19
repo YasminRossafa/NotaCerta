@@ -95,7 +95,7 @@ export function UploadFoto({
             tratar(e.dataTransfer.files?.[0]);
           }}
         >
-          <span className="text-azul flex h-14 w-14 items-center justify-center rounded-full bg-white shadow-sm">
+          <span className="text-azul flex h-14 w-14 items-center justify-center rounded-full bg-superficie shadow-sm">
             <IconeCamera width={28} height={28} />
           </span>
           <div>

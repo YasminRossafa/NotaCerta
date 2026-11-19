@@ -100,7 +100,7 @@ export function TextoDestacado({
             }}
           >
             {s.texto}
-            <sup className="ml-0.5 text-[10px] font-bold text-amber-700">{indice + 1}</sup>
+            <sup className="ml-0.5 text-[10px] font-bold text-ambar-texto">{indice + 1}</sup>
           </mark>
         );
       })}

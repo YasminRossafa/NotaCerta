@@ -24,8 +24,8 @@ export function Bloqueado({
       <div className="nc-borrado" aria-hidden="true">
         {children}
       </div>
-      <div className="absolute inset-0 flex flex-col items-center justify-center gap-3 bg-white/55 p-4 text-center">
-        <span className="text-azul-escuro flex h-10 w-10 items-center justify-center rounded-full bg-white shadow">
+      <div className="absolute inset-0 flex flex-col items-center justify-center gap-3 bg-superficie/70 p-4 text-center">
+        <span className="text-azul-escuro flex h-10 w-10 items-center justify-center rounded-full bg-superficie shadow">
           <IconeCadeado />
         </span>
         <p className="text-navy max-w-xs text-sm font-medium">{rotulo}</p>

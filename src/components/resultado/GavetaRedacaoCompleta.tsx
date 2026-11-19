@@ -45,7 +45,7 @@ export function GavetaRedacaoCompleta({
       onClick={(e) => {
         if (e.target === ref.current) aoFechar();
       }}
-      className="border-borda text-navy backdrop:bg-navy/50 m-auto w-[calc(100%-2rem)] max-w-3xl rounded-2xl border bg-white p-0 shadow-xl backdrop:backdrop-blur-sm"
+      className="border-borda text-navy backdrop:bg-navy-fixo/70 m-auto w-[calc(100%-2rem)] max-w-3xl rounded-2xl border bg-superficie p-0 shadow-xl backdrop:backdrop-blur-sm"
     >
       <div className="flex max-h-[85vh] flex-col">
         <header className="border-borda/60 flex items-start justify-between gap-4 border-b p-5">
@@ -77,7 +77,7 @@ export function GavetaRedacaoCompleta({
                 aria-pressed={modo === v}
                 className={cn(
                   "min-h-[36px] rounded-md px-3",
-                  modo === v ? "text-azul-escuro bg-white shadow-sm" : "text-slate",
+                  modo === v ? "text-azul-escuro bg-superficie shadow-sm" : "text-slate",
                 )}
               >
                 {v === "original" ? "Original com apontamentos" : "Reescrita completa"}

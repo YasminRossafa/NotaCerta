@@ -35,7 +35,7 @@ export const AreaTexto = forwardRef<HTMLTextAreaElement, Props>(function AreaTex
         aria-invalid={erro ? true : undefined}
         aria-describedby={describedBy || undefined}
         className={cn(
-          "text-navy placeholder:text-slate/70 min-h-[260px] w-full resize-y rounded-xl border bg-white px-3.5 py-3 text-base leading-relaxed",
+          "text-navy placeholder:text-slate/70 min-h-[260px] w-full resize-y rounded-xl border bg-superficie px-3.5 py-3 text-base leading-relaxed",
           "focus:border-azul focus:outline-none",
           erro ? "border-vermelho" : "border-borda",
         )}

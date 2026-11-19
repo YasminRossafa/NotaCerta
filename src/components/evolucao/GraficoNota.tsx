@@ -153,7 +153,7 @@ export function GraficoNota({ entradas, meta }: { entradas: EntradaHistorico[]; 
         {ponto && (
           <div
             role="status"
-            className="border-borda text-navy pointer-events-none absolute z-10 w-max max-w-[220px] -translate-x-1/2 -translate-y-full rounded-lg border bg-white px-3 py-2 text-xs shadow-lg"
+            className="border-borda text-navy pointer-events-none absolute z-10 w-max max-w-[220px] -translate-x-1/2 -translate-y-full rounded-lg border bg-superficie px-3 py-2 text-xs shadow-lg"
             style={{
               left: `${(x(ativo ?? 0, pontos.length) / LARGURA) * 100}%`,
               top: `${(y(ponto.notaTotal) / ALTURA) * 100}%`,
@@ -162,7 +162,7 @@ export function GraficoNota({ entradas, meta }: { entradas: EntradaHistorico[]; 
             <p className="font-semibold">{ponto.notaTotal} pontos</p>
             <p className="text-slate">{formatarDataCompleta(ponto.criadoEm)}</p>
             <p className="text-slate truncate">{ponto.tema}</p>
-            {ponto.demo && <p className="text-amber-700">Exemplo (dado de demonstração)</p>}
+            {ponto.demo && <p className="text-ambar-texto">Exemplo (dado de demonstração)</p>}
           </div>
         )}
       </div>

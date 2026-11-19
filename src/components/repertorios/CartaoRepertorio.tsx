@@ -11,8 +11,8 @@ import {
 
 const CORES_USO: Record<UsoRepertorio, string> = {
   introducao: "bg-azul-claro text-azul-escuro",
-  d1: "bg-verde-claro text-green-800",
-  d2: "bg-purple-50 text-purple-800",
+  d1: "bg-verde-claro text-verde-texto",
+  d2: "bg-roxo-claro text-roxo-texto",
 };
 
 export function TagUso({ uso }: { uso: UsoRepertorio }) {
@@ -63,7 +63,7 @@ export function CartaoRepertorio({
       </div>
 
       {porqueCombina && (
-        <p className="border-ambar/40 bg-ambar-claro mt-3 rounded-lg border px-3 py-2 text-sm text-amber-900">
+        <p className="border-ambar/40 bg-ambar-claro mt-3 rounded-lg border px-3 py-2 text-sm text-ambar-texto">
           <strong className="font-semibold">Por que combina com o tema:</strong> {porqueCombina}
         </p>
       )}
@@ -73,7 +73,7 @@ export function CartaoRepertorio({
         <strong className="text-navy font-semibold">Como usar:</strong> {item.comoUsar}
       </p>
 
-      {item.fonte && <p className="mt-2 text-xs text-amber-700">{item.fonte}</p>}
+      {item.fonte && <p className="mt-2 text-xs text-ambar-texto">{item.fonte}</p>}
 
       <ul className="mt-3 flex flex-wrap gap-1.5" aria-label="Temas">
         {item.temas.map((t) => (

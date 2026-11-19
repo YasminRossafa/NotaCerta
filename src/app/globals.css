@@ -1,63 +1,179 @@
 @import "tailwindcss";
 
 /* ---------------------------------------------------------------------------
-   NotaCerta — design tokens (spec §10)
+   NotaCerta — design tokens (spec §10 e §18.5)
+
+   Regra: nenhum componente usa cor literal. Tudo passa por um token
+   `--color-*`, e é só o VALOR do token que muda entre claro e escuro —
+   assim `text-navy`, `bg-superficie`, `border-borda` etc. funcionam nos dois
+   temas sem `dark:` espalhado pelo código.
    --------------------------------------------------------------------------- */
 @theme {
+  /* marca */
   --color-azul: #2563eb;
   --color-azul-escuro: #1e3a8a;
-  --color-navy: #0f172a;
   --color-azul-claro: #eff6ff;
-  --color-borda: #bfdbfe;
-  --color-cinza-fundo: #f1f5f9;
-  --color-slate: #64748b;
-
-  /* semânticos de nota */
-  --color-verde: #16a34a;
-  --color-verde-claro: #dcfce7;
   --color-ambar: #f59e0b;
   --color-ambar-claro: #fef3c7;
+
+  /* texto e superfícies (valores do tema claro; o escuro troca abaixo) */
+  --color-navy: #0f172a;
+  --color-slate: #51607a;
+  --color-superficie: #ffffff;
+  --color-superficie-2: #f8fafc;
+  --color-fundo: #f1f5f9;
+  --color-borda: #cdd9ec;
+  --color-cinza-fundo: #e9eff7;
+
+  /* navy que NÃO inverte — seções escuras existem nos dois temas */
+  --color-navy-fixo: #0f172a;
+  --color-navy-fixo-2: #16233c;
+  --color-rodape-fundo: #091526;
+
+  /* semânticos de nota (spec §10) */
+  --color-verde: #16a34a;
+  --color-verde-claro: #dcfce7;
+  --color-verde-texto: #15803d;
+  --color-ambar-texto: #92400e;
   --color-vermelho: #dc2626;
   --color-vermelho-claro: #fee2e2;
+  --color-vermelho-texto: #b91c1c;
+  --color-roxo-claro: #f3e8ff;
+  --color-roxo-texto: #6b21a8;
 
-  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
-
-  --color-rodape-fundo: #012235;
+  --font-sans: var(--font-jakarta), ui-sans-serif, system-ui, sans-serif;
 
   --radius-card: 1rem;
-  --shadow-card: 0 1px 2px rgb(15 23 42 / 0.04), 0 8px 24px -12px rgb(15 23 42 / 0.12);
-  --shadow-card-hover: 0 2px 4px rgb(15 23 42 / 0.05), 0 16px 32px -12px rgb(37 99 235 / 0.18);
+  --shadow-card: 0 1px 2px rgb(15 23 42 / 0.04), 0 8px 24px -14px rgb(15 23 42 / 0.14);
+  --shadow-card-hover: 0 2px 6px rgb(15 23 42 / 0.06), 0 22px 40px -16px rgb(37 99 235 / 0.24);
+  --shadow-alto: 0 24px 60px -20px rgb(15 23 42 / 0.3);
+
+  /* curvas de movimento compartilhadas (spec §18.5: sutil e rápido) */
+  --ease-saida: cubic-bezier(0.22, 1, 0.36, 1);
+  --duracao-rapida: 180ms;
+  --duracao-media: 320ms;
 }
 
+/* `dark:` passa a depender do atributo, não do sistema — o alternador resolve
+   "sistema" para um valor explícito antes de pintar. */
+@custom-variant dark (&:where([data-theme="dark"], [data-theme="dark"] *));
+
+/* --------------------------------------------------------------------------
+   Tema claro (explícito) — o default já está no @theme acima.
+   -------------------------------------------------------------------------- */
 :root {
   color-scheme: light;
+
+  /* traço de caneta: a assinatura da marca */
+  --nc-marca-img: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 100' preserveAspectRatio='none'%3E%3Cpath d='M1 52 C34 44 72 50 108 46 C142 42 172 48 199 42 L198 88 C166 95 128 88 92 91 C58 94 28 89 2 92 Z' fill='%23f59e0b' fill-opacity='.42'/%3E%3C/svg%3E");
+  --nc-sublinhado-img: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 12' preserveAspectRatio='none'%3E%3Cpath d='M2 8 C38 3 74 10 110 6 C146 2 174 9 198 4' fill='none' stroke='%23f59e0b' stroke-width='5' stroke-linecap='round'/%3E%3C/svg%3E");
+  --nc-grade: rgb(15 23 42 / 0.045);
+  --nc-eixo: #e2e8f0;
+}
+
+/* --------------------------------------------------------------------------
+   Tema escuro (base navy) — mesmo conjunto de tokens, outros valores.
+   -------------------------------------------------------------------------- */
+:root[data-theme="dark"] {
+  color-scheme: dark;
+
+  --color-azul: #74a6ff;
+  --color-azul-escuro: #c3d9ff;
+  --color-azul-claro: #16284a;
+  --color-ambar: #fbbf24;
+  --color-ambar-claro: #3b2a09;
+
+  --color-navy: #e8eef8;
+  --color-slate: #9aacc6;
+  --color-superficie: #121d33;
+  --color-superficie-2: #16233c;
+  --color-fundo: #0a1120;
+  --color-borda: #27354f;
+  --color-cinza-fundo: #1b2639;
+
+  --color-navy-fixo: #060d19;
+  --color-navy-fixo-2: #101b31;
+  --color-rodape-fundo: #060d19;
+
+  --color-verde: #34d399;
+  --color-verde-claro: #0d3327;
+  --color-verde-texto: #6ee7b7;
+  --color-ambar-texto: #fcd34d;
+  --color-vermelho: #f87171;
+  --color-vermelho-claro: #3d1518;
+  --color-vermelho-texto: #fca5a5;
+  --color-roxo-claro: #2d1b45;
+  --color-roxo-texto: #d8b4fe;
+
+  --shadow-card: 0 1px 2px rgb(0 0 0 / 0.3), 0 8px 24px -14px rgb(0 0 0 / 0.6);
+  --shadow-card-hover: 0 2px 6px rgb(0 0 0 / 0.35), 0 22px 40px -16px rgb(0 0 0 / 0.7);
+  --shadow-alto: 0 24px 60px -20px rgb(0 0 0 / 0.75);
+
+  --nc-marca-img: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 100' preserveAspectRatio='none'%3E%3Cpath d='M1 52 C34 44 72 50 108 46 C142 42 172 48 199 42 L198 88 C166 95 128 88 92 91 C58 94 28 89 2 92 Z' fill='%23fbbf24' fill-opacity='.34'/%3E%3C/svg%3E");
+  --nc-sublinhado-img: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 12' preserveAspectRatio='none'%3E%3Cpath d='M2 8 C38 3 74 10 110 6 C146 2 174 9 198 4' fill='none' stroke='%23fbbf24' stroke-width='5' stroke-linecap='round'/%3E%3C/svg%3E");
+  --nc-grade: rgb(255 255 255 / 0.06);
+  --nc-eixo: #27354f;
 }
 
 html {
   scroll-behavior: smooth;
+  background: var(--color-fundo);
 }
 
 body {
-  background: #ffffff;
+  background: var(--color-fundo);
   color: var(--color-navy);
   font-family: var(--font-sans);
   font-size: 16px;
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+/* Hierarquia: títulos grandes e apertados (spec §18.5, sem eyebrows). */
+h1,
+h2,
+h3 {
+  letter-spacing: -0.022em;
+  text-wrap: balance;
+}
+h1 {
+  letter-spacing: -0.032em;
+}
+
+::selection {
+  background: color-mix(in srgb, var(--color-ambar) 36%, transparent);
+  color: var(--color-navy);
 }
 
 /* Foco visível e consistente (a11y) */
 :where(a, button, input, textarea, select, summary, [tabindex]):focus-visible {
-  outline: 3px solid color-mix(in srgb, var(--color-azul) 55%, transparent);
+  outline: 3px solid color-mix(in srgb, var(--color-azul) 60%, transparent);
   outline-offset: 2px;
   border-radius: 0.5rem;
 }
 
+/* ---------------------------------------------------------------------------
+   Utilitários de superfície
+   --------------------------------------------------------------------------- */
 @utility card {
   border-radius: var(--radius-card);
-  background: #fff;
-  border: 1px solid color-mix(in srgb, var(--color-borda) 70%, transparent);
+  background: var(--color-superficie);
+  border: 1px solid color-mix(in srgb, var(--color-borda) 80%, transparent);
   box-shadow: var(--shadow-card);
+}
+
+/** Cartão que reage ao mouse: sobe um fio e ganha sombra azulada. */
+@utility card-elevavel {
+  transition:
+    transform var(--duracao-media) var(--ease-saida),
+    box-shadow var(--duracao-media) var(--ease-saida),
+    border-color var(--duracao-media) var(--ease-saida);
+  &:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-card-hover);
+    border-color: color-mix(in srgb, var(--color-azul) 45%, transparent);
+  }
 }
 
 @utility container-nc {
@@ -73,17 +189,66 @@ body {
   }
 }
 
+/** Seção escura — o contraponto ao claro, nos dois temas (spec §18.5). */
+@utility secao-escura {
+  background: var(--color-navy-fixo);
+  color: #fff;
+  background-image: radial-gradient(
+    120% 80% at 15% 0%,
+    color-mix(in srgb, var(--color-azul) 16%, transparent) 0%,
+    transparent 62%
+  );
+}
+
+/* ---------------------------------------------------------------------------
+   A caneta da professora: marca-texto e sublinhado feitos à mão
+   --------------------------------------------------------------------------- */
+
+/** Marca-texto âmbar por cima de uma palavra ou trecho. */
+@utility marca {
+  background-image: var(--nc-marca-img);
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  padding-inline: 0.12em;
+  box-decoration-break: clone;
+  -webkit-box-decoration-break: clone;
+}
+
+/** Sublinhado torto de caneta, embaixo da palavra. */
+@utility sublinhado {
+  background-image: var(--nc-sublinhado-img);
+  background-repeat: no-repeat;
+  background-position: 0 100%;
+  background-size: 100% 0.3em;
+  padding-bottom: 0.14em;
+  box-decoration-break: clone;
+  -webkit-box-decoration-break: clone;
+}
+
+/** Marca-texto que "passa a caneta" quando entra na tela. */
+@utility marca-anima {
+  background-image: var(--nc-marca-img);
+  background-repeat: no-repeat;
+  background-size: 0% 100%;
+  padding-inline: 0.12em;
+  transition: background-size 620ms var(--ease-saida);
+  &[data-visivel="true"] {
+    background-size: 100% 100%;
+  }
+}
+
 /* Marcações de trecho na tela de resultado */
 mark.nc-destaque {
-  background: linear-gradient(transparent 40%, var(--color-ambar-claro) 40%);
+  background-image: var(--nc-marca-img);
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
   color: inherit;
-  padding: 0 0.1em;
-  border-bottom: 2px solid var(--color-ambar);
-  border-radius: 2px;
+  padding: 0 0.15em;
   cursor: help;
+  border-radius: 2px;
+  transition: box-shadow var(--duracao-rapida) ease;
 }
 mark.nc-destaque[data-ativo="true"] {
-  background: var(--color-ambar-claro);
   box-shadow: 0 0 0 2px var(--color-ambar);
 }
 
@@ -94,7 +259,11 @@ mark.nc-destaque[data-ativo="true"] {
   pointer-events: none;
 }
 
-/* Flash de "aqui está" ao clicar num trecho destacado e pular até o apontamento (spec §11) */
+/* ---------------------------------------------------------------------------
+   Movimento (spec §18.5: sutil e rápido)
+   --------------------------------------------------------------------------- */
+
+/** Flash de "aqui está" ao pular até um apontamento (spec §11). */
 @keyframes nc-flash {
   0%,
   100% {
@@ -123,15 +292,54 @@ mark.nc-destaque[data-ativo="true"] {
   animation: nc-pulse 1.4s ease-in-out infinite;
 }
 
+/** Esqueleto de carregamento: brilho que atravessa o bloco. */
+@keyframes nc-brilho {
+  100% {
+    transform: translateX(100%);
+  }
+}
+.nc-esqueleto {
+  position: relative;
+  overflow: hidden;
+  background: var(--color-cinza-fundo);
+  border-radius: 0.75rem;
+}
+.nc-esqueleto::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  transform: translateX(-100%);
+  background: linear-gradient(
+    90deg,
+    transparent,
+    color-mix(in srgb, var(--color-superficie) 70%, transparent),
+    transparent
+  );
+  animation: nc-brilho 1.5s infinite;
+}
+
+/** Traço que se desenha (anel de nota, check à mão). */
+@keyframes nc-tracar {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
   }
-  .nc-pulse {
+  .nc-pulse,
+  .nc-flash,
+  .nc-esqueleto::after {
     animation: none;
   }
-  .nc-flash {
-    animation: none;
+  .card-elevavel:hover {
+    transform: none;
+  }
+  .marca-anima {
+    transition: none;
+    background-size: 100% 100%;
   }
 }
 
@@ -139,5 +347,8 @@ mark.nc-destaque[data-ativo="true"] {
   .nc-borrado {
     /* mantém o bloqueio visível também na exportação em PDF (spec §13) */
     filter: blur(6px);
+  }
+  body {
+    background: #fff;
   }
 }

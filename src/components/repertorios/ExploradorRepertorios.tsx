@@ -46,7 +46,7 @@ export function ExploradorRepertorios({
             value={busca}
             onChange={(e) => setBusca(e.target.value)}
             placeholder="Buscar por título, autor, tema…"
-            className="border-borda text-navy placeholder:text-slate/70 focus:border-azul min-h-[44px] w-full rounded-xl border bg-white pr-3.5 pl-11 text-base focus:outline-none"
+            className="border-borda text-navy placeholder:text-slate/70 focus:border-azul min-h-[44px] w-full rounded-xl border bg-superficie pr-3.5 pl-11 text-base focus:outline-none"
           />
         </div>
 
@@ -72,7 +72,7 @@ export function ExploradorRepertorios({
             id="tema-repertorio"
             value={tema}
             onChange={(e) => setTema(e.target.value)}
-            className="border-borda text-navy focus:border-azul min-h-[44px] w-full rounded-xl border bg-white px-3 text-base focus:outline-none"
+            className="border-borda text-navy focus:border-azul min-h-[44px] w-full rounded-xl border bg-superficie px-3 text-base focus:outline-none"
           >
             <option value="">Todos os temas</option>
             {temas.map((t) => (
@@ -145,7 +145,7 @@ function Chip({
         "min-h-[36px] rounded-full border px-3 text-sm font-medium transition-colors",
         ativo
           ? "border-azul bg-azul text-white"
-          : "border-borda text-navy hover:bg-azul-claro bg-white",
+          : "border-borda text-navy hover:bg-azul-claro bg-superficie",
       )}
     >
       {children}

@@ -35,7 +35,7 @@ export function ListaHistorico({ entradas }: { entradas: EntradaHistorico[] }) {
               <div className="flex items-center gap-2">
                 <p className="text-navy truncate font-medium">{e.tema}</p>
                 {e.demo && (
-                  <span className="bg-ambar-claro shrink-0 rounded-full px-2 py-0.5 text-xs font-semibold text-amber-800">
+                  <span className="bg-ambar-claro shrink-0 rounded-full px-2 py-0.5 text-xs font-semibold text-ambar-texto">
                     exemplo
                   </span>
                 )}

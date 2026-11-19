@@ -225,7 +225,7 @@ export function FormularioCorrigir() {
               className={cn(
                 "flex min-h-[44px] items-center justify-center gap-2 rounded-lg text-sm font-semibold transition-colors",
                 modo === aba.id
-                  ? "text-azul-escuro bg-white shadow-sm"
+                  ? "text-azul-escuro bg-superficie shadow-sm"
                   : "text-slate hover:text-navy",
               )}
             >

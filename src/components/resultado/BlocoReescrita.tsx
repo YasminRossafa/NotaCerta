@@ -39,19 +39,19 @@ export function BlocoReescrita({
     <div className="grid gap-4 md:grid-cols-2 print:block print:space-y-4">
       <div className={cn("md:block print:block", aba === "reescrita" && "hidden")}>
         <p className="text-slate mb-1.5 text-xs font-semibold tracking-wide uppercase">Original</p>
-        <p className="text-navy border-borda/70 rounded-xl border bg-white p-4 text-[15px] leading-relaxed">
+        <p className="text-navy border-borda/70 rounded-xl border bg-superficie p-4 text-[15px] leading-relaxed">
           {original}
         </p>
       </div>
       <div className={cn("md:block print:block", aba === "original" && "hidden")}>
         <div className="mb-1.5 flex items-center justify-between gap-2">
-          <p className="text-xs font-semibold tracking-wide text-green-800 uppercase">
+          <p className="text-xs font-semibold tracking-wide text-verde-texto uppercase">
             Versão seguindo o método
           </p>
           <button
             type="button"
             onClick={copiar}
-            className="text-verde inline-flex min-h-[32px] items-center gap-1 text-xs font-semibold hover:text-green-800 print:hidden"
+            className="text-verde inline-flex min-h-[32px] items-center gap-1 text-xs font-semibold hover:text-verde-texto print:hidden"
           >
             {copiado ? (
               <>
@@ -88,7 +88,7 @@ export function BlocoReescrita({
             aria-pressed={aba === v}
             className={cn(
               "min-h-[36px] rounded-md px-3",
-              aba === v ? "text-azul-escuro bg-white shadow-sm" : "text-slate",
+              aba === v ? "text-azul-escuro bg-superficie shadow-sm" : "text-slate",
             )}
           >
             {v === "original" ? "Original" : "Reescrita"}

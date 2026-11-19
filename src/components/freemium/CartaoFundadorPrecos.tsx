@@ -16,7 +16,7 @@ export function CartaoFundadorPrecos() {
 
   if (fundador) {
     return (
-      <div className="border-verde/40 bg-verde-claro rounded-xl border px-4 py-3 text-sm text-green-900">
+      <div className="border-verde/40 bg-verde-claro rounded-xl border px-4 py-3 text-sm text-verde-texto">
         <p className="font-semibold">Plano Fundador ativado neste navegador.</p>
         <p className="mt-1">Correções ilimitadas e repertório completo já estão liberados.</p>
       </div>

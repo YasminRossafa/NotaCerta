@@ -1,6 +1,9 @@
+"use client";
+
 import Image from "next/image";
 import Link from "next/link";
 import { cn } from "@/lib/cn";
+import { useTema } from "@/lib/tema";
 
 type Variante = "colorida" | "escura";
 
@@ -11,13 +14,17 @@ const ARQUIVO: Record<Variante, string> = {
 
 export function Logo({
   className,
-  variante = "colorida",
+  variante,
   altura = 32,
 }: {
   className?: string;
+  /** Sem valor, segue o tema: a logo escura é a que foi feita para fundo escuro. */
   variante?: Variante;
   altura?: number;
 }) {
+  const tema = useTema();
+  const efetiva: Variante = variante ?? (tema === "escuro" ? "escura" : "colorida");
+
   return (
     <Link
       href="/"
@@ -25,7 +32,7 @@ export function Logo({
       aria-label="NotaCerta — página inicial"
     >
       <Image
-        src={ARQUIVO[variante]}
+        src={ARQUIVO[efetiva]}
         alt="NotaCerta"
         width={900}
         height={320}
