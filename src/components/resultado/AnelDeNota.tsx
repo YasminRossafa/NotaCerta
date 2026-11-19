@@ -1,3 +1,8 @@
+"use client";
+
+import { motion, useInView, useReducedMotion } from "motion/react";
+import { useRef } from "react";
+import { ContadorAnimado } from "@/components/motion/ContadorAnimado";
 import { CORES_FAIXA, faixaDaNotaTotal } from "@/lib/competencias";
 import { cn } from "@/lib/cn";
 
@@ -8,7 +13,8 @@ const TAMANHOS = {
 } as const;
 
 /**
- * Círculo com a nota total (0–1000). Quando `nota` é null (redação incompleta),
+ * Círculo com a nota total (0–1000). O arco se desenha e o número conta de 0 até a nota
+ * quando o anel entra na tela (spec §18.5). Quando `nota` é null (redação incompleta),
  * mostra um traço e o rótulo "incompleta".
  */
 export function AnelDeNota({
@@ -26,8 +32,14 @@ export function AnelDeNota({
   const fracao = nota == null ? 0 : Math.max(0, Math.min(1, nota / 1000));
   const cor = nota == null ? "#94A3B8" : CORES_FAIXA[faixaDaNotaTotal(nota)].hex;
 
+  const ref = useRef<HTMLDivElement>(null);
+  const naTela = useInView(ref, { once: true, amount: 0.5 });
+  const reduzido = useReducedMotion();
+  const desenhar = reduzido || naTela;
+
   return (
     <div
+      ref={ref}
       role="img"
       aria-label={
         nota == null ? "Nota não estimada: redação incompleta" : `Nota estimada ${nota} de 1000`
@@ -36,8 +48,15 @@ export function AnelDeNota({
       style={{ width: px, height: px }}
     >
       <svg width={px} height={px} viewBox={`0 0 ${px} ${px}`} aria-hidden="true">
-        <circle cx={px / 2} cy={px / 2} r={raio} fill="none" stroke="#E2E8F0" strokeWidth={traco} />
         <circle
+          cx={px / 2}
+          cy={px / 2}
+          r={raio}
+          fill="none"
+          stroke="var(--nc-eixo)"
+          strokeWidth={traco}
+        />
+        <motion.circle
           cx={px / 2}
           cy={px / 2}
           r={raio}
@@ -46,18 +65,21 @@ export function AnelDeNota({
           strokeWidth={traco}
           strokeLinecap="round"
           strokeDasharray={circ}
-          strokeDashoffset={circ * (1 - fracao)}
           transform={`rotate(-90 ${px / 2} ${px / 2})`}
-          style={{ transition: "stroke-dashoffset 900ms cubic-bezier(.2,.8,.2,1)" }}
+          initial={{ strokeDashoffset: circ }}
+          animate={{ strokeDashoffset: circ * (1 - (desenhar ? fracao : 0)) }}
+          transition={
+            reduzido ? { duration: 0 } : { duration: 1.1, ease: [0.22, 1, 0.36, 1] }
+          }
         />
       </svg>
       <div className="absolute inset-0 flex flex-col items-center justify-center leading-none">
-        <span className={cn("text-navy font-semibold tabular-nums", fonte)}>
-          {nota == null ? "—" : nota}
+        <span className={cn("text-navy font-extrabold tabular-nums", fonte)}>
+          {nota == null ? "—" : <ContadorAnimado valor={nota} />}
         </span>
         <span
           className={cn(
-            "text-slate mt-1 font-medium",
+            "text-slate mt-1 font-semibold",
             tamanho === "lg" ? "text-sm" : "text-[10px]",
           )}
         >

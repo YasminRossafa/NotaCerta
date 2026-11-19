@@ -3,15 +3,14 @@
 import { motion, useReducedMotion } from "motion/react";
 import { useRouter } from "next/navigation";
 import { useEffect, useId, useState, type FormEvent } from "react";
-import { Carregando } from "@/components/corrigir/Carregando";
 import { ContadorPalavras } from "@/components/corrigir/ContadorPalavras";
+import { OverlayCorrigindo } from "@/components/corrigir/OverlayCorrigindo";
 import { SeletorTema } from "@/components/corrigir/SeletorTema";
 import { UploadFoto } from "@/components/corrigir/UploadFoto";
 import { ModalUpgrade, type MotivoUpgrade } from "@/components/freemium/ModalUpgrade";
-import { AreaTexto } from "@/components/ui/AreaTexto";
 import { Aviso } from "@/components/ui/Aviso";
 import { Botao } from "@/components/ui/Botao";
-import { IconeCamera, IconeSeta, IconeTexto } from "@/components/ui/Icones";
+import { IconeSeta } from "@/components/ui/Icones";
 import { cn } from "@/lib/cn";
 import {
   lerRascunho,
@@ -45,6 +44,11 @@ const MENSAGENS_ERRO_API: Record<string, string> = {
   configuracao:
     "O servidor não está configurado: falta a chave da API. Crie um .env.local com ANTHROPIC_API_KEY (veja o README, seção “Como obter e configurar a chave de API”) e reinicie o servidor.",
 };
+
+const ABAS = [
+  { id: "texto", rotulo: "Colar texto" },
+  { id: "foto", rotulo: "Enviar foto" },
+] as const;
 
 export function FormularioCorrigir() {
   const router = useRouter();
@@ -167,19 +171,17 @@ export function FormularioCorrigir() {
     }
   }
 
-  if (enviando) return <Carregando comImagem={modo === "foto"} />;
-
   return (
     <>
-      <form onSubmit={enviar} noValidate className="space-y-6">
+      <form onSubmit={enviar} noValidate>
         {mostrarRascunho && rascunho && (
-          <Aviso tom="info" compacto>
+          <Aviso tom="info" compacto className="mb-4">
             <div className="flex flex-wrap items-center justify-between gap-2">
               <span>Encontramos um rascunho salvo neste aparelho.</span>
               <span className="flex gap-3">
                 <button
                   type="button"
-                  className="text-azul min-h-[36px] font-semibold underline"
+                  className="text-azul min-h-[36px] font-bold underline"
                   onClick={() => {
                     setTema(rascunho.tema);
                     setTexto(rascunho.texto);
@@ -203,18 +205,14 @@ export function FormularioCorrigir() {
           </Aviso>
         )}
 
-        {/* Abas */}
+        {/* Abas: o indicador desliza entre rótulos de larguras diferentes — é
+            animação de layout, por isso motion e não CSS. */}
         <div
           role="tablist"
           aria-label="Forma de envio"
-          className="bg-cinza-fundo grid grid-cols-2 gap-1 rounded-xl p-1"
+          className="bg-cinza-fundo relative inline-flex rounded-full p-1"
         >
-          {(
-            [
-              { id: "texto", rotulo: "Colar texto", Icone: IconeTexto },
-              { id: "foto", rotulo: "Enviar foto", Icone: IconeCamera },
-            ] as const
-          ).map((aba) => (
+          {ABAS.map((aba) => (
             <button
               key={aba.id}
               type="button"
@@ -224,69 +222,72 @@ export function FormularioCorrigir() {
               aria-controls={`${tabsId}-painel-${aba.id}`}
               onClick={() => setModo(aba.id)}
               className={cn(
-                "relative flex min-h-[44px] items-center justify-center gap-2 rounded-lg text-sm font-semibold transition-colors",
-                modo === aba.id ? "text-azul-escuro" : "text-slate hover:text-navy",
+                "relative min-h-[44px] rounded-full px-4 text-sm font-bold transition-colors sm:px-[18px]",
+                modo === aba.id ? "text-white" : "text-slate hover:text-navy",
               )}
             >
-              {/* Fundo que desliza de uma aba para a outra (spec §18.5). */}
               {modo === aba.id && (
                 <motion.span
                   layoutId={`${tabsId}-aba-ativa`}
-                  className="bg-superficie absolute inset-0 rounded-lg shadow-sm"
+                  className="bg-navy-fixo dark:bg-azul absolute inset-0 rounded-full shadow-[0_4px_10px_rgb(11_18_32/.3)]"
                   transition={
                     reduzido
                       ? { duration: 0 }
-                      : { type: "spring", stiffness: 480, damping: 36, mass: 0.6 }
+                      : { type: "spring", stiffness: 430, damping: 34, mass: 0.6 }
                   }
                 />
               )}
-              <span className="relative flex items-center gap-2">
-                <aba.Icone width={18} height={18} />
-                {aba.rotulo}
-              </span>
+              {/* O rótulo fica acima da pílula que desliza. */}
+              <span className="relative">{aba.rotulo}</span>
             </button>
           ))}
         </div>
-
-        <SeletorTema
-          tema={tema}
-          detectar={detectar}
-          aoMudarTema={(v) => {
-            setTema(v);
-            if (erros.tema) setErros((e) => ({ ...e, tema: undefined }));
-          }}
-          aoMudarDetectar={(v) => {
-            setDetectar(v);
-            if (v) setErros((e) => ({ ...e, tema: undefined }));
-          }}
-          erro={erros.tema}
-        />
 
         <div
           role="tabpanel"
           id={`${tabsId}-painel-texto`}
           aria-labelledby={`${tabsId}-tab-texto`}
           hidden={modo !== "texto"}
+          className="mt-3.5"
         >
-          <AreaTexto
-            rotulo="Texto da redação"
-            value={texto}
-            onChange={(e) => {
-              setTexto(e.target.value);
-              if (erros.texto) setErros((er) => ({ ...er, texto: undefined }));
-            }}
-            placeholder={
-              "Cole aqui a redação completa, com os 4 parágrafos (introdução, dois desenvolvimentos e conclusão)."
-            }
-            contador={<ContadorPalavras texto={texto} />}
-            ajuda={
-              fundador
-                ? "Separe os parágrafos com uma linha em branco. Como você é Fundador, esta correção entra no seu histórico de evolução, salvo só neste navegador."
-                : "Separe os parágrafos com uma linha em branco. Não guardamos o texto depois da correção."
-            }
-            erro={erros.texto}
-            spellCheck={false}
-          />
+          <div className="relative">
+            <label htmlFor={`${tabsId}-texto`} className="sr-only">
+              Texto da redação
+            </label>
+            <textarea
+              id={`${tabsId}-texto`}
+              value={texto}
+              onChange={(e) => {
+                setTexto(e.target.value);
+                if (erros.texto) setErros((er) => ({ ...er, texto: undefined }));
+              }}
+              placeholder="Cole sua redação aqui — os 4 parágrafos, separados por uma linha em branco."
+              spellCheck={false}
+              aria-invalid={erros.texto ? true : undefined}
+              aria-describedby={`${tabsId}-ajuda${erros.texto ? ` ${tabsId}-erro` : ""}`}
+              className={cn(
+                "bg-cinza-fundo text-navy placeholder:text-slate/70 w-full resize-y rounded-[14px] border-2 px-4 pt-3.5 pb-9 text-[15px] leading-relaxed",
+                "focus:bg-superficie focus:border-azul focus:ring-azul/15 transition-colors focus:ring-4 focus:outline-none",
+                "min-h-[150px] sm:min-h-[180px]",
+                erros.texto ? "border-vermelho" : "border-transparent",
+              )}
+            />
+            <ContadorPalavras texto={texto} className="absolute right-3 bottom-2.5" />
+          </div>
+          <p id={`${tabsId}-ajuda`} className="text-slate mt-2 text-[13px]">
+            {fundador
+              ? "Esta correção entra no seu histórico de evolução, salvo só neste navegador."
+              : "Não guardamos o texto depois da correção."}
+          </p>
+          {erros.texto && (
+            <p
+              id={`${tabsId}-erro`}
+              role="alert"
+              className="text-vermelho-texto mt-1.5 text-[13px] font-semibold"
+            >
+              {erros.texto}
+            </p>
+          )}
         </div>
 
         <div
@@ -294,6 +295,7 @@ export function FormularioCorrigir() {
           id={`${tabsId}-painel-foto`}
           aria-labelledby={`${tabsId}-tab-foto`}
           hidden={modo !== "foto"}
+          className="mt-3.5"
         >
           <UploadFoto
             imagem={imagem}
@@ -305,29 +307,42 @@ export function FormularioCorrigir() {
           />
         </div>
 
+        <div className="mt-3.5">
+          <SeletorTema
+            tema={tema}
+            detectar={detectar}
+            aoMudarTema={(v) => {
+              setTema(v);
+              if (erros.tema) setErros((e) => ({ ...e, tema: undefined }));
+            }}
+            aoMudarDetectar={(v) => {
+              setDetectar(v);
+              if (v) setErros((e) => ({ ...e, tema: undefined }));
+            }}
+            erro={erros.tema}
+          />
+        </div>
+
         {erroApi && (
-          <Aviso tom="erro" titulo="Não foi possível corrigir agora">
+          <Aviso tom="erro" titulo="Não foi possível corrigir agora" className="mt-4">
             {erroApi}
           </Aviso>
         )}
 
-        <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-          <p className="text-slate text-xs">
-            {fundador
-              ? "Plano Fundador: correções ilimitadas. Nota estimada, não oficial."
-              : `Grátis: ${Math.min(usos ?? 0, LIMITE_GRATIS_PADRAO)} de ${LIMITE_GRATIS_PADRAO} neste mês, neste aparelho. Nota estimada, não oficial.`}
-          </p>
-          <Botao
-            type="submit"
-            variante="destaque"
-            tamanho="lg"
-            className="group sm:min-w-[240px]"
-          >
-            Corrigir redação
+        <div className="mt-4 flex flex-wrap items-center gap-x-4 gap-y-3">
+          <Botao type="submit" tamanho="lg" className="group">
+            Corrigir minha redação
             <IconeSeta className="transition-transform group-hover:translate-x-1 motion-reduce:transition-none" />
           </Botao>
+          <small className="text-slate font-medium">
+            {fundador
+              ? "Plano Fundador: correções ilimitadas"
+              : `Grátis: ${Math.min(usos ?? 0, LIMITE_GRATIS_PADRAO)} de ${LIMITE_GRATIS_PADRAO} correções neste mês`}
+          </small>
         </div>
       </form>
+
+      {enviando && <OverlayCorrigindo comImagem={modo === "foto"} />}
 
       {/* Fora do <form>: o modal tem seu próprio formulário de e-mail (sem <form> aninhado). */}
       <ModalUpgrade

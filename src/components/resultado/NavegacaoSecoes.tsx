@@ -1,5 +1,6 @@
 "use client";
 
+import { motion, useReducedMotion } from "motion/react";
 import { useRef } from "react";
 import { cn } from "@/lib/cn";
 import { proximoIndice } from "@/lib/teclado";
@@ -25,6 +26,7 @@ export function NavegacaoSecoes({
   aoSelecionar: (secao: SecaoResultado) => void;
 }) {
   const refs = useRef<Array<HTMLButtonElement | null>>([]);
+  const reduzido = useReducedMotion();
 
   function onKeyDown(e: React.KeyboardEvent) {
     const atual = SECOES_RESULTADO.findIndex((s) => s.id === ativa);
@@ -56,13 +58,23 @@ export function NavegacaoSecoes({
             tabIndex={ativa === s.id ? 0 : -1}
             onClick={() => aoSelecionar(s.id)}
             className={cn(
-              "min-h-[44px] shrink-0 rounded-xl px-4 py-2.5 text-left text-sm font-semibold whitespace-nowrap transition-colors",
-              ativa === s.id
-                ? "bg-azul text-white"
-                : "text-slate hover:bg-cinza-fundo hover:text-navy",
+              "relative min-h-[44px] shrink-0 rounded-xl px-4 py-2.5 text-left text-sm font-bold whitespace-nowrap transition-colors",
+              ativa === s.id ? "text-white" : "text-slate hover:bg-cinza-fundo hover:text-navy",
             )}
           >
-            {s.rotulo}
+            {/* Fundo que desliza entre as seções (spec §18.5). */}
+            {ativa === s.id && (
+              <motion.span
+                layoutId="indicador-secao-resultado"
+                className="bg-azul absolute inset-0 rounded-xl"
+                transition={
+                  reduzido
+                    ? { duration: 0 }
+                    : { type: "spring", stiffness: 480, damping: 38, mass: 0.6 }
+                }
+              />
+            )}
+            <span className="relative">{s.rotulo}</span>
           </button>
         ))}
       </div>

@@ -1,41 +1,53 @@
 "use client";
 
-import { motion, useReducedMotion } from "motion/react";
-import type { ReactNode } from "react";
+import { useEffect, useRef, useState, type ReactNode } from "react";
+import { cn } from "@/lib/cn";
 
 /**
- * Revelação ao rolar (spec §18.5): sobe alguns pixels e aparece, uma vez só.
- * Com `prefers-reduced-motion` o conteúdo já nasce visível, sem animação.
+ * Revelação ao rolar. A animação é CSS (utilitário `revelar`); aqui só entra o
+ * IntersectionObserver que liga `data-visivel`. Com `prefers-reduced-motion` o
+ * próprio CSS já deixa o conteúdo visível e parado.
  */
 export function Revelar({
   children,
   atraso = 0,
-  y = 16,
   className,
-  as = "div",
+  as: Componente = "div",
 }: {
   children: ReactNode;
-  /** segundos de atraso — use para escalonar itens de uma lista */
+  /** milissegundos de atraso — para escalonar itens de uma lista */
   atraso?: number;
-  y?: number;
   className?: string;
-  as?: "div" | "section" | "li" | "article" | "span";
+  as?: "div" | "section" | "li" | "article" | "span" | "aside";
 }) {
-  const reduzido = useReducedMotion();
-  const Componente = motion[as];
+  const ref = useRef<HTMLElement>(null);
+  const [visivel, setVisivel] = useState(false);
 
-  if (reduzido) {
-    const Simples = as;
-    return <Simples className={className}>{children}</Simples>;
-  }
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    const io = new IntersectionObserver(
+      (entradas) => {
+        for (const e of entradas) {
+          if (e.isIntersecting) {
+            setVisivel(true);
+            io.unobserve(e.target);
+          }
+        }
+      },
+      { threshold: 0.15 },
+    );
+    io.observe(el);
+    return () => io.disconnect();
+  }, []);
 
   return (
     <Componente
-      className={className}
-      initial={{ opacity: 0, y }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, amount: 0.15 }}
-      transition={{ duration: 0.45, delay: atraso, ease: [0.22, 1, 0.36, 1] }}
+      // @ts-expect-error — ref polimórfico: o elemento é sempre um HTMLElement.
+      ref={ref}
+      data-visivel={visivel ? "true" : "false"}
+      style={atraso ? { transitionDelay: `${atraso}ms` } : undefined}
+      className={cn("revelar", className)}
     >
       {children}
     </Componente>

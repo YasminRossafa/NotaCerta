@@ -1,14 +1,16 @@
 "use client";
 
-import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 import { useId, useState } from "react";
 import { Campo } from "@/components/ui/Campo";
-import { IconeCheck, IconeLupa } from "@/components/ui/Icones";
 import { cn } from "@/lib/cn";
 import { TEMAS_ENEM } from "@/lib/temas";
 
-/** Quantos temas aparecem como chip antes de "ver todos". */
-const CHIPS_VISIVEIS = 6;
+/** Temas em destaque na ferramenta; o resto fica na lista de sugestões do campo livre. */
+const DESTAQUES = ["2026", "2019", "2023", "2017"] as const;
+
+const EM_DESTAQUE = DESTAQUES.map((ano) => TEMAS_ENEM.find((t) => t.ano === ano)).filter(
+  (t): t is (typeof TEMAS_ENEM)[number] => Boolean(t),
+);
 
 type Props = {
   tema: string;
@@ -19,48 +21,34 @@ type Props = {
 };
 
 /**
- * Escolha do tema em chips selecionáveis (spec §18.1): os temas recentes do ENEM a um
- * toque, mais "outro tema" (campo livre com as sugestões oficiais) e "não sei — detectar
- * pelo texto". O valor enviado continua sendo o tema completo.
+ * Escolha do tema em chips (referência visual da home): os temas mais pedidos a um
+ * toque, "outro tema" abrindo o campo livre com as sugestões oficiais do ENEM e
+ * "não sei" delegando a detecção para a API. O valor enviado é sempre o tema completo.
  */
 export function SeletorTema({ tema, detectar, aoMudarTema, aoMudarDetectar, erro }: Props) {
   const listaId = useId();
-  const [todos, setTodos] = useState(false);
-  // "Outro tema" abre o campo livre; também já abre se vier um rascunho com tema digitado.
   const [livre, setLivre] = useState(
     () => tema.length > 0 && !TEMAS_ENEM.some((t) => t.tema === tema),
   );
 
-  const visiveis = todos ? TEMAS_ENEM : TEMAS_ENEM.slice(0, CHIPS_VISIVEIS);
-
-  function escolher(valor: string) {
-    setLivre(false);
-    aoMudarDetectar(false);
-    aoMudarTema(valor);
-  }
-
   return (
-    <fieldset className="space-y-3">
-      <legend className="text-navy mb-2 text-sm font-semibold">Tema da redação</legend>
-
-      <div className="flex flex-wrap gap-2">
-        {visiveis.map((t) => (
+    <fieldset>
+      <legend className="sr-only">Tema da redação</legend>
+      <div className="flex flex-wrap gap-2" role="group" aria-label="Tema da redação">
+        {EM_DESTAQUE.map((t) => (
           <Chip
             key={t.tema}
             ativo={!detectar && !livre && tema === t.tema}
-            onClick={() => escolher(t.tema)}
             titulo={`ENEM ${t.ano} — ${t.tema}`}
+            onClick={() => {
+              setLivre(false);
+              aoMudarDetectar(false);
+              aoMudarTema(t.tema);
+            }}
           >
             {t.curto}
-            <span className="text-[11px] font-medium opacity-70">{t.ano}</span>
           </Chip>
         ))}
-
-        {!todos && (
-          <Chip ativo={false} onClick={() => setTodos(true)} variante="discreto">
-            + {TEMAS_ENEM.length - CHIPS_VISIVEIS} temas
-          </Chip>
-        )}
 
         <Chip
           ativo={livre && !detectar}
@@ -68,9 +56,7 @@ export function SeletorTema({ tema, detectar, aoMudarTema, aoMudarDetectar, erro
             setLivre(true);
             aoMudarDetectar(false);
           }}
-          variante="discreto"
         >
-          <IconeLupa width={14} height={14} />
           Outro tema
         </Chip>
 
@@ -80,72 +66,42 @@ export function SeletorTema({ tema, detectar, aoMudarTema, aoMudarDetectar, erro
             setLivre(false);
             aoMudarDetectar(!detectar);
           }}
-          variante="discreto"
         >
-          Não sei — detectar pelo texto
+          Não sei o tema
         </Chip>
       </div>
 
-      <AnimatePresence initial={false}>
-        {livre && !detectar && (
-          <AbrirSuave key="campo-livre">
-            <Campo
-              rotulo="Qual é o tema?"
-              list={listaId}
-              value={tema}
-              onChange={(e) => aoMudarTema(e.target.value)}
-              placeholder="Ex.: Desafios para a valorização da herança africana no Brasil"
-              autoComplete="off"
-              autoFocus
-              ajuda="Escreva o tema como ele aparece na prova, ou escolha nas sugestões."
-              erro={erro}
-            />
-            <datalist id={listaId}>
-              {TEMAS_ENEM.map((t) => (
-                <option key={t.tema} value={t.tema}>{`ENEM ${t.ano}`}</option>
-              ))}
-            </datalist>
-          </AbrirSuave>
-        )}
+      {livre && !detectar && (
+        <div className="mt-3">
+          <Campo
+            rotulo="Qual é o tema?"
+            list={listaId}
+            value={tema}
+            onChange={(e) => aoMudarTema(e.target.value)}
+            placeholder="Ex.: Desafios para a valorização da herança africana no Brasil"
+            autoComplete="off"
+            erro={erro}
+          />
+          <datalist id={listaId}>
+            {TEMAS_ENEM.map((t) => (
+              <option key={t.tema} value={t.tema}>{`ENEM ${t.ano}`}</option>
+            ))}
+          </datalist>
+        </div>
+      )}
 
-        {detectar && (
-          <AbrirSuave key="aviso-detectar">
-            <p className="text-slate text-sm">
-              Vamos identificar o tema a partir do próprio texto da redação.
-            </p>
-          </AbrirSuave>
-        )}
-
-        {!livre && !detectar && tema && (
-          <AbrirSuave key="tema-escolhido">
-            <p className="text-slate text-sm leading-relaxed">
-              Tema escolhido: <span className="text-navy font-medium">{tema}</span>
-            </p>
-          </AbrirSuave>
-        )}
-      </AnimatePresence>
+      {detectar && (
+        <p className="text-slate mt-2.5 text-[13px]">
+          Vamos identificar o tema a partir do próprio texto.
+        </p>
+      )}
 
       {erro && !livre && (
-        <p role="alert" className="text-vermelho-texto text-sm font-medium">
+        <p role="alert" className="text-vermelho-texto mt-2.5 text-[13px] font-semibold">
           {erro}
         </p>
       )}
     </fieldset>
-  );
-}
-
-function AbrirSuave({ children }: { children: React.ReactNode }) {
-  const reduzido = useReducedMotion();
-  return (
-    <motion.div
-      initial={reduzido ? false : { height: 0, opacity: 0 }}
-      animate={{ height: "auto", opacity: 1 }}
-      exit={reduzido ? { opacity: 0 } : { height: 0, opacity: 0 }}
-      transition={{ duration: 0.22, ease: [0.22, 1, 0.36, 1] }}
-      className="overflow-hidden"
-    >
-      <div className="pt-1">{children}</div>
-    </motion.div>
   );
 }
 
@@ -154,35 +110,28 @@ function Chip({
   onClick,
   children,
   titulo,
-  variante = "tema",
 }: {
   ativo: boolean;
   onClick: () => void;
   children: React.ReactNode;
   titulo?: string;
-  variante?: "tema" | "discreto";
 }) {
-  const reduzido = useReducedMotion();
   return (
-    <motion.button
+    <button
       type="button"
-      role="radio"
-      aria-checked={ativo}
+      aria-pressed={ativo}
       title={titulo}
       onClick={onClick}
-      whileTap={reduzido ? undefined : { scale: 0.96 }}
-      transition={{ duration: 0.14 }}
       className={cn(
-        "inline-flex min-h-[44px] items-center gap-1.5 rounded-full border px-3.5 text-sm font-semibold transition-colors",
+        "inline-flex min-h-[44px] items-center rounded-full border-2 px-3.5 text-[13px] font-semibold",
+        "transition-[transform,box-shadow,background-color,color] duration-200",
+        "hover:-translate-y-0.5 motion-reduce:hover:translate-y-0",
         ativo
-          ? "border-azul bg-azul text-white shadow-sm"
-          : variante === "discreto"
-            ? "border-borda text-slate hover:border-azul/60 hover:text-navy bg-transparent"
-            : "border-borda bg-superficie text-navy hover:border-azul/60 hover:bg-azul-claro",
+          ? "bg-azul border-transparent text-white shadow-[0_8px_16px_-6px_var(--color-azul)]"
+          : "bg-cinza-fundo text-slate hover:text-navy border-transparent hover:shadow-[var(--shadow-1)]",
       )}
     >
-      {ativo && <IconeCheck width={14} height={14} />}
       {children}
-    </motion.button>
+    </button>
   );
 }

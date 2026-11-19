@@ -1,11 +1,10 @@
 import type { Metadata } from "next";
-import Link from "next/link";
 import { FormularioCorrigir } from "@/components/corrigir/FormularioCorrigir";
 import { DemoCorrecao } from "@/components/home/DemoCorrecao";
+import { PalcoFlutuante } from "@/components/home/PalcoFlutuante";
 import { Revelar } from "@/components/motion/Revelar";
 import { Botao } from "@/components/ui/Botao";
-import { AvisoNotaEstimada } from "@/components/ui/Aviso";
-import { IconeChevron } from "@/components/ui/Icones";
+import { IconeCheck } from "@/components/ui/Icones";
 import { SITE } from "@/lib/site";
 
 export const metadata: Metadata = {
@@ -23,186 +22,142 @@ export const metadata: Metadata = {
 };
 
 const PASSOS = [
-  {
-    titulo: "Envie a redação",
-    texto: "Cole o texto ou tire uma foto da folha. Diga o tema — ou deixe que a gente detecte.",
-  },
-  {
-    titulo: "O método roda inteiro",
-    texto:
-      "Introdução, D1, D2 e conclusão, competência por competência, do jeito que a professora corrige.",
-  },
-  {
-    titulo: "Você entende o porquê",
-    texto:
-      "Nota estimada, cada apontamento com o motivo, a reescrita que ensina e repertório para o tema.",
-  },
+  { n: "1", titulo: "Envie", texto: "Cole o texto ou fotografe a folha." },
+  { n: "2", titulo: "Receba", texto: "Nota por competência e apontamentos explicados." },
+  { n: "3", titulo: "Reescreva", texto: "Veja cada parágrafo ajustado ao modelo." },
 ];
 
-const FAQ = [
-  {
-    p: "Preciso me cadastrar para corrigir?",
-    r: "Não. A primeira correção não exige cadastro. O e-mail só é pedido depois, se você quiser mais correções.",
-  },
-  {
-    p: "Minha redação fica guardada em algum lugar?",
-    r: "Não. O texto ou a foto é usado só para gerar a correção e não é salvo em banco de dados.",
-  },
-  {
-    p: "A nota é a nota oficial do ENEM?",
-    r: "Não. É uma nota estimada por inteligência artificial seguindo o método da professora. O NotaCerta não tem vínculo com o INEP ou com o MEC.",
-  },
-  {
-    p: "Quantas correções grátis eu tenho?",
-    r: "Duas por mês, neste aparelho. O contador reseta no início de cada mês civil.",
-  },
-  {
-    p: "Funciona com redação manuscrita?",
-    r: "Sim. Você pode enviar uma foto da folha ou colar o texto digitado — os dois funcionam.",
-  },
-];
+const PLANO_GRATIS = ["2 correções por mês", "Nota e apontamentos", "1 reescrita"];
+const PLANO_FUNDADOR = ["Correções ilimitadas", "Todas as reescritas", "Repertórios e evolução"];
 
 export default function PaginaInicial() {
   return (
     <>
       {/* ---------------------------------------------------------------
-          Herói: a ferramenta é a página (spec §18.1)
+          Herói: a ferramenta real é a página (spec §18.1)
           --------------------------------------------------------------- */}
-      <section className="container-nc py-8 md:py-14">
-        <div className="grid gap-8 lg:grid-cols-[minmax(0,0.85fr)_minmax(0,1.15fr)] lg:items-start lg:gap-12">
-          <div className="max-w-xl lg:pt-4">
-            <h1 className="text-navy text-[2.6rem] leading-[1.02] font-extrabold tracking-[-0.035em] sm:text-6xl">
-              Corretor de redação ENEM com <span className="marca">método,</span> não com achismo.
+      <section className="papel-pautado px-5 pt-10 pb-20 lg:pt-16">
+        <div className="mx-auto grid w-full max-w-[1120px] items-center gap-10 lg:grid-cols-[1.05fr_0.95fr] lg:gap-14">
+          <div>
+            <h1 className="text-navy text-[clamp(38px,5.4vw,64px)]">
+              Sua redação corrigida <span className="marca">do jeito certo</span>
             </h1>
-            <p className="text-slate mt-6 text-lg leading-relaxed sm:text-xl">
-              Envie sua redação e receba nota estimada por competência, cada erro explicado{" "}
-              <span className="text-navy font-semibold">com o motivo</span>, a reescrita que ensina
-              e repertório curado para o seu tema.
+            <p className="text-slate mt-4 max-w-[46ch] text-lg">
+              Cole o texto ou envie uma foto. Receba nota por competência e a reescrita de cada
+              parágrafo.
             </p>
-            <p className="text-slate mt-5 text-sm">
-              Quer ver antes?{" "}
-              <Link href="/resultado?exemplo=1" className="text-azul sublinhado font-bold">
-                Veja uma correção de exemplo
-              </Link>
-              .
-            </p>
-            <AvisoNotaEstimada className="mt-7 max-w-md" />
+
+            {/* O cartão da ferramenta: o form de verdade, ligado à API e aos limites. */}
+            <div className="bg-superficie border-borda mt-7 rounded-[20px] border p-4 shadow-[var(--shadow-2)] focus-within:shadow-[var(--shadow-3)] sm:p-[18px] dark:shadow-[var(--nc-brilho-tool)]">
+              <FormularioCorrigir />
+            </div>
           </div>
 
-          {/* O cartão grande: é aqui que o aluno age. */}
-          <div className="card shadow-alto p-5 sm:p-7">
-            <FormularioCorrigir />
-          </div>
+          <PalcoFlutuante />
         </div>
       </section>
 
       {/* ---------------------------------------------------------------
-          Demo interativa — seção escura, o contraponto ao claro
+          Exemplo interativo — a seção navy
           --------------------------------------------------------------- */}
-      <section className="secao-escura" aria-labelledby="demo-titulo">
-        <div className="container-nc py-14 md:py-20">
+      <section
+        className="secao-escura brilho-canto px-5 py-20 lg:py-[110px]"
+        aria-labelledby="exemplo-titulo"
+        id="exemplo"
+      >
+        <div className="relative mx-auto w-full max-w-[1120px]">
           <Revelar>
-            <div className="max-w-2xl">
-              <h2
-                id="demo-titulo"
-                className="text-3xl leading-tight font-extrabold tracking-tight text-white sm:text-4xl"
-              >
-                Todo corretor diz o que está errado.
-                <br />
-                <span className="marca-forte">Este explica por quê.</span>
-              </h2>
-              <p className="mt-5 text-lg leading-relaxed text-white/75">
-                Abaixo está um parágrafo de verdade, corrigido pelo método. Cada trecho marcado tem
-                um motivo atrás — é o que faz você não repetir o erro na próxima.
-              </p>
-            </div>
+            <h2
+              id="exemplo-titulo"
+              className="max-w-[18ch] text-[clamp(30px,4vw,46px)] text-white"
+            >
+              Toque no texto e veja a correção
+            </h2>
           </Revelar>
-          <Revelar atraso={0.08} className="mt-8">
+          <Revelar atraso={90} className="mt-9">
             <DemoCorrecao />
           </Revelar>
         </div>
       </section>
 
       {/* ---------------------------------------------------------------
-          3 passos
+          Três passos
           --------------------------------------------------------------- */}
-      <section className="container-nc py-14 md:py-20" aria-labelledby="passos-titulo">
-        <Revelar>
-          <h2
-            id="passos-titulo"
-            className="text-navy text-3xl font-extrabold tracking-tight sm:text-4xl"
-          >
-            Como funciona
-          </h2>
-        </Revelar>
-        <ol className="mt-8 grid gap-6 sm:grid-cols-3 sm:gap-8">
-          {PASSOS.map((passo, i) => (
-            <Revelar as="li" key={passo.titulo} atraso={i * 0.08}>
-              {/* Número grande, sem ícone-em-círculo (spec §18.5). */}
-              <p className="text-ambar text-5xl leading-none font-extrabold tabular-nums">
-                {i + 1}
-              </p>
-              <h3 className="text-navy mt-3 text-xl font-bold">{passo.titulo}</h3>
-              <p className="text-slate mt-2 leading-relaxed">{passo.texto}</p>
-            </Revelar>
-          ))}
-        </ol>
+      <section className="px-5 pt-20 pb-10 lg:pt-[100px]" aria-labelledby="passos-titulo">
+        <div className="mx-auto w-full max-w-[1120px]">
+          <Revelar>
+            <h2
+              id="passos-titulo"
+              className="text-navy max-w-[22ch] text-[clamp(30px,4vw,46px)]"
+            >
+              Três passos, um minuto
+            </h2>
+          </Revelar>
+          <ul className="mt-9 grid gap-5 sm:grid-cols-3">
+            {PASSOS.map((p, i) => (
+              <Revelar
+                as="li"
+                key={p.n}
+                atraso={i * 90}
+                className="bg-superficie border-borda rounded-[20px] border p-6 shadow-[var(--shadow-1)] transition-[transform,box-shadow] duration-300 hover:-translate-y-2 hover:rotate-[-0.6deg] hover:shadow-[var(--shadow-2)] motion-reduce:hover:translate-y-0 motion-reduce:hover:rotate-0"
+              >
+                <span className="text-azul block text-[54px] leading-none font-extrabold tracking-[-0.05em]">
+                  {p.n}
+                </span>
+                <h3 className="text-navy mt-3 text-xl">{p.titulo}</h3>
+                <p className="text-slate mt-1.5 text-[15px]">{p.texto}</p>
+              </Revelar>
+            ))}
+          </ul>
+        </div>
       </section>
 
       {/* ---------------------------------------------------------------
-          Planos (teaser) + FAQ
+          Planos (curtos) — o Fundador domina
           --------------------------------------------------------------- */}
-      <section className="container-nc pb-14 md:pb-20" aria-labelledby="planos-titulo">
-        <Revelar>
-          <div className="card card-elevavel border-ambar/40 bg-ambar-claro/40 flex flex-col items-start gap-5 p-6 sm:flex-row sm:items-center sm:justify-between sm:p-8">
-            <div>
-              <h2 id="planos-titulo" className="text-navy text-xl font-bold tracking-tight">
-                Grátis: 2 correções completas por mês.
-              </h2>
-              <p className="text-slate mt-1.5">
-                Quer mais volume, todas as reescritas e histórico? Conheça o{" "}
-                <Link href="/precos" className="text-azul sublinhado font-bold">
-                  Plano Fundador
-                </Link>
-                .
-              </p>
-            </div>
-            <Botao href="/precos" variante="secundario" className="shrink-0">
-              Ver planos
-            </Botao>
-          </div>
-        </Revelar>
-      </section>
-
-      <section
-        className="bg-superficie-2 border-borda/70 border-y"
-        aria-labelledby="faq-titulo"
-      >
-        <div className="container-nc py-14 md:py-20">
+      <section className="px-5 pt-[70px] pb-[110px]" aria-labelledby="planos-titulo">
+        <div className="mx-auto w-full max-w-[1120px]">
           <Revelar>
-            <h2
-              id="faq-titulo"
-              className="text-navy text-3xl font-extrabold tracking-tight sm:text-4xl"
-            >
-              Perguntas frequentes
+            <h2 id="planos-titulo" className="text-navy max-w-[20ch] text-[clamp(30px,4vw,46px)]">
+              Comece grátis
             </h2>
           </Revelar>
-          <div className="divide-borda mt-8 max-w-3xl divide-y">
-            {FAQ.map((item, i) => (
-              <Revelar key={item.p} atraso={i * 0.04}>
-                <details className="group py-4">
-                  <summary className="text-navy flex min-h-[44px] cursor-pointer list-none items-center justify-between gap-4 text-lg font-bold">
-                    {item.p}
-                    <IconeChevron
-                      className="text-slate group-hover:text-azul shrink-0 transition-transform group-open:rotate-180 motion-reduce:transition-none"
-                      width={20}
-                      height={20}
-                    />
-                  </summary>
-                  <p className="text-slate mt-2 leading-relaxed">{item.r}</p>
-                </details>
-              </Revelar>
-            ))}
+
+          <div className="mt-8 grid max-w-[860px] gap-6 sm:grid-cols-2">
+            <Revelar className="bg-superficie border-borda card-elevavel rounded-3xl border p-7 shadow-[var(--shadow-1)]">
+              <h3 className="text-navy text-[22px]">Grátis</h3>
+              <p className="text-navy mt-1.5 text-[34px] font-extrabold tracking-[-0.04em]">
+                R$ 0
+              </p>
+              <ul className="text-slate mt-4 grid gap-2 text-[15px]">
+                {PLANO_GRATIS.map((t) => (
+                  <ItemPlano key={t}>{t}</ItemPlano>
+                ))}
+              </ul>
+              <Botao href="/#conteudo" variante="navy" className="mt-6">
+                Corrigir agora
+              </Botao>
+            </Revelar>
+
+            <Revelar
+              atraso={90}
+              className="bg-navy-fixo rounded-3xl p-7 shadow-[var(--shadow-3)] transition-transform duration-300 sm:-translate-y-2.5 sm:hover:-translate-y-4 motion-reduce:transform-none dark:shadow-[var(--nc-brilho-tool)] dark:ring-1 dark:ring-white/10"
+            >
+              <h3 className="text-[22px] text-white">Plano Fundador</h3>
+              <p className="mt-1.5 text-[34px] font-extrabold tracking-[-0.04em] text-white">
+                Em breve
+              </p>
+              <ul className="mt-4 grid gap-2 text-[15px] text-[#C9D4F2]">
+                {PLANO_FUNDADOR.map((t) => (
+                  <ItemPlano key={t} escuro>
+                    {t}
+                  </ItemPlano>
+                ))}
+              </ul>
+              <Botao href="/precos" className="mt-6">
+                Quero acesso
+              </Botao>
+            </Revelar>
           </div>
         </div>
       </section>
@@ -224,5 +179,19 @@ export default function PaginaInicial() {
         }}
       />
     </>
+  );
+}
+
+function ItemPlano({ children, escuro }: { children: React.ReactNode; escuro?: boolean }) {
+  return (
+    <li className="flex items-start gap-2">
+      <IconeCheck
+        width={16}
+        height={16}
+        strokeWidth={3}
+        className={escuro ? "mt-0.5 shrink-0 text-[#4ADE80]" : "text-verde mt-0.5 shrink-0"}
+      />
+      {children}
+    </li>
   );
 }

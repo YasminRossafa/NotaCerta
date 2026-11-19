@@ -44,8 +44,8 @@ export const metadata: Metadata = {
 
 export const viewport: Viewport = {
   themeColor: [
-    { media: "(prefers-color-scheme: light)", color: "#F1F5F9" },
-    { media: "(prefers-color-scheme: dark)", color: "#0A1120" },
+    { media: "(prefers-color-scheme: light)", color: "#F3F6FF" },
+    { media: "(prefers-color-scheme: dark)", color: "#0B1220" },
   ],
   width: "device-width",
   initialScale: 1,
@@ -73,7 +73,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         </a>
         <FundadorProvider>
           <Cabecalho />
-          <main id="conteudo" className="flex-1">
+          {/* O cabeçalho é uma pílula fixa: o conteúdo começa abaixo dela. */}
+          <main id="conteudo" className="flex-1 pt-[76px]">
             {children}
           </main>
           <Rodape />
