@@ -147,7 +147,7 @@ function ChipFiltro({
       onClick={onClick}
       className={cn(
         "min-h-[32px] rounded-full px-3 py-1 text-xs font-semibold transition-colors",
-        ativo ? "bg-azul text-white" : "bg-cinza-fundo text-slate hover:text-navy",
+        ativo ? "bg-azul-acao text-white" : "bg-cinza-fundo text-slate hover:text-navy",
       )}
     >
       {children}

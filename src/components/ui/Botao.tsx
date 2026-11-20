@@ -17,7 +17,7 @@ const base =
   "disabled:cursor-not-allowed disabled:opacity-60 disabled:hover:translate-y-0";
 
 const variantes: Record<Variante, string> = {
-  azul: "bg-azul text-white shadow-[0_10px_24px_-6px_var(--color-azul)] hover:shadow-[0_16px_32px_-8px_var(--color-azul)]",
+  azul: "bg-azul-acao text-white shadow-[0_10px_24px_-6px_var(--color-azul-acao)] hover:shadow-[0_16px_32px_-8px_var(--color-azul-acao)]",
   navy: "bg-navy-fixo text-white shadow-[0_6px_16px_-4px_rgb(11_18_32/.5)] hover:shadow-[0_12px_24px_-6px_rgb(11_18_32/.55)] dark:bg-superficie-2 dark:ring-1 dark:ring-white/10",
   secundario:
     "border border-borda bg-superficie text-navy hover:border-azul/50 hover:shadow-[var(--shadow-1)]",

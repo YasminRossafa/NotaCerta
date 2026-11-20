@@ -14,7 +14,7 @@ export const COR_PONTO_STATUS: Record<Paragrafo["status"], string> = {
 };
 
 export const CLASSES_CHIP_STATUS: Record<Paragrafo["status"], string> = {
-  adequado: "bg-verde-claro text-green-800",
-  ajustes: "bg-ambar-claro text-amber-800",
-  incompleto: "bg-vermelho-claro text-red-800",
+  adequado: "bg-verde-claro text-verde-texto",
+  ajustes: "bg-ambar-claro text-ambar-texto",
+  incompleto: "bg-vermelho-claro text-vermelho-texto",
 };

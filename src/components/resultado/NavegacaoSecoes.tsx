@@ -67,7 +67,7 @@ export function NavegacaoSecoes({
             {ativa === s.id && (
               <motion.span
                 layoutId="indicador-secao-resultado"
-                className="bg-azul absolute inset-0 rounded-xl"
+                className="bg-azul-acao absolute inset-0 rounded-xl"
                 transition={
                   reduzido
                     ? { duration: 0 }

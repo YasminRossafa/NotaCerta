@@ -45,7 +45,7 @@ export function Cabecalho() {
                 href={l.href}
                 aria-current={ehAtivo(l.href) ? "page" : undefined}
                 className={cn(
-                  "rounded-full px-3.5 py-2 text-sm font-semibold transition-colors",
+                  "inline-flex min-h-[44px] items-center rounded-full px-3.5 text-sm font-semibold transition-colors",
                   ehAtivo(l.href)
                     ? "bg-azul-claro text-azul-escuro"
                     : "text-slate hover:bg-azul-claro hover:text-azul-escuro",

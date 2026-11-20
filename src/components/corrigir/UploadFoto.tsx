@@ -139,7 +139,7 @@ export function UploadFoto({
               type="button"
               onClick={() => inputCamera.current?.click()}
               disabled={processando}
-              className="bg-azul inline-flex min-h-[44px] items-center rounded-full px-4 text-sm font-bold text-white disabled:opacity-60 sm:hidden"
+              className="bg-azul-acao inline-flex min-h-[44px] items-center rounded-full px-4 text-sm font-bold text-white disabled:opacity-60 sm:hidden"
             >
               Tirar foto
             </button>

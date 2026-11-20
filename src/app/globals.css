@@ -11,6 +11,9 @@
 @theme {
   /* marca */
   --color-azul: #2563eb;
+  /* Azul de AÇÃO: fundo de botão/chip com texto branco por cima. Não clareia no
+     tema escuro — #3B82F6 com texto branco fica em 3,7:1 e reprovaria em AA. */
+  --color-azul-acao: #2563eb;
   --color-azul-escuro: #1e3a8a;
   --color-azul-claro: #e8efff;
   --color-ambar: #fbbf24;
@@ -40,7 +43,7 @@
   /* semânticos de nota (spec §10) */
   --color-verde: #16a34a;
   --color-verde-claro: #dcfce7;
-  --color-verde-texto: #15803d;
+  --color-verde-texto: #166534;
   --color-ambar-texto: #92400e;
   --color-vermelho: #dc2626;
   --color-vermelho-claro: #fee2e2;
@@ -95,7 +98,10 @@
 :root[data-theme="dark"] {
   color-scheme: dark;
 
-  --color-azul: #3b82f6;
+  /* Um passo mais claro que o #3B82F6 do briefing: como cor de TEXTO sobre o
+     cartão navy, #3B82F6 fica em 4,3:1 e reprovaria em AA. O azul cheio de
+     botão continua sendo --color-azul-acao. */
+  --color-azul: #589bff;
   --color-azul-escuro: #bdd3ff;
   --color-azul-claro: #17294d;
   --color-ambar-claro: #3b2a09;

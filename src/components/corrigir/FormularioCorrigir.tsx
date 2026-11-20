@@ -229,7 +229,7 @@ export function FormularioCorrigir() {
               {modo === aba.id && (
                 <motion.span
                   layoutId={`${tabsId}-aba-ativa`}
-                  className="bg-navy-fixo dark:bg-azul absolute inset-0 rounded-full shadow-[0_4px_10px_rgb(11_18_32/.3)]"
+                  className="bg-navy-fixo dark:bg-azul-acao absolute inset-0 rounded-full shadow-[0_4px_10px_rgb(11_18_32/.3)]"
                   transition={
                     reduzido
                       ? { duration: 0 }

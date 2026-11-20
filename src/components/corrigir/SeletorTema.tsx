@@ -127,7 +127,7 @@ function Chip({
         "transition-[transform,box-shadow,background-color,color] duration-200",
         "hover:-translate-y-0.5 motion-reduce:hover:translate-y-0",
         ativo
-          ? "bg-azul border-transparent text-white shadow-[0_8px_16px_-6px_var(--color-azul)]"
+          ? "bg-azul-acao border-transparent text-white shadow-[0_8px_16px_-6px_var(--color-azul-acao)]"
           : "bg-cinza-fundo text-slate hover:text-navy border-transparent hover:shadow-[var(--shadow-1)]",
       )}
     >
