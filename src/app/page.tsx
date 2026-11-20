@@ -141,7 +141,7 @@ export default function PaginaInicial() {
 
             <Revelar
               atraso={90}
-              className="bg-navy-fixo rounded-3xl p-7 shadow-[var(--shadow-3)] transition-transform duration-300 sm:-translate-y-2.5 sm:hover:-translate-y-4 motion-reduce:transform-none dark:shadow-[var(--nc-brilho-tool)] dark:ring-1 dark:ring-white/10"
+              className="bg-navy-fixo sobre-navy rounded-3xl p-7 shadow-[var(--shadow-3)] transition-transform duration-300 sm:-translate-y-2.5 sm:hover:-translate-y-4 motion-reduce:transform-none dark:shadow-[var(--nc-brilho-tool)] dark:ring-1 dark:ring-white/10"
             >
               <h3 className="text-[22px] text-white">Plano Fundador</h3>
               <p className="mt-1.5 text-[34px] font-extrabold tracking-[-0.04em] text-white">

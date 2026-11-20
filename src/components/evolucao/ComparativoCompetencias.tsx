@@ -1,3 +1,6 @@
+"use client";
+
+import { ContadorAnimado } from "@/components/motion/ContadorAnimado";
 import { COMPETENCIAS } from "@/lib/competencias";
 import { compararPrimeiraEUltima, type TendenciaNota } from "@/lib/evolucao-analise";
 import type { EntradaHistorico } from "@/lib/historico";
@@ -38,27 +41,30 @@ export function ComparativoCompetencias({
                 {COMPETENCIAS[l.codigo].sigla} · {COMPETENCIAS[l.codigo].nome}
               </span>
               <span className="text-slate tabular-nums">
-                {l.primeira} → <span className="text-navy font-semibold">{l.ultima}</span>
+                {l.primeira} →{" "}
+                <span className="text-navy font-bold">
+                  <ContadorAnimado valor={l.ultima} duracao={0.9} />
+                </span>
                 <span className="text-xs"> /200</span>
               </span>
             </div>
             <div className="mt-1.5 space-y-1">
               <div
-                className="bg-cinza-fundo h-2 w-full overflow-hidden rounded-full"
+                className="bg-trilho h-2 w-full overflow-hidden rounded-full"
                 aria-hidden="true"
               >
                 <div
-                  className="bg-slate h-full rounded-full"
-                  style={{ width: `${(l.primeira / 200) * 100}%` }}
+                  className="bg-slate barra-anima h-full rounded-full"
+                  style={{ "--pct": `${(l.primeira / 200) * 100}%` } as React.CSSProperties}
                 />
               </div>
               <div
-                className="bg-cinza-fundo h-2 w-full overflow-hidden rounded-full"
+                className="bg-trilho h-2 w-full overflow-hidden rounded-full"
                 aria-hidden="true"
               >
                 <div
-                  className="bg-azul h-full rounded-full"
-                  style={{ width: `${(l.ultima / 200) * 100}%` }}
+                  className="bg-azul barra-anima h-full rounded-full"
+                  style={{ "--pct": `${(l.ultima / 200) * 100}%` } as React.CSSProperties}
                 />
               </div>
             </div>

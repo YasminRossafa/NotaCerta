@@ -216,12 +216,42 @@ h1 {
 }
 
 /** Seção escura — o contraponto ao claro, nos dois temas. */
+/**
+ * Seção escura — o contraponto ao claro. No tema escuro o fundo da página já é
+ * navy, então a separação vem de um tom um pouco mais fundo MAIS uma borda no
+ * topo e na base; sem isso a seção sumiria dentro da página.
+ */
 @utility secao-escura {
   position: relative;
   overflow: hidden;
   background: var(--color-navy-fixo);
   color: #fff;
-  border-top: 1px solid rgb(255 255 255 / 0.06);
+  border-block: 1px solid rgb(255 255 255 / 0.06);
+  @variant dark {
+    border-block-color: rgb(255 255 255 / 0.12);
+  }
+}
+
+/**
+ * Superfície navy dentro de uma página clara (cartão Fundador, blocos escuros).
+ * Em vez de reescrever cada componente filho, redefine os tokens para o subárvore:
+ * qualquer `text-navy`/`text-slate`/`border-borda` que caia aqui dentro já nasce
+ * legível sobre o navy, nos dois temas.
+ */
+@utility sobre-navy {
+  --color-navy: #ffffff;
+  --color-slate: #c9d4f2;
+  --color-borda: rgb(255 255 255 / 0.18);
+  --color-superficie: rgb(255 255 255 / 0.08);
+  --color-superficie-2: rgb(255 255 255 / 0.1);
+  --color-cinza-fundo: rgb(255 255 255 / 0.08);
+  --color-azul-claro: rgb(255 255 255 / 0.12);
+  --color-azul-escuro: #bdd3ff;
+  --color-verde-claro: rgb(22 163 74 / 0.18);
+  --color-verde-texto: #bff3d2;
+  --color-vermelho-claro: rgb(220 38 38 / 0.2);
+  --color-vermelho-texto: #fecaca;
+  color: #fff;
 }
 
 /** O brilho azul atrás da seção escura (uma só mancha, sem blobs flutuando). */
@@ -418,6 +448,19 @@ mark.nc-destaque[data-ativo="true"] {
   to {
     opacity: 1;
     transform: none;
+  }
+}
+
+/**
+ * Barra que cresce de zero até a largura final na primeira pintura — CSS puro
+ * via @starting-style, sem JS. A largura chega em `--pct` (não inline em
+ * `width`), senão o valor inline venceria o estado inicial.
+ */
+@utility barra-anima {
+  width: var(--pct, 0%);
+  transition: width 900ms var(--ease-saida);
+  @starting-style {
+    width: 0%;
   }
 }
 

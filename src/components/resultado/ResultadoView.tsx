@@ -103,10 +103,10 @@ function Resultado({
       />
 
       <div className="container-nc py-6">
-        <div className="grid gap-6 lg:grid-cols-[220px_minmax(0,1fr)] lg:items-start print:block">
+        <div className="grid min-w-0 gap-6 lg:grid-cols-[220px_minmax(0,1fr)] lg:items-start print:block">
           <NavegacaoSecoes ativa={secao} aoSelecionar={setSecao} />
 
-          <div>
+          <div className="min-w-0">
             <div
               id="painel-visao-geral"
               role="tabpanel"
@@ -217,12 +217,12 @@ function ResultadoVazio() {
 function EsqueletoResultado() {
   return (
     <div className="container-nc py-8 md:py-12" aria-busy="true" aria-label="Carregando resultado">
-      <div className="card nc-pulse bg-cinza-fundo h-40" />
+      <div className="nc-esqueleto h-40 rounded-[20px]" />
       <div className="mt-6 grid gap-6 lg:grid-cols-[220px_minmax(0,1fr)]">
-        <div className="card nc-pulse bg-cinza-fundo h-40" />
+        <div className="nc-esqueleto h-40 rounded-[20px]" />
         <div className="space-y-4">
-          <div className="card nc-pulse bg-cinza-fundo h-56" />
-          <div className="card nc-pulse bg-cinza-fundo h-56" />
+          <div className="nc-esqueleto h-56 rounded-[20px]" />
+          <div className="nc-esqueleto h-56 rounded-[20px]" />
         </div>
       </div>
     </div>

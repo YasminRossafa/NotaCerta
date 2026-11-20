@@ -12,6 +12,8 @@ const eslintConfig = defineConfig([
     "out/**",
     "build/**",
     "next-env.d.ts",
+    // Saída de builds de verificação (NEXT_DIST_DIR), fora do controle de versão.
+    ".next-*/**",
   ]),
 ]);
 

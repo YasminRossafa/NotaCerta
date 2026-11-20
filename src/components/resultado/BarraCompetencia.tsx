@@ -24,7 +24,7 @@ export function BarraCompetencia({
 
   return (
     <div className={cn("flex flex-col gap-1.5", className)}>
-      <div className="flex items-center justify-between gap-3">
+      <div className="flex items-start justify-between gap-3">
         <div className="flex min-w-0 items-center gap-2">
           <span
             className={cn(
@@ -36,7 +36,9 @@ export function BarraCompetencia({
             {meta.sigla}
           </span>
           <span
-            className={cn("text-navy truncate font-medium", compacta ? "text-sm" : "text-base")}
+            // Sem truncar: o nome da competência é informação, não enfeite — quebra em
+            // duas linhas quando o cartão é estreito.
+            className={cn("text-navy font-medium text-balance", compacta ? "text-sm" : "text-base")}
             title={meta.descricao}
           >
             {meta.nome}
@@ -59,14 +61,11 @@ export function BarraCompetencia({
         aria-valuemin={0}
         aria-valuemax={200}
         aria-valuenow={nota}
-        className={cn(
-          "bg-cinza-fundo w-full overflow-hidden rounded-full",
-          compacta ? "h-2" : "h-2.5",
-        )}
+        className={cn("bg-trilho w-full overflow-hidden rounded-full", compacta ? "h-2" : "h-2.5")}
       >
         <div
-          className={cn("h-full rounded-full", cores.barra)}
-          style={{ width: `${pct}%`, transition: "width 700ms cubic-bezier(.2,.8,.2,1)" }}
+          className={cn("barra-anima h-full rounded-full", cores.barra)}
+          style={{ "--pct": `${pct}%` } as React.CSSProperties}
         />
       </div>
       {!compacta && justificativa && (

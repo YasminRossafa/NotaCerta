@@ -21,9 +21,12 @@ export function SecaoVisaoGeral({
         <h2 id="vg-competencias-titulo" className="text-navy text-xl font-semibold">
           Nota por competência
         </h2>
-        <div className="mt-4 grid gap-4 sm:grid-cols-2 lg:grid-cols-3 print:block print:space-y-4">
+        <div className="mt-4 grid gap-4 sm:grid-cols-2 print:block print:space-y-4">
           {CODIGOS_COMPETENCIA.map((c) => (
-            <div key={c} className="border-borda/60 rounded-xl border p-4">
+            <div
+              key={c}
+              className="border-borda bg-superficie-2 card-elevavel min-w-0 rounded-2xl border p-4"
+            >
               <BarraCompetencia
                 codigo={c}
                 nota={correcao.competencias[c].nota}
@@ -44,7 +47,7 @@ export function SecaoVisaoGeral({
               <button
                 type="button"
                 onClick={() => aoAbrirParagrafo(i)}
-                className="border-borda/70 hover:bg-cinza-fundo flex min-h-[52px] w-full items-center justify-between gap-3 rounded-xl border px-4 text-left transition-colors"
+                className="border-borda hover:border-azul/50 hover:bg-azul-claro flex min-h-[52px] w-full items-center justify-between gap-3 rounded-2xl border px-4 text-left transition-colors"
               >
                 <span className="flex items-center gap-2.5">
                   <span

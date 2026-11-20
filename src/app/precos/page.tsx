@@ -68,13 +68,13 @@ export default function PaginaPrecos() {
 
       <div className="mx-auto mt-10 grid max-w-4xl gap-5 md:grid-cols-2">
         {/* Grátis */}
-        <section className="card flex flex-col p-6 sm:p-7" aria-labelledby="plano-gratis">
+        <section className="card card-elevavel flex flex-col p-6 sm:p-7" aria-labelledby="plano-gratis">
           <h2 id="plano-gratis" className="text-navy text-2xl font-semibold">
             Grátis
           </h2>
           <p className="text-slate mt-1 text-sm">Para conhecer o método e corrigir todo mês.</p>
           <p className="text-navy mt-5 text-4xl font-semibold">
-            R$ 0<span className="text-slate text-base font-normal"> / sempre</span>
+            R$ 0<span className="text-slate text-base font-normal tracking-normal"> / sempre</span>
           </p>
           <ul className="text-navy mt-6 flex-1 space-y-2.5 text-sm">
             {[
@@ -85,8 +85,8 @@ export default function PaginaPrecos() {
               "Resumo do professor",
             ].map((t) => (
               <li key={t} className="flex items-start gap-2.5">
-                <span className="bg-verde-claro text-verde mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full">
-                  <IconeCheck width={13} height={13} />
+                <span className="bg-verde-claro text-verde-texto mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full">
+                  <IconeCheck width={13} height={13} strokeWidth={3} />
                 </span>
                 {t}
               </li>
@@ -99,23 +99,25 @@ export default function PaginaPrecos() {
 
         {/* Fundador */}
         <section
-          className="card border-azul ring-azul/30 relative flex flex-col p-6 ring-2 sm:p-7"
+          className="bg-navy-fixo sobre-navy relative flex flex-col rounded-[20px] p-6 shadow-[var(--shadow-3)] transition-transform duration-300 sm:-translate-y-3 sm:p-7 sm:hover:-translate-y-5 motion-reduce:transform-none dark:shadow-[var(--nc-brilho-tool)] dark:ring-1 dark:ring-white/10"
           aria-labelledby="plano-fundador"
         >
-          <span className="bg-azul absolute -top-3 left-6 rounded-full px-3 py-1 text-xs font-semibold text-white">
+          <span className="bg-ambar text-navy-fixo absolute -top-3 left-6 rounded-full px-3 py-1 text-xs font-extrabold shadow-[0_8px_16px_-6px_var(--color-ambar)]">
             Vagas limitadas
           </span>
-          <h2 id="plano-fundador" className="text-navy text-2xl font-semibold">
+          <h2 id="plano-fundador" className="text-2xl text-white">
             Plano Fundador
           </h2>
-          <p className="text-slate mt-1 text-sm">Para quem treina várias redações por semana.</p>
-          <p className="text-navy mt-5 text-4xl font-semibold">
+          <p className="mt-1 text-sm text-[#C9D4F2]">
+            Para quem treina várias redações por semana.
+          </p>
+          <p className="mt-5 text-4xl font-extrabold tracking-[-0.04em] text-white">
             Em breve
-            <span className="text-slate block text-base font-normal">
+            <span className="mt-1 block text-base font-normal tracking-normal text-[#C9D4F2]">
               preço de fundador para a lista
             </span>
           </p>
-          <ul className="text-navy mt-6 flex-1 space-y-2.5 text-sm">
+          <ul className="mt-6 flex-1 space-y-2.5 text-sm text-[#C9D4F2]">
             {[
               "Correções ilimitadas",
               "Todas as reescritas, parágrafo por parágrafo",
@@ -124,8 +126,8 @@ export default function PaginaPrecos() {
               "Exportar a correção em PDF",
             ].map((t) => (
               <li key={t} className="flex items-start gap-2.5">
-                <span className="bg-azul-claro text-azul mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full">
-                  <IconeCheck width={13} height={13} />
+                <span className="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-white/10 text-[#4ADE80]">
+                  <IconeCheck width={13} height={13} strokeWidth={3} />
                 </span>
                 {t}
               </li>

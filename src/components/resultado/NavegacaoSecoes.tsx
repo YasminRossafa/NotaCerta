@@ -37,8 +37,9 @@ export function NavegacaoSecoes({
     refs.current[prox]?.focus();
   }
 
+  // min-w-0: sem isso a faixa rolável de abas alarga a coluna da grade no mobile.
   return (
-    <nav aria-label="Seções do resultado" className="print:hidden">
+    <nav aria-label="Seções do resultado" className="min-w-0 print:hidden">
       <div
         role="tablist"
         onKeyDown={onKeyDown}

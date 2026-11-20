@@ -19,7 +19,7 @@ export function CabecalhoResumo({
   aoExportar: () => void;
 }) {
   return (
-    <div className="border-borda/60 bg-superficie/95 py-4 backdrop-blur lg:sticky lg:top-16 lg:z-30 lg:border-b print:static print:border-0 print:bg-superficie print:py-0">
+    <div className="border-borda/60 bg-superficie/90 py-4 backdrop-blur-xl lg:sticky lg:top-[72px] lg:z-30 lg:border-b print:static print:border-0 print:bg-superficie print:py-0">
       <div className="container-nc flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
         <div className="flex min-w-0 items-center gap-4">
           <AnelDeNota nota={correcao.notaTotal} tamanho="sm" />
@@ -50,10 +50,10 @@ export function CabecalhoResumo({
                 <span className={cn("text-[11px] font-bold", cores.texto)}>
                   {COMPETENCIAS[c].sigla}
                 </span>
-                <div className="bg-cinza-fundo h-1.5 w-9 overflow-hidden rounded-full sm:w-11">
+                <div className="bg-trilho h-1.5 w-9 overflow-hidden rounded-full sm:w-11">
                   <div
-                    className={cn("h-full rounded-full", cores.barra)}
-                    style={{ width: `${pct}%` }}
+                    className={cn("barra-anima h-full rounded-full", cores.barra)}
+                    style={{ "--pct": `${pct}%` } as React.CSSProperties}
                   />
                 </div>
               </div>

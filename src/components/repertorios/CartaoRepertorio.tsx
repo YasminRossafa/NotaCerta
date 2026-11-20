@@ -1,5 +1,8 @@
+"use client";
+
 import Link from "next/link";
-import { IconeExterno } from "@/components/ui/Icones";
+import { useId, useState } from "react";
+import { IconeChevron, IconeExterno } from "@/components/ui/Icones";
 import { cn } from "@/lib/cn";
 import {
   DESCRICAO_USO,
@@ -19,7 +22,7 @@ export function TagUso({ uso }: { uso: UsoRepertorio }) {
   return (
     <span
       title={DESCRICAO_USO[uso]}
-      className={cn("rounded-md px-2 py-0.5 text-xs font-semibold", CORES_USO[uso])}
+      className={cn("rounded-full px-2 py-0.5 text-xs font-bold", CORES_USO[uso])}
     >
       {ROTULO_USO[uso]}
     </span>
@@ -27,8 +30,9 @@ export function TagUso({ uso }: { uso: UsoRepertorio }) {
 }
 
 /**
- * Cartão de um item do acervo. Na tela de resultado recebe `porqueCombina`
- * e um link "ver no acervo" (spec §11.4).
+ * Cartão de um item do acervo. "Como usar" abre e fecha com a transição de
+ * grid-template-rows (0fr → 1fr) — altura animada sem JS e sem altura fixa.
+ * Na tela de resultado recebe `porqueCombina` e o link "ver no acervo" (spec §11.4).
  */
 export function CartaoRepertorio({
   item,
@@ -43,16 +47,17 @@ export function CartaoRepertorio({
   className?: string;
   id?: string;
 }) {
+  const [aberto, setAberto] = useState(false);
+  const painelId = useId();
+
   return (
-    <article id={id} className={cn("card flex h-full flex-col p-5", className)}>
+    <article id={id} className={cn("card card-elevavel flex h-full flex-col p-5", className)}>
       <div className="flex items-start justify-between gap-3">
         <div className="min-w-0">
-          <p className="text-slate text-xs font-semibold tracking-wide uppercase">
+          <p className="text-slate text-xs font-bold tracking-wide uppercase">
             {ROTULO_CATEGORIA[item.categoria]}
           </p>
-          <h3 className="text-navy mt-1 text-xl leading-snug font-semibold">
-            {item.titulo}
-          </h3>
+          <h3 className="text-navy mt-1 text-xl leading-snug">{item.titulo}</h3>
           {item.autor && <p className="text-slate text-sm">{item.autor}</p>}
         </div>
         <div className="flex shrink-0 flex-wrap justify-end gap-1">
@@ -63,17 +68,40 @@ export function CartaoRepertorio({
       </div>
 
       {porqueCombina && (
-        <p className="border-ambar/40 bg-ambar-claro mt-3 rounded-lg border px-3 py-2 text-sm text-ambar-texto">
-          <strong className="font-semibold">Por que combina com o tema:</strong> {porqueCombina}
+        <p className="border-ambar/40 bg-ambar-claro text-ambar-texto mt-3 rounded-xl border px-3 py-2 text-sm">
+          <strong className="font-bold">Por que combina com o tema:</strong> {porqueCombina}
         </p>
       )}
 
       <p className="text-navy mt-3 text-sm leading-relaxed">{item.resumo}</p>
-      <p className="text-slate mt-2 text-sm leading-relaxed">
-        <strong className="text-navy font-semibold">Como usar:</strong> {item.comoUsar}
-      </p>
 
-      {item.fonte && <p className="mt-2 text-xs text-ambar-texto">{item.fonte}</p>}
+      <button
+        type="button"
+        onClick={() => setAberto((v) => !v)}
+        aria-expanded={aberto}
+        aria-controls={painelId}
+        className="text-azul hover:text-azul-escuro mt-3 inline-flex min-h-[44px] items-center gap-1.5 self-start text-sm font-bold"
+      >
+        Como usar
+        <IconeChevron
+          width={16}
+          height={16}
+          className={cn("transition-transform duration-300", aberto && "rotate-180")}
+        />
+      </button>
+
+      <div
+        id={painelId}
+        className={cn(
+          "grid transition-[grid-template-rows] duration-300 ease-out motion-reduce:transition-none",
+          aberto ? "grid-rows-[1fr]" : "grid-rows-[0fr]",
+        )}
+      >
+        <div className="overflow-hidden">
+          <p className="text-slate text-sm leading-relaxed">{item.comoUsar}</p>
+          {item.fonte && <p className="text-ambar-texto mt-2 text-xs">{item.fonte}</p>}
+        </div>
+      </div>
 
       <ul className="mt-3 flex flex-wrap gap-1.5" aria-label="Temas">
         {item.temas.map((t) => (
@@ -86,7 +114,7 @@ export function CartaoRepertorio({
       {linkAcervo && (
         <Link
           href={`/repertorios#${item.id}`}
-          className="text-azul hover:text-azul-escuro mt-4 inline-flex min-h-[44px] items-center gap-1.5 text-sm font-semibold"
+          className="text-azul hover:text-azul-escuro mt-auto inline-flex min-h-[44px] items-center gap-1.5 pt-3 text-sm font-bold"
         >
           Ver no acervo
           <IconeExterno width={16} height={16} />

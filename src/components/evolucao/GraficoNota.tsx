@@ -64,7 +64,7 @@ export function GraficoNota({ entradas, meta }: { entradas: EntradaHistorico[]; 
                 x2={LARGURA - PAD.direita}
                 y1={y(v)}
                 y2={y(v)}
-                stroke="#E2E8F0"
+                stroke="var(--nc-eixo)"
                 strokeWidth={1}
               />
               {(v === 0 || v === 500 || v === 1000) && (
@@ -87,7 +87,7 @@ export function GraficoNota({ entradas, meta }: { entradas: EntradaHistorico[]; 
             x2={LARGURA - PAD.direita}
             y1={y(meta)}
             y2={y(meta)}
-            stroke="#2563EB"
+            stroke="var(--color-azul)"
             strokeWidth={1.5}
             strokeDasharray="5 4"
           />
@@ -104,7 +104,7 @@ export function GraficoNota({ entradas, meta }: { entradas: EntradaHistorico[]; 
           <polyline
             points={linha}
             fill="none"
-            stroke="#2563EB"
+            stroke="var(--color-azul)"
             strokeWidth={2}
             strokeLinejoin="round"
             strokeLinecap="round"
@@ -136,7 +136,7 @@ export function GraficoNota({ entradas, meta }: { entradas: EntradaHistorico[]; 
                 cy={y(p.notaTotal)}
                 r={ativo === i ? 7 : 5}
                 fill={cor}
-                stroke="#fff"
+                stroke="var(--color-superficie)"
                 strokeWidth={2}
                 tabIndex={0}
                 aria-label={`${formatarDataCompleta(p.criadoEm)}: nota ${p.notaTotal} de 1000, tema ${p.tema}${p.demo ? " (exemplo)" : ""}`}

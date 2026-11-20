@@ -16,7 +16,7 @@ export function CartaoFundadorPrecos() {
 
   if (fundador) {
     return (
-      <div className="border-verde/40 bg-verde-claro rounded-xl border px-4 py-3 text-sm text-verde-texto">
+      <div className="border-verde/40 bg-verde-claro text-verde-texto rounded-xl border px-4 py-3 text-sm">
         <p className="font-semibold">Plano Fundador ativado neste navegador.</p>
         <p className="mt-1">Correções ilimitadas e repertório completo já estão liberados.</p>
       </div>
@@ -26,7 +26,7 @@ export function CartaoFundadorPrecos() {
   return (
     <div className="space-y-5">
       <BotaoFundador>Entrar na lista do Fundador</BotaoFundador>
-      <div className="border-borda/70 border-t pt-5">
+      <div className="border-borda border-t pt-5">
         <EntrarFundadorForm rotuloBotao="Entrar" compacto />
       </div>
     </div>
