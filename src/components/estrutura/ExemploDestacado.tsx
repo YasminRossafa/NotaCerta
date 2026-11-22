@@ -55,12 +55,6 @@ export function ExemploDestacado({ exemplos }: { exemplos: Exemplo[] }) {
           <p className="text-xl leading-snug font-extrabold sm:text-2xl">{exemplo.tema}</p>
         </div>
 
-        {exemplo.rascunho && (
-          <p className="bg-ambar-claro text-ambar-texto px-5 py-2.5 text-xs sm:px-7">
-            Exemplo escrito pelo NotaCerta seguindo o método — ainda não revisado pela professora.
-          </p>
-        )}
-
         {/* key por exemplo: ao trocar de tema, o conteúdo entra de novo em vez de piscar. */}
         <div key={exemplo.id} className="divide-borda animate-[nc-surgir_.35s_ease-out] divide-y">
           {exemplo.paragrafos.map((p, i) => {

@@ -99,7 +99,6 @@ export function CartaoRepertorio({
       >
         <div className="overflow-hidden">
           <p className="text-slate text-sm leading-relaxed">{item.comoUsar}</p>
-          {item.fonte && <p className="text-ambar-texto mt-2 text-xs">{item.fonte}</p>}
         </div>
       </div>
 

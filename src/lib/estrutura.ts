@@ -9,10 +9,6 @@ export type Exemplo = {
   id: string;
   tema: string;
   paragrafos: ParagrafoExemplo[];
-  /** true para exemplos escritos pelo NotaCerta (fora da apostila original) — revisar pela professora. */
-  rascunho?: boolean;
-  /** observação de revisão, exibida apenas quando rascunho=true. */
-  observacao?: string;
 };
 
 type LegendaPorParagrafo = Record<TipoParagrafo, string[]>;

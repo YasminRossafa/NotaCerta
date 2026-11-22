@@ -512,8 +512,7 @@
       "resumo": "Documentário que expõe as falhas do sistema de saúde privado dos EUA e compara com sistemas públicos universais.",
       "comoUsar": "Abrir introdução sobre direito à saúde, SUS ou desigualdade no acesso a tratamento.",
       "temas": ["saúde", "SUS", "desigualdade", "direito"],
-      "uso": ["introducao", "d1"],
-      "fonte": "complemento NotaCerta — revisar pela professora"
+      "uso": ["introducao", "d1"]
     },
     {
       "id": "a-peste",
@@ -523,8 +522,7 @@
       "resumo": "Romance em que uma cidade enfrenta uma epidemia e precisa agir coletivamente e com solidariedade.",
       "comoUsar": "Repertório sobre saúde pública, epidemias, vacinação e responsabilidade coletiva.",
       "temas": ["saúde", "epidemia", "vacinação", "solidariedade"],
-      "uso": ["introducao", "d2"],
-      "fonte": "complemento NotaCerta — revisar pela professora"
+      "uso": ["introducao", "d2"]
     },
     {
       "id": "pni",
@@ -533,8 +531,7 @@
       "resumo": "Criado em 1973, é referência mundial em vacinação gratuita e universal, ofertada pelo SUS.",
       "comoUsar": "Fato para D1: exemplo de política pública que funciona por meio do SUS.",
       "temas": ["saúde", "SUS", "vacinação", "política pública"],
-      "uso": ["d1", "d2"],
-      "fonte": "complemento NotaCerta — revisar pela professora"
+      "uso": ["d1", "d2"]
     },
     {
       "id": "lei-organica-saude",
@@ -543,8 +540,7 @@
       "resumo": "Regulamenta o SUS e define princípios como universalidade, integralidade e equidade.",
       "comoUsar": "Citação/fato para D1 em temas de saúde e direitos sociais.",
       "temas": ["saúde", "SUS", "direito", "legislação"],
-      "uso": ["d1"],
-      "fonte": "complemento NotaCerta — revisar pela professora"
+      "uso": ["d1"]
     }
   ]
 }
