@@ -36,7 +36,7 @@ export function Cabecalho() {
           aria-label="Principal"
           className="bg-pilula border-pilula-borda flex items-center gap-2 rounded-[999px] border py-2 pr-2.5 pl-4 shadow-[var(--shadow-1)] backdrop-blur-xl sm:pl-5"
         >
-          <Logo className="mr-auto" altura={26} />
+          <Logo className="mr-auto" altura={32} />
 
           <div className="hidden items-center gap-0.5 lg:flex">
             {NAV_LINKS.map((l) => (

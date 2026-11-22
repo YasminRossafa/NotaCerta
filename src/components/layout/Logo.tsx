@@ -8,20 +8,23 @@ import { useTema } from "@/lib/tema";
 type Variante = "colorida" | "escura";
 
 /**
- * Logo do projeto (arquivos em /public). Os dois PNGs têm fundo chapado —
- * branco na versão clara, #022336 na escura — então a logo é apresentada como
- * um "chip" de cantos arredondados: a borda arredondada é intencional e o
- * retângulo do arquivo nunca aparece como emenda.
+ * Logo do projeto (arquivos em /public). Os dois PNGs têm fundo transparente e
+ * já vêm recortados na arte, sem folga — por isso `altura` é a altura real do
+ * desenho, e não de uma moldura. As duas variantes compartilham a mesma caixa
+ * (797×222), então a logo não muda de tamanho ao alternar o tema.
  */
 const ARQUIVO: Record<Variante, string> = {
   colorida: "/notacerta-logo-clara.png",
   escura: "/notacerta-logo-escura.png",
 };
 
+const LARGURA_ARQUIVO = 797;
+const ALTURA_ARQUIVO = 222;
+
 export function Logo({
   className,
   variante,
-  altura = 28,
+  altura = 32,
 }: {
   className?: string;
   /** Sem valor, segue o tema: a versão escura foi feita para fundo escuro. */
@@ -37,22 +40,15 @@ export function Logo({
       className={cn("inline-flex shrink-0 items-center", className)}
       aria-label="NotaCerta — página inicial"
     >
-      <span
-        className={cn(
-          "inline-flex overflow-hidden rounded-[9px]",
-          efetiva === "escura" ? "ring-1 ring-white/10" : "ring-1 ring-black/5",
-        )}
-      >
-        <Image
-          src={ARQUIVO[efetiva]}
-          alt="NotaCerta"
-          width={900}
-          height={320}
-          priority
-          sizes="200px"
-          style={{ height: altura, width: "auto" }}
-        />
-      </span>
+      <Image
+        src={ARQUIVO[efetiva]}
+        alt="NotaCerta"
+        width={LARGURA_ARQUIVO}
+        height={ALTURA_ARQUIVO}
+        priority
+        sizes="240px"
+        style={{ height: altura, width: "auto" }}
+      />
     </Link>
   );
 }

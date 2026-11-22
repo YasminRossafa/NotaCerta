@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import { FormularioCorrigir } from "@/components/corrigir/FormularioCorrigir";
 import { DemoCorrecao } from "@/components/home/DemoCorrecao";
 import { PalcoFlutuante } from "@/components/home/PalcoFlutuante";
@@ -51,6 +52,14 @@ export default function PaginaInicial() {
             <div className="bg-superficie border-borda mt-7 rounded-[20px] border p-4 shadow-[var(--shadow-2)] focus-within:shadow-[var(--shadow-3)] sm:p-[18px] dark:shadow-[var(--nc-brilho-tool)]">
               <FormularioCorrigir />
             </div>
+
+            <p className="text-slate mt-4 text-sm">
+              Quer ver antes?{" "}
+              <Link href="/resultado?exemplo=1" className="text-azul font-semibold underline">
+                Veja uma correção de exemplo
+              </Link>
+              .
+            </p>
           </div>
 
           <PalcoFlutuante />

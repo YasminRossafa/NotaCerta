@@ -15,7 +15,7 @@ export function Rodape() {
     <footer className="bg-rodape-fundo mt-auto border-t border-white/10 text-white">
       <div className="mx-auto grid w-full max-w-[1120px] gap-8 px-5 py-12 md:grid-cols-[1.4fr_1fr_1fr]">
         <div className="max-w-md">
-          <Logo variante="escura" altura={30} />
+          <Logo variante="escura" altura={38} />
           <p className="mt-3 text-sm text-white/70">{SITE.slogan}</p>
           <AvisoNotaEstimada className="mt-4" sobreFundoEscuro />
           {modoDemonstracao && <AvisoModoDemonstracao className="mt-2" sobreFundoEscuro />}
