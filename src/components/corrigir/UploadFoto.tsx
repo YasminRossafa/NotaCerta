@@ -1,13 +1,14 @@
 "use client";
 
 import { useId, useRef, useState } from "react";
-import { Botao } from "@/components/ui/Botao";
-import { IconeCamera, IconeUpload, IconeX } from "@/components/ui/Icones";
+import { IconeCheck, IconeX } from "@/components/ui/Icones";
+import { cn } from "@/lib/cn";
 import { ErroImagem, prepararImagem, type ImagemPreparada } from "@/lib/imagem";
 
 /**
- * Upload da foto da redação manuscrita. No celular abre a câmera (capture="environment");
- * em qualquer dispositivo aceita arquivo da galeria. A imagem é comprimida no cliente.
+ * Upload da foto da redação manuscrita. No celular abre a câmera
+ * (capture="environment"); em qualquer dispositivo aceita arrastar e soltar ou
+ * escolher da galeria. A imagem é comprimida no cliente.
  */
 export function UploadFoto({
   imagem,
@@ -21,6 +22,7 @@ export function UploadFoto({
   const inputCamera = useRef<HTMLInputElement>(null);
   const inputArquivo = useRef<HTMLInputElement>(null);
   const [processando, setProcessando] = useState(false);
+  const [arrastando, setArrastando] = useState(false);
   const [erroLocal, setErroLocal] = useState<string | null>(null);
   const descId = useId();
 
@@ -65,70 +67,96 @@ export function UploadFoto({
       />
 
       {imagem ? (
-        <figure className="card overflow-hidden">
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
-            src={imagem.previewUrl}
-            alt="Prévia da foto da redação enviada"
-            className="bg-cinza-fundo max-h-[420px] w-full object-contain"
-          />
-          <figcaption className="text-slate flex items-center justify-between gap-3 px-4 py-3 text-sm">
+        <figure className="border-borda overflow-hidden rounded-[14px] border">
+          <div className="bg-cinza-fundo relative">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src={imagem.previewUrl}
+              alt="Prévia da foto da redação enviada"
+              className="max-h-[320px] w-full object-contain"
+            />
+            <span className="bg-verde absolute top-3 left-3 flex h-8 w-8 items-center justify-center rounded-full text-white shadow-[var(--shadow-1)]">
+              <IconeCheck width={18} height={18} strokeWidth={3} titulo="Foto pronta" />
+            </span>
+          </div>
+          <figcaption className="text-slate flex flex-wrap items-center justify-between gap-3 px-4 py-2.5 text-sm">
             <span>
               {imagem.largura}×{imagem.altura}px · pronta para enviar
             </span>
-            <button
-              type="button"
-              onClick={() => aoMudar(null)}
-              className="text-vermelho inline-flex min-h-[44px] items-center gap-1 font-semibold"
-            >
-              <IconeX width={16} height={16} />
-              Remover
-            </button>
+            <span className="flex gap-3">
+              <button
+                type="button"
+                onClick={() => inputArquivo.current?.click()}
+                className="text-azul min-h-[44px] font-bold"
+              >
+                Trocar
+              </button>
+              <button
+                type="button"
+                onClick={() => aoMudar(null)}
+                className="text-vermelho-texto inline-flex min-h-[44px] items-center gap-1 font-bold"
+              >
+                <IconeX width={16} height={16} />
+                Remover
+              </button>
+            </span>
           </figcaption>
         </figure>
       ) : (
         <div
-          className="border-borda bg-azul-claro/40 flex flex-col items-center justify-center gap-4 rounded-2xl border-2 border-dashed px-4 py-10 text-center"
-          onDragOver={(e) => e.preventDefault()}
+          onDragEnter={(e) => {
+            e.preventDefault();
+            setArrastando(true);
+          }}
+          onDragOver={(e) => {
+            e.preventDefault();
+            setArrastando(true);
+          }}
+          onDragLeave={(e) => {
+            // Só desliga quando o ponteiro sai da área, não ao passar por um filho.
+            if (!e.currentTarget.contains(e.relatedTarget as Node | null)) setArrastando(false);
+          }}
           onDrop={(e) => {
             e.preventDefault();
+            setArrastando(false);
             tratar(e.dataTransfer.files?.[0]);
           }}
+          className={cn(
+            "rounded-[14px] border-2 border-dashed px-4 py-8 text-center transition-[background-color,border-color,transform] duration-200",
+            arrastando
+              ? "border-azul bg-azul-claro text-azul-escuro scale-[1.01]"
+              : "border-trilho bg-cinza-fundo text-slate hover:border-azul hover:bg-azul-claro hover:text-azul-escuro",
+          )}
         >
-          <span className="text-azul flex h-14 w-14 items-center justify-center rounded-full bg-white shadow-sm">
-            <IconeCamera width={28} height={28} />
-          </span>
-          <div>
-            <p className="text-navy font-semibold">Foto da redação manuscrita</p>
-            <p id={descId} className="text-slate mt-1 text-sm">
-              Boa luz, folha inteira no quadro, sem sombra. Nós transcrevemos antes de corrigir.
-            </p>
-          </div>
-          <div className="flex w-full max-w-sm flex-col gap-2 sm:flex-row">
-            <Botao
+          <p className="font-semibold">
+            {arrastando ? "Solte a foto aqui" : "Arraste a foto da redação ou escolha abaixo"}
+          </p>
+          <p id={descId} className="text-slate mx-auto mt-1 max-w-sm text-[13px]">
+            Boa luz, folha inteira no quadro, sem sombra. Nós transcrevemos antes de corrigir.
+          </p>
+          <div className="mt-4 flex flex-wrap justify-center gap-2">
+            <button
+              type="button"
               onClick={() => inputCamera.current?.click()}
               disabled={processando}
-              cheio
-              className="sm:hidden"
+              className="bg-azul-acao inline-flex min-h-[44px] items-center rounded-full px-4 text-sm font-bold text-white disabled:opacity-60 sm:hidden"
             >
-              <IconeCamera />
               Tirar foto
-            </Botao>
-            <Botao
-              variante="secundario"
+            </button>
+            <button
+              type="button"
               onClick={() => inputArquivo.current?.click()}
               disabled={processando}
-              cheio
+              className="bg-superficie border-borda text-navy inline-flex min-h-[44px] items-center rounded-full border px-4 text-sm font-bold disabled:opacity-60"
             >
-              <IconeUpload />
               {processando ? "Processando…" : "Escolher arquivo"}
-            </Botao>
+            </button>
           </div>
         </div>
       )}
 
       {mensagemErro && (
-        <p role="alert" className="text-vermelho text-sm font-medium">
+        <p role="alert" className="text-vermelho-texto text-[13px] font-semibold">
           {mensagemErro}
         </p>
       )}

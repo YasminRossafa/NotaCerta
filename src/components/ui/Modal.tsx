@@ -36,8 +36,8 @@ export function Modal({
         if (e.target === ref.current) aoFechar();
       }}
       className={cn(
-        "border-borda text-navy m-auto w-[calc(100%-2rem)] max-w-lg rounded-2xl border bg-white p-0 shadow-xl",
-        "backdrop:bg-navy/50 backdrop:backdrop-blur-sm",
+        "border-borda text-navy m-auto w-[calc(100%-2rem)] max-w-lg rounded-2xl border bg-superficie p-0 shadow-xl",
+        "backdrop:bg-navy-fixo/70 backdrop:backdrop-blur-sm",
         className,
       )}
     >

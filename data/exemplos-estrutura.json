@@ -1,7 +1,7 @@
 {
   "versao": 2,
   "fonte": "Apostila de Redação para o ENEM — CEC (Cursinho Educação e Cidadania), UFSCar Sorocaba",
-  "observacao": "Redações-modelo já segmentadas. Cada parágrafo é dividido em 'partes', e cada parte traz o 'rotulo' do elemento do método. A página /estrutura mostra UM exemplo por tema (navegação por tema), com a legenda de rótulos separada por parágrafo. Exemplo 'sus' escrito pelo NotaCerta seguindo o método — revisar pela professora (rascunho: true).",
+  "observacao": "Redações-modelo já segmentadas. Cada parágrafo é dividido em 'partes', e cada parte traz o 'rotulo' do elemento do método. A página /estrutura mostra UM exemplo por tema (navegação por tema), com a legenda de rótulos separada por parágrafo.",
   "exemplos": [
     {
       "id": "educacao-surdos",
@@ -218,7 +218,6 @@
     {
       "id": "sus",
       "tema": "A valorização do Sistema Único de Saúde (SUS) como direito universal",
-      "rascunho": true,
       "paragrafos": [
         {
           "tipo": "introducao",
@@ -325,7 +324,6 @@
     {
       "id": "cinema",
       "tema": "A democratização do acesso ao cinema no Brasil",
-      "rascunho": true,
       "paragrafos": [
         {
           "tipo": "introducao",
@@ -432,7 +430,6 @@
     {
       "id": "trabalho-infantil",
       "tema": "Desafios para a erradicação do trabalho infantil no Brasil",
-      "rascunho": true,
       "paragrafos": [
         {
           "tipo": "introducao",
@@ -540,7 +537,6 @@
     {
       "id": "envelhecimento",
       "tema": "Os desafios do envelhecimento na sociedade brasileira",
-      "rascunho": true,
       "paragrafos": [
         {
           "tipo": "introducao",
@@ -648,7 +644,6 @@
     {
       "id": "neurodivergentes",
       "tema": "Desafios para a inclusão educacional de pessoas neurodivergentes no Brasil",
-      "rascunho": true,
       "paragrafos": [
         {
           "tipo": "introducao",
@@ -756,7 +751,6 @@
     {
       "id": "manipulacao-informacao",
       "tema": "A manipulação da informação na internet",
-      "rascunho": true,
       "paragrafos": [
         {
           "tipo": "introducao",

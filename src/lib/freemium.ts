@@ -1,9 +1,10 @@
 /**
- * Freemium no cliente (spec §13): limite mensal por dispositivo, plano (stub) e captura de e-mail.
- * Tudo em localStorage, sempre dentro de try/catch (spec §4).
+ * Freemium no cliente (spec §13): limite mensal por dispositivo e captura de e-mail. Tudo em
+ * localStorage, sempre dentro de try/catch (spec §4).
  *
  * O limite "de verdade" é aplicado no servidor (rota /api/corrigir); aqui é só a experiência
- * (abrir o ModalUpgrade antes de gastar uma chamada). Reseta no mês civil.
+ * (abrir o ModalUpgrade antes de gastar uma chamada). Reseta no mês civil. O Plano Fundador
+ * (spec §18.4) é à parte: vem do cookie assinado de `/api/fundador` — ver `useFundador()`.
  */
 
 export const LIMITE_GRATIS_PADRAO = 2;
@@ -11,11 +12,8 @@ export const LIMITE_GRATIS_PADRAO = 2;
 const CHAVES = {
   uso: "nc:uso",
   email: "nc:email",
-  plano: "nc:plano",
   rascunho: "nc:rascunho",
 } as const;
-
-export type Plano = "gratis" | "fundador";
 
 function ler<T>(chave: string): T | null {
   try {
@@ -38,13 +36,6 @@ function mesAtual(): string {
   return new Date().toISOString().slice(0, 7);
 }
 
-/** Plano ativo. Stub: sempre "gratis" salvo marcação manual em localStorage. */
-export function planoAtivo(): Plano {
-  // TODO(claudia): pagamento — trocar por verificação real de assinatura.
-  const p = ler<{ plano: Plano }>(CHAVES.plano);
-  return p?.plano === "fundador" ? "fundador" : "gratis";
-}
-
 export function usosNoMes(): number {
   const u = ler<{ mes: string; total: number }>(CHAVES.uso);
   return u && u.mes === mesAtual() ? u.total : 0;
@@ -55,7 +46,6 @@ export function registrarUso(): void {
 }
 
 export function podeCorrigirGratis(limite = LIMITE_GRATIS_PADRAO): boolean {
-  if (planoAtivo() === "fundador") return true;
   return usosNoMes() < limite;
 }
 

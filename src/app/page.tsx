@@ -1,9 +1,10 @@
 import type { Metadata } from "next";
-import Link from "next/link";
 import { FormularioCorrigir } from "@/components/corrigir/FormularioCorrigir";
+import { DemoCorrecao } from "@/components/home/DemoCorrecao";
+import { PalcoFlutuante } from "@/components/home/PalcoFlutuante";
+import { Revelar } from "@/components/motion/Revelar";
 import { Botao } from "@/components/ui/Botao";
-import { AvisoNotaEstimada } from "@/components/ui/Aviso";
-import { IconeChevron } from "@/components/ui/Icones";
+import { IconeCheck } from "@/components/ui/Icones";
 import { SITE } from "@/lib/site";
 
 export const metadata: Metadata = {
@@ -21,123 +22,143 @@ export const metadata: Metadata = {
 };
 
 const PASSOS = [
-  "Cole o texto ou tire uma foto da redação, e informe o tema (ou deixe que a gente detecte).",
-  "Analisamos introdução, D1, D2 e conclusão competência por competência, seguindo o método.",
-  "Você recebe nota estimada, apontamentos com motivo, reescrita e repertório para o tema.",
+  { n: "1", titulo: "Envie", texto: "Cole o texto ou fotografe a folha." },
+  { n: "2", titulo: "Receba", texto: "Nota por competência e apontamentos explicados." },
+  { n: "3", titulo: "Reescreva", texto: "Veja cada parágrafo ajustado ao modelo." },
 ];
 
-const FAQ = [
-  {
-    p: "Preciso me cadastrar para corrigir?",
-    r: "Não. A primeira correção não exige cadastro. O e-mail só é pedido depois, se você quiser mais correções.",
-  },
-  {
-    p: "Minha redação fica guardada em algum lugar?",
-    r: "Não. O texto ou a foto é usado só para gerar a correção e não é salvo em banco de dados.",
-  },
-  {
-    p: "A nota é a nota oficial do ENEM?",
-    r: "Não. É uma nota estimada por inteligência artificial seguindo o método da professora. O NotaCerta não tem vínculo com o INEP ou com o MEC.",
-  },
-  {
-    p: "Quantas correções grátis eu tenho?",
-    r: "Duas por mês, neste aparelho. O contador reseta no início de cada mês civil.",
-  },
-  {
-    p: "Funciona com redação manuscrita?",
-    r: "Sim. Você pode enviar uma foto da folha ou colar o texto digitado — os dois funcionam.",
-  },
-];
+const PLANO_GRATIS = ["2 correções por mês", "Nota e apontamentos", "1 reescrita"];
+const PLANO_FUNDADOR = ["Correções ilimitadas", "Todas as reescritas", "Repertórios e evolução"];
 
 export default function PaginaInicial() {
   return (
     <>
-      <section className="container-nc py-10 md:py-14">
-        <div className="grid gap-8 lg:grid-cols-[1fr_1.1fr] lg:items-start lg:gap-14">
-          <div className="max-w-lg lg:pt-2">
-            <h1 className="text-navy text-4xl leading-[1.1] font-semibold tracking-tight sm:text-5xl">
-              Corretor de redação ENEM com <span className="text-azul">método</span>, não com
-              achismo.
-            </h1>
-            <p className="text-slate mt-5 text-lg leading-relaxed">
-              Envie sua redação e receba nota estimada por competência, cada erro explicado com o
-              motivo, a reescrita que ensina e repertório curado para o seu tema.
-            </p>
-            <p className="text-slate mt-4 text-sm">
-              Quer ver antes?{" "}
-              <Link href="/resultado?exemplo=1" className="text-azul font-semibold underline">
-                Veja uma correção de exemplo
-              </Link>
-              .
-            </p>
-            <AvisoNotaEstimada className="mt-6" />
-          </div>
-
-          <div className="card p-5 sm:p-7">
-            <FormularioCorrigir />
-          </div>
-        </div>
-      </section>
-
-      {/* 3 passos */}
-      <section className="bg-cinza-fundo" aria-labelledby="passos-titulo">
-        <div className="container-nc py-12 md:py-16">
-          <h2 id="passos-titulo" className="text-navy text-2xl font-semibold sm:text-3xl">
-            Como funciona
-          </h2>
-          <ol className="mt-6 space-y-3">
-            {PASSOS.map((texto, i) => (
-              <li key={texto} className="flex items-start gap-3 text-sm sm:text-base">
-                <span className="bg-azul flex h-6 w-6 shrink-0 items-center justify-center rounded-full text-xs font-semibold text-white">
-                  {i + 1}
-                </span>
-                <span className="text-navy pt-0.5">{texto}</span>
-              </li>
-            ))}
-          </ol>
-        </div>
-      </section>
-
-      {/* Planos (teaser) */}
-      <section className="container-nc py-12 md:py-16" aria-labelledby="planos-titulo">
-        <div className="card flex flex-col items-start gap-4 p-6 sm:flex-row sm:items-center sm:justify-between sm:p-7">
+      {/* ---------------------------------------------------------------
+          Herói: a ferramenta real é a página (spec §18.1)
+          --------------------------------------------------------------- */}
+      <section className="papel-pautado px-5 pt-10 pb-20 lg:pt-16">
+        <div className="mx-auto grid w-full max-w-[1120px] items-center gap-10 lg:grid-cols-[1.05fr_0.95fr] lg:gap-14">
           <div>
-            <h2 id="planos-titulo" className="text-navy text-lg font-semibold">
-              Grátis: 2 correções completas por mês.
-            </h2>
-            <p className="text-slate mt-1 text-sm">
-              Quer mais volume, todas as reescritas e histórico? Conheça o{" "}
-              <Link href="/precos" className="text-azul font-semibold underline">
-                Plano Fundador
-              </Link>
-              .
+            <h1 className="text-navy text-[clamp(38px,5.4vw,64px)]">
+              Sua redação corrigida <span className="marca">do jeito certo</span>
+            </h1>
+            <p className="text-slate mt-4 max-w-[46ch] text-lg">
+              Cole o texto ou envie uma foto. Receba nota por competência e a reescrita de cada
+              parágrafo.
             </p>
+
+            {/* O cartão da ferramenta: o form de verdade, ligado à API e aos limites. */}
+            <div className="bg-superficie border-borda mt-7 rounded-[20px] border p-4 shadow-[var(--shadow-2)] focus-within:shadow-[var(--shadow-3)] sm:p-[18px] dark:shadow-[var(--nc-brilho-tool)]">
+              <FormularioCorrigir />
+            </div>
           </div>
-          <Botao href="/precos" variante="secundario">
-            Ver planos
-          </Botao>
+
+          <PalcoFlutuante />
         </div>
       </section>
 
-      {/* FAQ */}
-      <section className="container-nc pb-14 md:pb-20" aria-labelledby="faq-titulo">
-        <h2 id="faq-titulo" className="text-navy text-2xl font-semibold sm:text-3xl">
-          Perguntas frequentes
-        </h2>
-        <div className="divide-borda mt-6 max-w-2xl divide-y">
-          {FAQ.map((item) => (
-            <details key={item.p} className="group py-4">
-              <summary className="text-navy flex cursor-pointer list-none items-center justify-between gap-4 font-semibold">
-                {item.p}
-                <IconeChevron
-                  className="text-slate shrink-0 transition-transform group-open:rotate-180"
-                  width={18}
-                  height={18}
-                />
-              </summary>
-              <p className="text-slate mt-2 text-sm leading-relaxed">{item.r}</p>
-            </details>
-          ))}
+      {/* ---------------------------------------------------------------
+          Exemplo interativo — a seção navy
+          --------------------------------------------------------------- */}
+      <section
+        className="secao-escura brilho-canto px-5 py-20 lg:py-[110px]"
+        aria-labelledby="exemplo-titulo"
+        id="exemplo"
+      >
+        <div className="relative mx-auto w-full max-w-[1120px]">
+          <Revelar>
+            <h2
+              id="exemplo-titulo"
+              className="max-w-[18ch] text-[clamp(30px,4vw,46px)] text-white"
+            >
+              Toque no texto e veja a correção
+            </h2>
+          </Revelar>
+          <Revelar atraso={90} className="mt-9">
+            <DemoCorrecao />
+          </Revelar>
+        </div>
+      </section>
+
+      {/* ---------------------------------------------------------------
+          Três passos
+          --------------------------------------------------------------- */}
+      <section className="px-5 pt-20 pb-10 lg:pt-[100px]" aria-labelledby="passos-titulo">
+        <div className="mx-auto w-full max-w-[1120px]">
+          <Revelar>
+            <h2
+              id="passos-titulo"
+              className="text-navy max-w-[22ch] text-[clamp(30px,4vw,46px)]"
+            >
+              Três passos, um minuto
+            </h2>
+          </Revelar>
+          <ul className="mt-9 grid gap-5 sm:grid-cols-3">
+            {PASSOS.map((p, i) => (
+              <Revelar
+                as="li"
+                key={p.n}
+                atraso={i * 90}
+                className="bg-superficie border-borda rounded-[20px] border p-6 shadow-[var(--shadow-1)] transition-[transform,box-shadow] duration-300 hover:-translate-y-2 hover:rotate-[-0.6deg] hover:shadow-[var(--shadow-2)] motion-reduce:hover:translate-y-0 motion-reduce:hover:rotate-0"
+              >
+                <span className="text-azul block text-[54px] leading-none font-extrabold tracking-[-0.05em]">
+                  {p.n}
+                </span>
+                <h3 className="text-navy mt-3 text-xl">{p.titulo}</h3>
+                <p className="text-slate mt-1.5 text-[15px]">{p.texto}</p>
+              </Revelar>
+            ))}
+          </ul>
+        </div>
+      </section>
+
+      {/* ---------------------------------------------------------------
+          Planos (curtos) — o Fundador domina
+          --------------------------------------------------------------- */}
+      <section className="px-5 pt-[70px] pb-[110px]" aria-labelledby="planos-titulo">
+        <div className="mx-auto w-full max-w-[1120px]">
+          <Revelar>
+            <h2 id="planos-titulo" className="text-navy max-w-[20ch] text-[clamp(30px,4vw,46px)]">
+              Comece grátis
+            </h2>
+          </Revelar>
+
+          <div className="mt-8 grid max-w-[860px] gap-6 sm:grid-cols-2">
+            <Revelar className="bg-superficie border-borda card-elevavel rounded-3xl border p-7 shadow-[var(--shadow-1)]">
+              <h3 className="text-navy text-[22px]">Grátis</h3>
+              <p className="text-navy mt-1.5 text-[34px] font-extrabold tracking-[-0.04em]">
+                R$ 0
+              </p>
+              <ul className="text-slate mt-4 grid gap-2 text-[15px]">
+                {PLANO_GRATIS.map((t) => (
+                  <ItemPlano key={t}>{t}</ItemPlano>
+                ))}
+              </ul>
+              <Botao href="/#conteudo" variante="navy" className="mt-6">
+                Corrigir agora
+              </Botao>
+            </Revelar>
+
+            <Revelar
+              atraso={90}
+              className="bg-navy-fixo sobre-navy rounded-3xl p-7 shadow-[var(--shadow-3)] transition-transform duration-300 sm:-translate-y-2.5 sm:hover:-translate-y-4 motion-reduce:transform-none dark:shadow-[var(--nc-brilho-tool)] dark:ring-1 dark:ring-white/10"
+            >
+              <h3 className="text-[22px] text-white">Plano Fundador</h3>
+              <p className="mt-1.5 text-[34px] font-extrabold tracking-[-0.04em] text-white">
+                Em breve
+              </p>
+              <ul className="mt-4 grid gap-2 text-[15px] text-[#C9D4F2]">
+                {PLANO_FUNDADOR.map((t) => (
+                  <ItemPlano key={t} escuro>
+                    {t}
+                  </ItemPlano>
+                ))}
+              </ul>
+              <Botao href="/precos" className="mt-6">
+                Quero acesso
+              </Botao>
+            </Revelar>
+          </div>
         </div>
       </section>
 
@@ -158,5 +179,19 @@ export default function PaginaInicial() {
         }}
       />
     </>
+  );
+}
+
+function ItemPlano({ children, escuro }: { children: React.ReactNode; escuro?: boolean }) {
+  return (
+    <li className="flex items-start gap-2">
+      <IconeCheck
+        width={16}
+        height={16}
+        strokeWidth={3}
+        className={escuro ? "mt-0.5 shrink-0 text-[#4ADE80]" : "text-verde mt-0.5 shrink-0"}
+      />
+      {children}
+    </li>
   );
 }

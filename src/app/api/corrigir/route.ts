@@ -2,6 +2,7 @@ import { NextResponse, type NextRequest } from "next/server";
 import { EntradaSchema, TEXTO_MINIMO, type ErroApi } from "@/lib/schema";
 import { ErroCorretor, corrigirRedacao } from "@/lib/server/corretor";
 import { chaveConfigurada } from "@/lib/ai/provider";
+import { COOKIE_FUNDADOR, verificarCookie } from "@/lib/server/fundador";
 import {
   COOKIE_DISPOSITIVO,
   consumirUso,
@@ -80,8 +81,16 @@ export async function POST(request: NextRequest) {
     );
   }
 
-  // 2. Rate limit por dispositivo
-  if (!consumirUso(idDispositivo)) {
+  // 1.5 Plano Fundador (demo, spec §18.4): sem limite mensal e mais sugestões de repertório.
+  let fundador = false;
+  try {
+    fundador = verificarCookie(request.cookies.get(COOKIE_FUNDADOR)?.value);
+  } catch {
+    fundador = false;
+  }
+
+  // 2. Rate limit por dispositivo — Fundador não tem limite.
+  if (!fundador && !consumirUso(idDispositivo)) {
     return responderErro(
       {
         erro: "limite_mensal",
@@ -96,13 +105,13 @@ export async function POST(request: NextRequest) {
 
   // 3–5. Modelo → normalização → validação (dentro de corrigirRedacao)
   try {
-    const correcao = await corrigirRedacao(entrada.data);
+    const correcao = await corrigirRedacao(entrada.data, fundador ? 5 : 3);
     const res = NextResponse.json(correcao, { status: 200 });
     if (cookieNovo) res.headers.set("Set-Cookie", cookieNovo);
     res.headers.set("Cache-Control", "no-store");
     return res;
   } catch (e) {
-    devolverUso(idDispositivo); // o aluno não recebeu nada: não cobrar do saldo mensal
+    if (!fundador) devolverUso(idDispositivo); // o aluno não recebeu nada: não cobrar do saldo mensal
     const erro =
       e instanceof ErroCorretor
         ? e

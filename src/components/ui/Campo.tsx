@@ -31,7 +31,7 @@ export const Campo = forwardRef<HTMLInputElement, Props>(function Campo(
         aria-invalid={erro ? true : undefined}
         aria-describedby={describedBy || undefined}
         className={cn(
-          "text-navy placeholder:text-slate/70 min-h-[44px] w-full rounded-xl border bg-white px-3.5 text-base",
+          "text-navy placeholder:text-slate/70 min-h-[44px] w-full rounded-xl border bg-superficie px-3.5 text-base",
           "focus:border-azul focus:outline-none",
           erro ? "border-vermelho" : "border-borda",
         )}

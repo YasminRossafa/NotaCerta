@@ -34,7 +34,7 @@ export function ExploradorRepertorios({
   return (
     <div className="grid gap-6 lg:grid-cols-[260px_1fr]">
       {/* Filtros */}
-      <aside className="space-y-5 lg:sticky lg:top-20 lg:self-start" aria-label="Filtros">
+      <aside className="space-y-5 lg:sticky lg:top-[96px] lg:self-start" aria-label="Filtros">
         <div className="relative">
           <label htmlFor="busca-repertorio" className="sr-only">
             Buscar repertório
@@ -46,7 +46,7 @@ export function ExploradorRepertorios({
             value={busca}
             onChange={(e) => setBusca(e.target.value)}
             placeholder="Buscar por título, autor, tema…"
-            className="border-borda text-navy placeholder:text-slate/70 focus:border-azul min-h-[44px] w-full rounded-xl border bg-white pr-3.5 pl-11 text-base focus:outline-none"
+            className="border-borda text-navy placeholder:text-slate/70 focus:border-azul focus:ring-azul/15 bg-superficie min-h-[44px] w-full rounded-full border pr-3.5 pl-11 text-base transition-colors focus:ring-4 focus:outline-none"
           />
         </div>
 
@@ -72,7 +72,7 @@ export function ExploradorRepertorios({
             id="tema-repertorio"
             value={tema}
             onChange={(e) => setTema(e.target.value)}
-            className="border-borda text-navy focus:border-azul min-h-[44px] w-full rounded-xl border bg-white px-3 text-base focus:outline-none"
+            className="border-borda text-navy focus:border-azul bg-superficie min-h-[44px] w-full rounded-full border px-4 text-base transition-colors focus:outline-none"
           >
             <option value="">Todos os temas</option>
             {temas.map((t) => (
@@ -142,10 +142,12 @@ function Chip({
       aria-pressed={ativo}
       onClick={onClick}
       className={cn(
-        "min-h-[36px] rounded-full border px-3 text-sm font-medium transition-colors",
+        "min-h-[44px] rounded-full border-2 px-3.5 text-sm font-bold",
+        "transition-[transform,box-shadow,background-color,color] duration-200",
+        "hover:-translate-y-0.5 motion-reduce:hover:translate-y-0",
         ativo
-          ? "border-azul bg-azul text-white"
-          : "border-borda text-navy hover:bg-azul-claro bg-white",
+          ? "bg-azul-acao border-transparent text-white shadow-[0_8px_16px_-6px_var(--color-azul-acao)]"
+          : "bg-cinza-fundo text-slate hover:text-navy border-transparent hover:shadow-[var(--shadow-1)]",
       )}
     >
       {children}

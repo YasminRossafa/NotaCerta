@@ -1,90 +1,424 @@
 @import "tailwindcss";
 
 /* ---------------------------------------------------------------------------
-   NotaCerta — design tokens (spec §10)
+   NotaCerta — sistema visual (referência: home-notacerta-referencia.html)
+
+   Regra: nenhum componente usa cor literal. Tudo passa por um token
+   `--color-*`, e é só o VALOR do token que muda entre claro e escuro — assim
+   `text-navy`, `bg-superficie`, `border-borda` etc. funcionam nos dois temas
+   sem `dark:` espalhado pelo código.
    --------------------------------------------------------------------------- */
 @theme {
+  /* marca */
   --color-azul: #2563eb;
+  /* Azul de AÇÃO: fundo de botão/chip com texto branco por cima. Não clareia no
+     tema escuro — #3B82F6 com texto branco fica em 3,7:1 e reprovaria em AA. */
+  --color-azul-acao: #2563eb;
   --color-azul-escuro: #1e3a8a;
-  --color-navy: #0f172a;
-  --color-azul-claro: #eff6ff;
-  --color-borda: #bfdbfe;
-  --color-cinza-fundo: #f1f5f9;
-  --color-slate: #64748b;
+  --color-azul-claro: #e8efff;
+  --color-ambar: #fbbf24;
+  --color-ambar-escuro: #f59e0b;
+  --color-ambar-claro: #fef3c7;
 
-  /* semânticos de nota */
+  /* texto e superfícies (valores do tema claro; o escuro troca mais abaixo) */
+  --color-navy: #111b33;
+  --color-slate: #5b6785;
+  --color-superficie: #ffffff;
+  --color-superficie-2: #f8faff;
+  --color-fundo: #f3f6ff;
+  --color-borda: #dde5fa;
+  --color-cinza-fundo: #f0f4ff;
+
+  /* navy que NÃO inverte — as seções escuras existem nos dois temas */
+  --color-navy-fixo: #0b1220;
+  --color-rodape-fundo: #0b1220;
+
+  /* pílula flutuante do cabeçalho */
+  --color-pilula: rgb(255 255 255 / 0.78);
+  --color-pilula-borda: rgb(255 255 255 / 0.9);
+
+  /* trilho de barras finas (contador, competências) */
+  --color-trilho: #dde5fa;
+
+  /* semânticos de nota (spec §10) */
   --color-verde: #16a34a;
   --color-verde-claro: #dcfce7;
-  --color-ambar: #f59e0b;
-  --color-ambar-claro: #fef3c7;
+  --color-verde-texto: #166534;
+  --color-ambar-texto: #92400e;
   --color-vermelho: #dc2626;
   --color-vermelho-claro: #fee2e2;
+  --color-vermelho-texto: #b91c1c;
+  --color-roxo-claro: #f3e8ff;
+  --color-roxo-texto: #6b21a8;
 
-  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-sans: var(--font-jakarta), ui-sans-serif, system-ui, sans-serif;
 
-  --color-rodape-fundo: #012235;
+  --radius-card: 20px;
 
-  --radius-card: 1rem;
-  --shadow-card: 0 1px 2px rgb(15 23 42 / 0.04), 0 8px 24px -12px rgb(15 23 42 / 0.12);
-  --shadow-card-hover: 0 2px 4px rgb(15 23 42 / 0.05), 0 16px 32px -12px rgb(37 99 235 / 0.18);
+  /* Três níveis de sombra em camadas — é o que dá a sensação de papel flutuando. */
+  --shadow-1: 0 1px 2px rgb(11 18 32 / 0.06), 0 4px 12px rgb(11 18 32 / 0.06);
+  --shadow-2:
+    0 2px 4px rgb(11 18 32 / 0.06), 0 12px 24px -6px rgb(11 18 32 / 0.14),
+    0 32px 60px -20px rgb(37 99 235 / 0.28);
+  --shadow-3:
+    0 4px 8px rgb(11 18 32 / 0.08), 0 24px 48px -8px rgb(11 18 32 / 0.22),
+    0 48px 90px -30px rgb(37 99 235 / 0.35);
+
+  /* curvas e tempos compartilhados */
+  --ease-saida: cubic-bezier(0.2, 0.8, 0.2, 1);
+  --ease-mola: cubic-bezier(0.3, 1.3, 0.5, 1);
 }
 
+/* `dark:` depende do atributo, não do sistema — o script inline do layout
+   resolve a preferência do sistema para um valor explícito antes de pintar. */
+@custom-variant dark (&:where([data-theme="dark"], [data-theme="dark"] *));
+
+/* --------------------------------------------------------------------------
+   Tema claro
+   -------------------------------------------------------------------------- */
 :root {
   color-scheme: light;
+
+  /* papel pautado: a linha do caderno e a margem vermelha da professora */
+  --nc-pauta: rgb(37 99 235 / 0.07);
+  --nc-margem: rgb(220 38 38 / 0.18);
+  --nc-eixo: #e1e8fb;
+  --nc-trilho: #dde5fa;
+
+  /* traço de caneta por cima do texto (marca-texto) */
+  --nc-marca: var(--color-ambar);
+  --nc-marca-opacidade: 1;
+
+  --nc-brilho-tool: none;
+}
+
+/* --------------------------------------------------------------------------
+   Tema escuro — deste layout, não um inverte-tudo genérico.
+   -------------------------------------------------------------------------- */
+:root[data-theme="dark"] {
+  color-scheme: dark;
+
+  /* Um passo mais claro que o #3B82F6 do briefing: como cor de TEXTO sobre o
+     cartão navy, #3B82F6 fica em 4,3:1 e reprovaria em AA. O azul cheio de
+     botão continua sendo --color-azul-acao. */
+  --color-azul: #589bff;
+  --color-azul-escuro: #bdd3ff;
+  --color-azul-claro: #17294d;
+  --color-ambar-claro: #3b2a09;
+
+  --color-navy: #e6ecff;
+  --color-slate: #9fb0dc;
+  --color-superficie: #16213d;
+  --color-superficie-2: #1a2748;
+  --color-fundo: #0b1220;
+  --color-borda: rgb(255 255 255 / 0.08);
+  --color-cinza-fundo: #111c36;
+
+  /* a seção "exemplo" precisa continuar separada do fundo da página */
+  --color-navy-fixo: #070f1f;
+  --color-rodape-fundo: #070f1f;
+
+  --color-verde: #34d399;
+  --color-verde-claro: #0d3327;
+  --color-verde-texto: #6ee7b7;
+  --color-ambar-texto: #fcd34d;
+  --color-vermelho: #f87171;
+  --color-vermelho-claro: #3d1518;
+  --color-vermelho-texto: #fca5a5;
+  --color-roxo-claro: #2d1b45;
+  --color-roxo-texto: #d8b4fe;
+
+  /* pauta e margem continuam, bem fracas */
+  --nc-pauta: rgb(59 130 246 / 0.08);
+  --nc-margem: rgb(248 113 113 / 0.16);
+  --nc-eixo: #24315a;
+  --nc-trilho: #24315a;
+
+  /* o âmbar segue âmbar, com um pouco menos de força sobre texto claro */
+  --nc-marca-opacidade: 0.82;
+
+  --color-pilula: rgb(22 33 61 / 0.82);
+  --color-pilula-borda: rgb(255 255 255 / 0.08);
+  --color-trilho: #24315a;
+
+  --shadow-1: 0 1px 2px rgb(0 0 0 / 0.4), 0 4px 12px rgb(0 0 0 / 0.35);
+  --shadow-2: 0 2px 4px rgb(0 0 0 / 0.4), 0 12px 24px -6px rgb(0 0 0 / 0.55);
+  --shadow-3: 0 4px 8px rgb(0 0 0 / 0.45), 0 24px 48px -8px rgb(0 0 0 / 0.65);
+
+  /* o brilho azul é exclusivo do cartão da ferramenta e do cartão Fundador */
+  --nc-brilho-tool: 0 0 0 1px rgb(59 130 246 / 0.14), 0 30px 70px -30px rgb(59 130 246 / 0.55);
 }
 
 html {
   scroll-behavior: smooth;
+  background: var(--color-fundo);
 }
 
 body {
-  background: #ffffff;
+  background: var(--color-fundo);
   color: var(--color-navy);
   font-family: var(--font-sans);
   font-size: 16px;
-  line-height: 1.6;
+  line-height: 1.5;
   -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
 }
 
-/* Foco visível e consistente (a11y) */
+/* No escuro o fundo ganha a profundidade do briefing: #0B1220 -> #0E1730. */
+:root[data-theme="dark"] body {
+  background: linear-gradient(175deg, #0b1220 0%, #0e1730 100%) fixed;
+}
+
+h1,
+h2,
+h3 {
+  letter-spacing: -0.04em;
+  font-weight: 800;
+  line-height: 1.08;
+  text-wrap: balance;
+}
+h1 {
+  letter-spacing: -0.045em;
+  line-height: 1.03;
+}
+
+::selection {
+  background: color-mix(in srgb, var(--color-ambar) 45%, transparent);
+  color: var(--color-navy);
+}
+
+/* Foco visível e consistente (a11y) — âmbar, visível nos dois temas. */
 :where(a, button, input, textarea, select, summary, [tabindex]):focus-visible {
-  outline: 3px solid color-mix(in srgb, var(--color-azul) 55%, transparent);
-  outline-offset: 2px;
-  border-radius: 0.5rem;
+  outline: 3px solid var(--color-ambar-escuro, #f59e0b);
+  outline-offset: 3px;
+  border-radius: 8px;
 }
 
+/* ---------------------------------------------------------------------------
+   Superfícies
+   --------------------------------------------------------------------------- */
 @utility card {
   border-radius: var(--radius-card);
-  background: #fff;
-  border: 1px solid color-mix(in srgb, var(--color-borda) 70%, transparent);
-  box-shadow: var(--shadow-card);
+  background: var(--color-superficie);
+  border: 1px solid var(--color-borda);
+  box-shadow: var(--shadow-1);
+}
+
+/** Cartão que sobe ao passar o mouse. */
+@utility card-elevavel {
+  transition:
+    transform 0.3s var(--ease-saida),
+    box-shadow 0.3s var(--ease-saida);
+  &:hover {
+    transform: translateY(-6px);
+    box-shadow: var(--shadow-2);
+  }
 }
 
 @utility container-nc {
-  width: 100%;
+  width: min(1120px, 100%);
   margin-inline: auto;
-  padding-inline: 1rem;
-  max-width: 72rem;
-  @media (width >= 40rem) {
-    padding-inline: 1.5rem;
-  }
-  @media (width >= 64rem) {
-    padding-inline: 2rem;
+  padding-inline: 20px;
+}
+
+/** Seção escura — o contraponto ao claro, nos dois temas. */
+/**
+ * Seção escura — o contraponto ao claro. No tema escuro o fundo da página já é
+ * navy, então a separação vem de um tom um pouco mais fundo MAIS uma borda no
+ * topo e na base; sem isso a seção sumiria dentro da página.
+ */
+@utility secao-escura {
+  position: relative;
+  overflow: hidden;
+  background: var(--color-navy-fixo);
+  color: #fff;
+  border-block: 1px solid rgb(255 255 255 / 0.06);
+  @variant dark {
+    border-block-color: rgb(255 255 255 / 0.12);
   }
 }
 
-/* Marcações de trecho na tela de resultado */
-mark.nc-destaque {
-  background: linear-gradient(transparent 40%, var(--color-ambar-claro) 40%);
-  color: inherit;
-  padding: 0 0.1em;
-  border-bottom: 2px solid var(--color-ambar);
-  border-radius: 2px;
-  cursor: help;
+/**
+ * Superfície navy dentro de uma página clara (cartão Fundador, blocos escuros).
+ * Em vez de reescrever cada componente filho, redefine os tokens para o subárvore:
+ * qualquer `text-navy`/`text-slate`/`border-borda` que caia aqui dentro já nasce
+ * legível sobre o navy, nos dois temas.
+ */
+@utility sobre-navy {
+  --color-navy: #ffffff;
+  --color-slate: #c9d4f2;
+  --color-borda: rgb(255 255 255 / 0.18);
+  --color-superficie: rgb(255 255 255 / 0.08);
+  --color-superficie-2: rgb(255 255 255 / 0.1);
+  --color-cinza-fundo: rgb(255 255 255 / 0.08);
+  --color-azul-claro: rgb(255 255 255 / 0.12);
+  --color-azul-escuro: #bdd3ff;
+  --color-verde-claro: rgb(22 163 74 / 0.18);
+  --color-verde-texto: #bff3d2;
+  --color-vermelho-claro: rgb(220 38 38 / 0.2);
+  --color-vermelho-texto: #fecaca;
+  color: #fff;
 }
+
+/** O brilho azul atrás da seção escura (uma só mancha, sem blobs flutuando). */
+@utility brilho-canto {
+  &::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background: radial-gradient(
+      600px 300px at 85% 10%,
+      color-mix(in srgb, var(--color-azul) 35%, transparent),
+      transparent 70%
+    );
+  }
+}
+
+/** Papel pautado: linha do caderno + margem vermelha à esquerda. */
+@utility papel-pautado {
+  position: relative;
+  background-image: linear-gradient(transparent 31px, var(--nc-pauta) 32px);
+  background-size: 100% 32px;
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: max(24px, calc(50% - 560px - 30px));
+    width: 2px;
+    background: var(--nc-margem);
+    pointer-events: none;
+  }
+  @media (width < 57.5rem) {
+    &::before {
+      display: none;
+    }
+  }
+}
+
+/* ---------------------------------------------------------------------------
+   A caneta da professora
+   --------------------------------------------------------------------------- */
+
+/**
+ * Marca-texto âmbar por baixo da palavra, levemente torta — a assinatura da
+ * marca. O traço é um pseudo-elemento para poder "ser passado" da esquerda
+ * para a direita quando entra na tela.
+ */
+@utility marca {
+  position: relative;
+  white-space: nowrap;
+  z-index: 0;
+  &::after {
+    content: "";
+    position: absolute;
+    left: -4px;
+    right: -6px;
+    bottom: 0.05em;
+    height: 0.42em;
+    border-radius: 6px;
+    background: var(--nc-marca);
+    opacity: var(--nc-marca-opacidade);
+    z-index: -1;
+    transform: rotate(-1.2deg) scaleX(0);
+    transform-origin: left;
+    animation: nc-tracar-marca 0.8s 0.5s var(--ease-mola) forwards;
+  }
+}
+
+@keyframes nc-tracar-marca {
+  to {
+    transform: rotate(-1.2deg) scaleX(1);
+  }
+}
+
+/** Marca-texto estático (sem animação de entrada), para uso dentro de texto corrido. */
+@utility marca-fixa {
+  background: linear-gradient(
+    transparent 55%,
+    color-mix(in srgb, var(--color-ambar) 75%, transparent) 55%
+  );
+  padding: 0 2px;
+  border-radius: 2px;
+  box-decoration-break: clone;
+  -webkit-box-decoration-break: clone;
+}
+
+/** O mesmo traço, em vermelho: o que a professora marcou como erro. */
+@utility marca-erro {
+  background: linear-gradient(
+    transparent 62%,
+    color-mix(in srgb, var(--color-vermelho) 38%, transparent) 62%
+  );
+  padding: 0 2px;
+  border-radius: 2px;
+  box-decoration-break: clone;
+  -webkit-box-decoration-break: clone;
+}
+
+/* Marcações de trecho na tela de resultado.
+   Shorthand de propósito: <mark> vem com amarelo do navegador, e só o
+   `background` zera essa cor de forma confiável (um `background-color:
+   transparent` solto é descartado pelo minificador por parecer o valor inicial). */
+mark.nc-destaque {
+  background: linear-gradient(
+      transparent 58%,
+      color-mix(in srgb, var(--color-ambar) 70%, transparent) 58%
+    )
+    no-repeat;
+  color: inherit;
+  padding: 1px 3px;
+  border-radius: 4px;
+  border-bottom: 3px solid var(--color-ambar-escuro, #f59e0b);
+  cursor: pointer;
+  transition:
+    transform 0.2s var(--ease-saida),
+    box-shadow 0.2s var(--ease-saida),
+    background-color 0.2s;
+}
+mark.nc-destaque:hover,
 mark.nc-destaque[data-ativo="true"] {
-  background: var(--color-ambar-claro);
-  box-shadow: 0 0 0 2px var(--color-ambar);
+  transform: translateY(-2px);
+  background-color: color-mix(in srgb, var(--color-ambar) 28%, transparent);
+  box-shadow: 0 6px 14px -4px rgb(11 18 32 / 0.3);
+}
+
+/**
+ * Trechos clicáveis do exemplo da home: vermelho para o que a professora
+ * apontou, verde para o que já está dentro do modelo. O sublinhado grosso é o
+ * traço da caneta; o realce de fundo só aparece no item em foco.
+ */
+.nc-trecho {
+  cursor: pointer;
+  border-radius: 4px;
+  padding: 1px 3px;
+  border-bottom: 3px solid;
+  transition:
+    transform 0.2s var(--ease-saida),
+    box-shadow 0.2s var(--ease-saida),
+    background-color 0.2s;
+}
+.nc-trecho:hover,
+.nc-trecho[data-ativo="true"] {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 14px -4px rgb(11 18 32 / 0.3);
+}
+.nc-trecho[data-tom="erro"] {
+  background-color: color-mix(in srgb, var(--color-vermelho) 10%, transparent);
+  border-color: var(--color-vermelho);
+}
+.nc-trecho[data-tom="erro"][data-ativo="true"],
+.nc-trecho[data-tom="erro"]:hover {
+  background-color: color-mix(in srgb, var(--color-vermelho) 25%, transparent);
+}
+.nc-trecho[data-tom="ok"] {
+  background-color: color-mix(in srgb, var(--color-verde) 10%, transparent);
+  border-color: var(--color-verde);
+}
+.nc-trecho[data-tom="ok"][data-ativo="true"],
+.nc-trecho[data-tom="ok"]:hover {
+  background-color: color-mix(in srgb, var(--color-verde) 25%, transparent);
 }
 
 /* Conteúdo bloqueado (freemium) */
@@ -92,6 +426,78 @@ mark.nc-destaque[data-ativo="true"] {
   filter: blur(6px);
   user-select: none;
   pointer-events: none;
+}
+
+/* ---------------------------------------------------------------------------
+   Movimento
+   --------------------------------------------------------------------------- */
+
+/** Revelação ao rolar — puro CSS, ligada por IntersectionObserver. */
+@utility revelar {
+  opacity: 0;
+  transform: translateY(28px);
+  transition:
+    opacity 0.7s,
+    transform 0.7s var(--ease-saida);
+  &[data-visivel="true"] {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/** Entrada curta de um bloco que troca de conteúdo (painel do exemplo). */
+@keyframes nc-surgir {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/**
+ * Barra que cresce de zero até a largura final na primeira pintura — CSS puro
+ * via @starting-style, sem JS. A largura chega em `--pct` (não inline em
+ * `width`), senão o valor inline venceria o estado inicial.
+ */
+@utility barra-anima {
+  width: var(--pct, 0%);
+  transition: width 900ms var(--ease-saida);
+  @starting-style {
+    width: 0%;
+  }
+}
+
+/** Papéis que balançam de leve no herói (só decoração). */
+@keyframes nc-boiar {
+  0%,
+  100% {
+    translate: 0 0;
+  }
+  50% {
+    translate: 0 -12px;
+  }
+}
+.nc-boiar {
+  animation: nc-boiar 6s ease-in-out infinite;
+}
+
+/** Flash de "aqui está" ao pular até um apontamento (spec §11). */
+@keyframes nc-flash {
+  0%,
+  100% {
+    background-color: transparent;
+    box-shadow: none;
+  }
+  25% {
+    background-color: var(--color-ambar-claro);
+    box-shadow: 0 0 0 2px var(--color-ambar);
+  }
+}
+.nc-flash {
+  animation: nc-flash 900ms ease-out;
 }
 
 @keyframes nc-pulse {
@@ -107,11 +513,42 @@ mark.nc-destaque[data-ativo="true"] {
   animation: nc-pulse 1.4s ease-in-out infinite;
 }
 
+/** Esqueleto de carregamento. */
+.nc-esqueleto {
+  background: var(--color-cinza-fundo);
+  border-radius: 12px;
+  animation: nc-pulse 1.4s ease-in-out infinite;
+}
+
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
   }
-  .nc-pulse {
-    animation: none;
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+  .revelar {
+    opacity: 1;
+    transform: none;
+  }
+  .marca::after {
+    transform: rotate(-1.2deg);
+  }
+  .card-elevavel:hover {
+    transform: none;
+  }
+}
+
+@media print {
+  .nc-borrado {
+    /* mantém o bloqueio visível também na exportação em PDF (spec §13) */
+    filter: blur(6px);
+  }
+  body {
+    background: #fff;
   }
 }

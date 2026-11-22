@@ -115,7 +115,7 @@ export const correcaoModeloResponseSchema: Schema = {
     paragrafos: { type: Type.ARRAY, items: paragrafo },
     repertorioSugestoes: {
       type: Type.ARRAY,
-      description: "2 a 3 itens do acervo.",
+      description: "Itens do acervo: 2 a 3 no plano grátis, 4 a 5 no Plano Fundador.",
       items: {
         type: Type.OBJECT,
         properties: {

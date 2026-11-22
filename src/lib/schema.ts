@@ -138,7 +138,7 @@ export const CorrecaoSchema = z.object({
   paragrafos: z.array(ParagrafoSchema).min(1).max(6),
   repertorioSugestoes: z
     .array(z.object({ id: z.string().min(1), porqueCombina: z.string().min(1) }))
-    .max(3),
+    .max(5), // 3 no grátis, 5 no Plano Fundador (spec §18.4) — ver lib/server/corretor.ts
   resumoProfessor: z.string().min(1),
 });
 

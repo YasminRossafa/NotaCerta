@@ -1,0 +1,300 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>NotaCerta — referência visual da home</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#F3F6FF; --paper:#FFFFFF; --navy:#0B1220; --ink:#111B33; --muted:#5B6785;
+  --blue:#2563EB; --blue-d:#1E3A8A; --blue-l:#E8EFFF; --amber:#FBBF24; --amber-d:#F59E0B;
+  --green:#16A34A; --red:#DC2626;
+  --sh1:0 1px 2px rgba(11,18,32,.06),0 4px 12px rgba(11,18,32,.06);
+  --sh2:0 2px 4px rgba(11,18,32,.06),0 12px 24px -6px rgba(11,18,32,.14),0 32px 60px -20px rgba(37,99,235,.28);
+  --sh3:0 4px 8px rgba(11,18,32,.08),0 24px 48px -8px rgba(11,18,32,.22),0 48px 90px -30px rgba(37,99,235,.35);
+  --r:20px;
+}
+*{box-sizing:border-box;margin:0}
+html{scroll-behavior:smooth}
+body{font-family:'Plus Jakarta Sans',system-ui,sans-serif;background:var(--bg);color:var(--ink);line-height:1.5;overflow-x:hidden}
+a{color:inherit;text-decoration:none}
+button{font:inherit;cursor:pointer;border:0;background:none;color:inherit}
+:focus-visible{outline:3px solid var(--amber-d);outline-offset:3px;border-radius:8px}
+
+/* header */
+header{position:fixed;inset:0 0 auto 0;z-index:50;display:flex;justify-content:center;padding:14px 16px}
+.nav{display:flex;align-items:center;gap:8px;width:min(1120px,100%);padding:8px 10px 8px 18px;border-radius:999px;background:rgba(255,255,255,.78);backdrop-filter:blur(14px);box-shadow:var(--sh1);border:1px solid rgba(255,255,255,.9)}
+.logo{font-weight:800;font-size:20px;letter-spacing:-.03em;margin-right:auto;position:relative}
+.logo b{color:var(--blue)}
+.logo::after{content:"";position:absolute;left:34px;right:-2px;bottom:-3px;height:4px;border-radius:4px;background:var(--amber);transform:rotate(-1.5deg)}
+.nav a.l{padding:8px 14px;border-radius:999px;font-weight:600;font-size:14px;color:var(--muted);transition:.2s}
+.nav a.l:hover{background:var(--blue-l);color:var(--blue-d)}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:12px 20px;border-radius:999px;font-weight:700;font-size:15px;transition:transform .2s,box-shadow .2s,background .2s}
+.btn-navy{background:var(--navy);color:#fff;box-shadow:0 6px 16px -4px rgba(11,18,32,.5)}
+.btn-navy:hover{transform:translateY(-2px);box-shadow:0 12px 24px -6px rgba(11,18,32,.55)}
+.btn-blue{background:var(--blue);color:#fff;box-shadow:0 10px 24px -6px rgba(37,99,235,.65)}
+.btn-blue:hover{transform:translateY(-2px);box-shadow:0 16px 32px -8px rgba(37,99,235,.7)}
+.btn:active{transform:translateY(0) scale(.98)}
+
+/* hero */
+.hero{position:relative;min-height:100vh;padding:120px 20px 80px;display:grid;place-items:center;
+  background:
+   linear-gradient(transparent 31px,rgba(37,99,235,.07) 32px) 0 0/100% 32px,
+   var(--bg)}
+.hero::before{content:"";position:absolute;top:0;bottom:0;left:max(24px,calc(50% - 560px - 30px));width:2px;background:rgba(220,38,38,.18)}
+.wrap{width:min(1120px,100%);display:grid;grid-template-columns:1.05fr .95fr;gap:56px;align-items:center;position:relative}
+h1{font-size:clamp(38px,5.4vw,64px);line-height:1.03;letter-spacing:-.045em;font-weight:800;color:var(--navy)}
+h1 .hl{position:relative;white-space:nowrap;z-index:0}
+h1 .hl::after{content:"";position:absolute;left:-4px;right:-6px;bottom:.05em;height:.42em;background:var(--amber);border-radius:6px;z-index:-1;transform:rotate(-1.2deg) scaleX(0);transform-origin:left;animation:draw .8s .5s cubic-bezier(.2,.9,.2,1) forwards}
+@keyframes draw{to{transform:rotate(-1.2deg) scaleX(1)}}
+.sub{margin-top:16px;color:var(--muted);font-size:18px;max-width:46ch}
+
+/* tool card */
+.tool{margin-top:28px;background:var(--paper);border-radius:var(--r);box-shadow:var(--sh2);padding:18px;transition:transform .25s ease-out,box-shadow .25s;transform-style:preserve-3d}
+.tool:focus-within{box-shadow:var(--sh3)}
+.tabs{position:relative;display:inline-flex;background:var(--bg);border-radius:999px;padding:4px}
+.tabs button{position:relative;z-index:1;padding:8px 18px;border-radius:999px;font-weight:700;font-size:14px;color:var(--muted);transition:color .25s}
+.tabs button[aria-selected=true]{color:#fff}
+.tabs .ind{position:absolute;top:4px;bottom:4px;left:4px;border-radius:999px;background:var(--navy);transition:transform .35s cubic-bezier(.3,1.3,.5,1),width .35s;box-shadow:0 4px 10px rgba(11,18,32,.3)}
+.field{margin-top:14px;position:relative}
+textarea{width:100%;min-height:150px;resize:vertical;border:2px solid transparent;background:var(--bg);border-radius:14px;padding:14px 16px 34px;font:inherit;font-size:15px;color:var(--ink);transition:.2s}
+textarea:focus{outline:0;border-color:var(--blue);background:#fff;box-shadow:0 0 0 5px rgba(37,99,235,.12)}
+.count{position:absolute;right:12px;bottom:10px;display:flex;align-items:center;gap:8px;font-size:12px;font-weight:700;color:var(--muted)}
+.count i{display:block;width:70px;height:6px;border-radius:6px;background:#DDE5FA;overflow:hidden}
+.count i span{display:block;height:100%;width:0;background:var(--blue);border-radius:6px;transition:width .3s,background .3s}
+.drop{display:none;margin-top:14px;border:2px dashed #B9C8F5;border-radius:14px;padding:34px 16px;text-align:center;color:var(--muted);font-weight:600;background:var(--bg);transition:.2s}
+.drop:hover,.drop.over{border-color:var(--blue);background:var(--blue-l);color:var(--blue-d);transform:scale(1.01)}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+.chip{padding:8px 14px;border-radius:999px;background:var(--bg);font-weight:600;font-size:13px;color:var(--muted);transition:.2s;border:2px solid transparent}
+.chip:hover{transform:translateY(-2px);box-shadow:var(--sh1);color:var(--ink)}
+.chip[aria-pressed=true]{background:var(--blue);color:#fff;box-shadow:0 8px 16px -6px rgba(37,99,235,.7)}
+.row{display:flex;align-items:center;gap:14px;margin-top:16px;flex-wrap:wrap}
+.row small{color:var(--muted);font-weight:500}
+.go{position:relative;overflow:hidden}
+
+/* floating visual */
+.stage{position:relative;height:540px}
+.sheet{position:absolute;background:var(--paper);border-radius:var(--r);box-shadow:var(--sh2);transition:transform .15s ease-out}
+.sheet.back{top:30px;left:30px;right:20px;height:230px;transform:rotate(5deg);background:#E7EEFF;box-shadow:var(--sh1)}
+.sheet.main{top:10px;left:0;right:40px;height:230px;padding:24px 22px;transform:rotate(-2.5deg)}
+.sheet .ttl{font-size:12px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.sheet p{margin-top:12px;font-size:15px;line-height:1.9}
+.m{background:linear-gradient(transparent 55%,rgba(251,191,36,.75) 55%);padding:0 2px;border-radius:2px}
+.m.red{background:linear-gradient(transparent 62%,rgba(220,38,38,.35) 62%)}
+.float{position:absolute;animation:bob 6s ease-in-out infinite}
+@keyframes bob{0%,100%{translate:0 0}50%{translate:0 -12px}}
+.score{right:0;top:215px;width:150px;padding:16px;text-align:center;transform:rotate(3deg);animation-delay:-2s}
+.ring{position:relative;width:110px;height:110px;margin:0 auto}
+.ring svg{transform:rotate(-90deg)}
+.ring circle{fill:none;stroke-width:10;stroke-linecap:round}
+.ring .bg{stroke:#E1E8FB}.ring .fg{stroke:var(--blue);stroke-dasharray:289;stroke-dashoffset:289;transition:stroke-dashoffset 1.6s cubic-bezier(.2,.8,.2,1)}
+.ring b{position:absolute;inset:0;display:grid;place-items:center;font-size:30px;font-weight:800;letter-spacing:-.04em}
+.score small{display:block;margin-top:6px;font-weight:700;font-size:12px;color:var(--muted)}
+.note{left:-20px;bottom:90px;width:240px;padding:14px 16px;transform:rotate(-3deg);animation-delay:-4s;border-left:5px solid var(--red)}
+.note b{font-size:12px;color:var(--red);letter-spacing:.04em}
+.note span{display:block;font-size:13px;color:var(--ink);margin-top:2px}
+.ok{right:6px;bottom:0;padding:12px 16px;display:flex;gap:10px;align-items:center;font-weight:700;font-size:14px;transform:rotate(2deg);animation-delay:-1s;border-radius:999px}
+.ok svg{width:26px;height:26px;background:var(--green);border-radius:50%;padding:5px;stroke:#fff;fill:none;stroke-width:3.2;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:30;animation:tick 1.2s .8s both}
+@keyframes tick{from{stroke-dashoffset:30}to{stroke-dashoffset:0}}
+
+/* demo section */
+section.demo{background:var(--navy);color:#fff;padding:110px 20px;position:relative;overflow:hidden}
+section.demo::before{content:"";position:absolute;inset:0;background:radial-gradient(600px 300px at 85% 10%,rgba(37,99,235,.35),transparent 70%)}
+.in{width:min(1120px,100%);margin:0 auto;position:relative}
+h2{font-size:clamp(30px,4vw,46px);letter-spacing:-.04em;line-height:1.08;font-weight:800;max-width:18ch}
+.demo-grid{display:grid;grid-template-columns:1.2fr .8fr;gap:28px;margin-top:40px;align-items:start}
+.essay{background:#fff;color:var(--ink);border-radius:var(--r);padding:30px;box-shadow:var(--sh3);font-size:17px;line-height:2.05}
+.essay .tag{display:inline-block;margin-bottom:10px;font-size:12px;font-weight:800;letter-spacing:.06em;color:var(--blue);background:var(--blue-l);padding:4px 10px;border-radius:999px}
+.hot{cursor:pointer;border-radius:4px;padding:1px 3px;transition:.2s;border-bottom:3px solid}
+.hot.e{background:rgba(220,38,38,.1);border-color:var(--red)}
+.hot.g{background:rgba(22,163,74,.1);border-color:var(--green)}
+.hot:hover,.hot.on{transform:translateY(-2px);box-shadow:0 6px 14px -4px rgba(11,18,32,.3)}
+.hot.on.e{background:rgba(220,38,38,.25)}.hot.on.g{background:rgba(22,163,74,.25)}
+.panel{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12);border-radius:var(--r);padding:24px;min-height:260px;backdrop-filter:blur(8px);position:sticky;top:100px}
+.panel .c{display:inline-block;font-weight:800;font-size:12px;padding:4px 10px;border-radius:999px;background:var(--amber);color:var(--navy)}
+.panel h3{margin-top:14px;font-size:21px;letter-spacing:-.02em}
+.panel p{margin-top:10px;color:#C9D4F2}
+.panel .fix{margin-top:16px;padding:12px 14px;border-radius:12px;background:rgba(22,163,74,.16);color:#BFF3D2;font-weight:600;font-size:15px}
+.panel.swap{animation:swap .4s}
+@keyframes swap{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+.hint{margin-top:14px;font-size:14px;color:#9FB0DC}
+
+/* steps + plans */
+section.how{padding:100px 20px 40px}
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:36px}
+.step{background:#fff;border-radius:var(--r);padding:26px;box-shadow:var(--sh1);transition:transform .3s,box-shadow .3s}
+.step:hover{transform:translateY(-8px) rotate(-.6deg);box-shadow:var(--sh2)}
+.step em{font-style:normal;font-weight:800;font-size:54px;letter-spacing:-.05em;color:var(--blue);line-height:1}
+.step h3{margin-top:12px;font-size:20px;letter-spacing:-.02em}
+.step p{margin-top:6px;color:var(--muted);font-size:15px}
+section.plans{padding:70px 20px 110px}
+.pl{display:grid;grid-template-columns:1fr 1fr;gap:22px;margin-top:34px;max-width:860px}
+.plan{background:#fff;border-radius:24px;padding:30px;box-shadow:var(--sh1);transition:.3s}
+.plan:hover{transform:translateY(-6px);box-shadow:var(--sh2)}
+.plan.f{background:var(--navy);color:#fff;box-shadow:var(--sh3);transform:translateY(-10px)}
+.plan.f:hover{transform:translateY(-16px)}
+.plan h3{font-size:22px}.plan .pr{margin-top:6px;font-size:34px;font-weight:800;letter-spacing:-.04em}
+.plan ul{margin:16px 0 22px;padding:0;list-style:none;display:grid;gap:8px;font-size:15px;color:var(--muted)}
+.plan.f ul{color:#C9D4F2}
+.plan li::before{content:"✓";color:var(--green);font-weight:800;margin-right:8px}
+footer{padding:30px 20px 50px;text-align:center;color:var(--muted);font-size:13px}
+
+/* overlay */
+.ov{position:fixed;inset:0;z-index:99;background:rgba(11,18,32,.72);backdrop-filter:blur(8px);display:none;place-items:center}
+.ov.show{display:grid}
+.ov .box{background:#fff;border-radius:24px;padding:36px 40px;text-align:center;box-shadow:var(--sh3);min-width:300px;animation:swap .4s}
+.spin{width:54px;height:54px;border-radius:50%;border:6px solid var(--blue-l);border-top-color:var(--blue);margin:0 auto 18px;animation:rot .9s linear infinite}
+@keyframes rot{to{rotate:360deg}}
+.ov b{font-size:18px}
+
+.rv{opacity:0;transform:translateY(28px);transition:opacity .7s,transform .7s cubic-bezier(.2,.8,.2,1)}
+.rv.in-v{opacity:1;transform:none}
+@media(max-width:920px){
+  .wrap,.demo-grid,.steps,.pl{grid-template-columns:1fr}
+  .stage{height:520px;margin-top:10px}
+  .note{left:0;bottom:50px;width:210px}.ok{display:none}
+  .hero::before{display:none}
+  .panel{position:static}
+  .nav a.l{display:none}
+  .plan.f{transform:none}
+}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.rv{opacity:1;transform:none}h1 .hl::after{transform:rotate(-1.2deg)}}
+</style>
+</head>
+<body>
+
+<header><nav class="nav">
+  <a class="logo" href="#">Nota<b>Certa</b></a>
+  <a class="l" href="#exemplo">Exemplo</a><a class="l" href="#">Estrutura</a><a class="l" href="#">Repertórios</a><a class="l" href="#planos">Planos</a>
+  <a class="btn btn-navy" href="#planos">Plano Fundador</a>
+</nav></header>
+
+<main>
+<section class="hero" id="hero">
+  <div class="wrap">
+    <div>
+      <h1>Sua redação corrigida <span class="hl">do jeito certo</span></h1>
+      <p class="sub">Cole o texto ou envie uma foto. Receba nota por competência e a reescrita de cada parágrafo.</p>
+
+      <form class="tool" id="tool" autocomplete="off">
+        <div class="tabs" role="tablist"><span class="ind"></span>
+          <button type="button" role="tab" aria-selected="true" data-t="texto">Colar texto</button>
+          <button type="button" role="tab" aria-selected="false" data-t="foto">Enviar foto</button>
+        </div>
+        <div class="field" id="pane-texto">
+          <textarea id="ta" placeholder="Cole sua redação aqui..." aria-label="Texto da redação"></textarea>
+          <div class="count"><span id="wc">0 palavras</span><i><span id="bar"></span></i></div>
+        </div>
+        <label class="drop" id="pane-foto"><input type="file" accept="image/*" hidden>Arraste a foto da redação ou toque para escolher</label>
+        <div class="chips" id="chips" role="group" aria-label="Tema">
+          <button type="button" class="chip" aria-pressed="true">SUS como direito universal</button>
+          <button type="button" class="chip" aria-pressed="false">Acesso ao cinema</button>
+          <button type="button" class="chip" aria-pressed="false">Trabalho de cuidado</button>
+          <button type="button" class="chip" aria-pressed="false">Educação de surdos</button>
+          <button type="button" class="chip" aria-pressed="false">Outro tema</button>
+        </div>
+        <div class="row">
+          <button class="btn btn-blue go" id="go" type="submit">Corrigir minha redação</button>
+          <small>Grátis: 2 correções por mês</small>
+        </div>
+      </form>
+    </div>
+
+    <div class="stage" aria-hidden="true">
+      <div class="sheet back" data-depth="10"></div>
+      <div class="sheet main" data-depth="22">
+        <div class="ttl">Desenvolvimento 1</div>
+        <p>Em primeiro lugar, destaca-se a <span class="m">concentração das salas</span> nos grandes centros, uma vez que os investimentos se <span class="m red">dirigem as regiões</span> de maior consumo. Dessa forma, a população fica privada do acesso à cultura.</p>
+      </div>
+      <div class="sheet float score" data-depth="40"><div class="ring"><svg width="110" height="110"><circle class="bg" cx="55" cy="55" r="46"/><circle class="fg" id="fg" cx="55" cy="55" r="46"/></svg><b id="num">0</b></div><small>NOTA ESTIMADA</small></div>
+      <div class="sheet float note" data-depth="55"><b>C1 · CRASE</b><span>“dirigem às regiões”: o verbo pede a preposição “a” + artigo.</span></div>
+      <div class="sheet float ok" data-depth="30"><svg viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>Estrutura dentro do modelo</div>
+    </div>
+  </div>
+</section>
+
+<section class="demo" id="exemplo">
+  <div class="in">
+    <h2 class="rv">Toque no texto e veja a correção</h2>
+    <div class="demo-grid">
+      <div class="essay rv">
+        <span class="tag">DESENVOLVIMENTO 1</span><br>
+        Em primeiro lugar, destaca-se a concentração das salas de cinema nos grandes centros, <span class="hot e" data-i="0" tabindex="0">uma vez que os investimentos se dirigem as regiões de maior consumo</span>. Segundo a ANCINE, <span class="hot e" data-i="1" tabindex="0">muitos municípios, não possuem nenhuma sala</span>. <span class="hot g" data-i="2" tabindex="0">Dessa forma, a população fica privada do acesso à cultura e ao lazer.</span>
+        <p class="hint" style="color:#7A88AB;font-size:14px;line-height:1.5;margin-top:14px">Trecho de exemplo.</p>
+      </div>
+      <aside class="panel rv" id="panel" aria-live="polite"></aside>
+    </div>
+  </div>
+</section>
+
+<section class="how"><div class="in">
+  <h2 class="rv" style="max-width:22ch">Três passos, um minuto</h2>
+  <div class="steps">
+    <div class="step rv"><em>1</em><h3>Envie</h3><p>Cole o texto ou fotografe a folha.</p></div>
+    <div class="step rv"><em>2</em><h3>Receba</h3><p>Nota por competência e apontamentos explicados.</p></div>
+    <div class="step rv"><em>3</em><h3>Reescreva</h3><p>Veja cada parágrafo ajustado ao modelo.</p></div>
+  </div>
+</div></section>
+
+<section class="plans" id="planos"><div class="in">
+  <h2 class="rv" style="max-width:20ch">Comece grátis</h2>
+  <div class="pl">
+    <div class="plan rv"><h3>Grátis</h3><div class="pr">R$ 0</div><ul><li>2 correções por mês</li><li>Nota e apontamentos</li><li>1 reescrita</li></ul><a class="btn btn-navy" href="#hero">Corrigir agora</a></div>
+    <div class="plan f rv"><h3>Plano Fundador</h3><div class="pr">Em breve</div><ul><li>Correções ilimitadas</li><li>Todas as reescritas</li><li>Repertórios e evolução</li></ul><a class="btn btn-blue" href="#">Quero acesso</a></div>
+  </div>
+</div></section>
+</main>
+<footer>Nota estimada, sem vínculo com INEP/MEC · NotaCerta</footer>
+
+<div class="ov" id="ov"><div class="box"><div class="spin"></div><b id="msg">Lendo sua introdução...</b></div></div>
+
+<script>
+const $=(s,r=document)=>r.querySelector(s),$$=(s,r=document)=>[...r.querySelectorAll(s)];
+/* tabs */
+const tabs=$$('.tabs button'),ind=$('.ind');
+function moveInd(b){ind.style.width=b.offsetWidth+'px';ind.style.transform=`translateX(${b.offsetLeft-4}px)`}
+tabs.forEach(b=>b.onclick=()=>{tabs.forEach(x=>x.setAttribute('aria-selected',x===b));moveInd(b);
+  const f=b.dataset.t==='foto';$('#pane-texto').style.display=f?'none':'block';$('#pane-foto').style.display=f?'block':'none'});
+addEventListener('load',()=>moveInd(tabs[0]));addEventListener('resize',()=>moveInd($('.tabs [aria-selected=true]')));
+/* drop */
+const drop=$('#pane-foto');['dragover','dragenter'].forEach(e=>drop.addEventListener(e,ev=>{ev.preventDefault();drop.classList.add('over')}));
+['dragleave','drop'].forEach(e=>drop.addEventListener(e,ev=>{ev.preventDefault();drop.classList.remove('over')}));
+/* chips */
+$$('.chip').forEach(c=>c.onclick=()=>{$$('.chip').forEach(x=>x.setAttribute('aria-pressed',x===c))});
+/* counter */
+$('#ta').oninput=e=>{const n=(e.target.value.trim().match(/\S+/g)||[]).length;$('#wc').textContent=n+' palavras';
+  const p=Math.min(n/300,1);$('#bar').style.width=p*100+'%';$('#bar').style.background=n>=200?'var(--green)':'var(--blue)'};
+/* parallax */
+const hero=$('#hero');if(matchMedia('(pointer:fine)').matches){
+  hero.addEventListener('mousemove',e=>{const r=hero.getBoundingClientRect(),x=(e.clientX-r.left)/r.width-.5,y=(e.clientY-r.top)/r.height-.5;
+    $$('[data-depth]').forEach(el=>{const d=+el.dataset.depth;el.style.translate=`${-x*d}px ${-y*d}px`});
+    const t=$('#tool');t.style.transform=`perspective(1000px) rotateY(${x*3}deg) rotateX(${-y*3}deg)`});
+  hero.addEventListener('mouseleave',()=>{$$('[data-depth]').forEach(el=>el.style.translate='0 0');$('#tool').style.transform=''})}
+/* score count-up */
+function countUp(){const n=$('#num');let v=0;const t=920;$('#fg').style.strokeDashoffset=289*(1-t/1000);
+  const s=performance.now();(function f(now){const p=Math.min((now-s)/1600,1);n.textContent=Math.round(t*(1-Math.pow(1-p,3)));if(p<1)requestAnimationFrame(f)})(s)}
+setTimeout(countUp,600);
+/* reveal */
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in-v');io.unobserve(e.target)}}),{threshold:.15});
+$$('.rv').forEach((el,i)=>{el.style.transitionDelay=(i%3)*90+'ms';io.observe(el)});
+/* demo notes */
+const notes=[
+ {c:'C1 · CRASE',t:'Crase faltando',p:'“dirigem as regiões”: o verbo “dirigir-se” pede a preposição “a”, que se funde ao artigo feminino.',f:'dirigem às regiões'},
+ {c:'C1 · PONTUAÇÃO',t:'Vírgula entre sujeito e verbo',p:'Não se separa o sujeito (“muitos municípios”) do verbo (“possuem”) com vírgula.',f:'muitos municípios não possuem'},
+ {c:'DENTRO DO MODELO',t:'Argumento conclusivo presente',p:'O parágrafo fecha com “Dessa forma” e aprofunda o impacto do problema. Nada a ajustar aqui.',f:null}];
+const panel=$('#panel');
+function show(i){const n=notes[i];panel.innerHTML=`<span class="c">${n.c}</span><h3>${n.t}</h3><p>${n.p}</p>${n.f?`<div class="fix">Fica assim: ${n.f}</div>`:''}`;
+  panel.classList.remove('swap');void panel.offsetWidth;panel.classList.add('swap');
+  $$('.hot').forEach(h=>h.classList.toggle('on',+h.dataset.i===i))}
+$$('.hot').forEach(h=>{const go=()=>show(+h.dataset.i);h.onclick=go;h.onmouseenter=go;h.onfocus=go;h.onkeydown=e=>{if(e.key==='Enter')go()}});
+show(0);
+/* submit sim */
+$('#tool').onsubmit=e=>{e.preventDefault();const ov=$('#ov'),m=$('#msg');ov.classList.add('show');
+  const ms=['Lendo sua introdução...','Conferindo a estrutura...','Analisando as competências...','Montando a reescrita...'];let i=0;m.textContent=ms[0];
+  const t=setInterval(()=>{i++;if(i<ms.length)m.textContent=ms[i]},800);
+  setTimeout(()=>{clearInterval(t);ov.classList.remove('show');$('#exemplo').scrollIntoView({behavior:'smooth'})},3400)};
+</script>
+</body>
+</html>

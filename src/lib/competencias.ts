@@ -55,10 +55,10 @@ export const CORES_FAIXA: Record<
   FaixaNota,
   { texto: string; fundo: string; barra: string; hex: string }
 > = {
-  verde: { texto: "text-verde", fundo: "bg-verde-claro", barra: "bg-verde", hex: "#16A34A" },
-  ambar: { texto: "text-amber-700", fundo: "bg-ambar-claro", barra: "bg-ambar", hex: "#F59E0B" },
+  verde: { texto: "text-verde-texto", fundo: "bg-verde-claro", barra: "bg-verde", hex: "#16A34A" },
+  ambar: { texto: "text-ambar-texto", fundo: "bg-ambar-claro", barra: "bg-ambar", hex: "#F59E0B" },
   vermelho: {
-    texto: "text-vermelho",
+    texto: "text-vermelho-texto",
     fundo: "bg-vermelho-claro",
     barra: "bg-vermelho",
     hex: "#DC2626",
